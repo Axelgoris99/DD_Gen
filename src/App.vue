@@ -1,5 +1,17 @@
+import BootstrapVue from 'bootstrap-vue';
+
 <template>
   <div id="app">
+    <div>
+      <b-button pill variant="primary">Primary</b-button>
+      <b-button variant="secondary">Secondary</b-button>
+      <b-button variant="success">Success</b-button>
+      <b-button variant="danger">Danger</b-button>
+      <b-button variant="warning">Warning</b-button>
+      <b-button variant="info">Info</b-button>
+      <b-button variant="light">Light</b-button>
+      <b-button variant="dark">Dark</b-button>
+    </div>
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
