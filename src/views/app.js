@@ -1,8 +1,5 @@
 ///import ...
 
-export default
-function App(props){
-    return(<div>
-        
-    </div>)
+export default function App(props) {
+  return <div></div>;
 }

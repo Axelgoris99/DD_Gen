@@ -1,5 +1,5 @@
-function navigationView(props){
-
+function navigationView(props) {
+  return;
 }
 
 export default navigationView;

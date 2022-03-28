@@ -1,6 +1,5 @@
-function inputView(props){
-    
+function inputView(props) {
+  return;
 }
-
 
 export default inputView;
