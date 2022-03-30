@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
     <h1>Hello World!</h1>
-    <navbar />
+    <Sidebar title="test" />
   </div>
 </template>
 
 <script>
-import navbar from "./components/navbar.vue";
+import Sidebar from "./vue/sidebarPresenter";
 
 export default {
   name: "App",
   components: {
-    navbar,
+    Sidebar,
   },
 };
 </script>

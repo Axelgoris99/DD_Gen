@@ -1,19 +1,18 @@
 <template>
   <header>
-    <h1>test</h1>
+    <h1>{{ title }}</h1>
   </header>
 </template>
 
 <script>
 export default {
-  name: "MyNavbar",
+  name: "MySidebar",
   props: {
     title: {
       type: String,
       default: "Hello There",
     },
   },
-  components: {},
 };
 </script>
 
