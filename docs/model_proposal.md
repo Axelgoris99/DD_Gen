@@ -36,7 +36,3 @@ Initially we want a character to have the following data
 
 The idea is to upon entering the app is to randomly create a character. Then the user can customize it. 
 
-
-## Input
-
-``´` `
