@@ -21,14 +21,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-**/node_modules
-**/*~
-dist
-**/*solved*
-**/*Config.js*
-/public/*.js
-/public/*.html
-**/*.psd
-/dev_rsc
-/src/.vs
