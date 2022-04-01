@@ -1,16 +1,22 @@
 <template>
   <header>
-    <h1>{{ title }}</h1>
+    <SidebarView :title="title" @setTitle="setTitle" />
   </header>
 </template>
 
 <script>
+import SidebarView from "@/view/sidebarView.vue";
 export default {
   name: "MySidebar",
-  props: {
-    title: {
-      type: String,
-      default: "Hello There",
+  data() {
+    return { title: "myOldTitle" };
+  },
+  components: {
+    SidebarView,
+  },
+  methods: {
+    setTitle(newTitle) {
+      this.title = newTitle;
     },
   },
 };

@@ -20,5 +20,6 @@ module.exports = {
         'endOfLine': 'auto',
       },
     ],
+    "vue/comment-directive": "off"
   },
 };

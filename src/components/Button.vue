@@ -1,11 +1,16 @@
 <template>
-  <b-button pill variant="primary">{{ text }}</b-button>
+  <b-button pill variant="primary" @click="click">{{ text }} </b-button>
 </template>
 <script>
 export default {
   name: "MyButton",
   props: {
     text: String,
+  },
+  methods: {
+    click() {
+      this.$emit("click");
+    },
   },
 };
 </script>

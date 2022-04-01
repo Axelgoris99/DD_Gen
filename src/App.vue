@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Hello World!</h1>
-    <Sidebar title="test" />
+    <Sidebar />
   </div>
 </template>
 
