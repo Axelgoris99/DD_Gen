@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MyHomeView />
+    <MyHomeView :count="this.$store.state.count" @increment="increment" />
   </div>
 </template>
 
@@ -12,7 +12,11 @@ export default {
   components: {
     MyHomeView,
   },
-  methods: {},
+  methods: {
+    increment() {
+      this.$store.commit("increment");
+    },
+  },
 };
 </script>
 
