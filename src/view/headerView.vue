@@ -32,6 +32,7 @@ export default {
 
 <style scoped>
 .header {
+  margin-bottom: 10px;
   background: #ffffff;
 }
 </style>
