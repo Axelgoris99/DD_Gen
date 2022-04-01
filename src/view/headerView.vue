@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <b-button-group>
-      <b-button variant="primary" v-on:click="Login">Login</b-button>
-      <b-button variant="success" v-on:click="Signup">Signup</b-button>
+      <b-button variant="primary" v-on:click="login">Login</b-button>
+      <b-button variant="success" v-on:click="signup">Signup</b-button>
     </b-button-group>
     <b-img
       right

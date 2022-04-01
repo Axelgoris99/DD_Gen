@@ -1,6 +1,6 @@
 <template>
   <sidebar>
-    <SidebarView
+    <MySidebarView
       @setHome="setHome"
       @setInput="setInput"
       @setChanges="setChanges"
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import SidebarView from "@/view/sidebarView.vue";
+import MySidebarView from "../view/sidebarView.vue";
 export default {
   name: "MySidebar",
   components: {
-    SidebarView,
+    MySidebarView,
   },
   methods: {
     setHome() {

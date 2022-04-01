@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Sidebar from "./vue/sidebarPresenter";
+import Sidebar from "./vue/sidebarPresenter.vue";
 import Header from "./vue/headerPresenter.vue";
 import Footer from "./vue/footerPresenter.vue";
 export default {

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import footerView from "@/view/footerView.vue";
+import footerView from "../view/footerView.vue";
 
 export default {
   name: "MyFooter",
