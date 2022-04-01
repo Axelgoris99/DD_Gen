@@ -1,16 +1,17 @@
 <template>
-  <sidebar>
+  <div class="sidebar">
     <MySidebarView
       @setHome="setHome"
       @setInput="setInput"
       @setChanges="setChanges"
       @setOutput="setOutput"
     />
-  </sidebar>
+  </div>
 </template>
 
 <script>
 import MySidebarView from "../view/sidebarView.vue";
+
 export default {
   name: "MySidebar",
   components: {
@@ -34,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-sidebar {
+.sidebar {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
