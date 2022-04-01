@@ -1,6 +1,11 @@
 <template>
   <header>
-    <SidebarView :title="title" @setTitle="setTitle" />
+    <SidebarView
+      @setHome="setHome"
+      @setInput="setInput"
+      @setChanges="setChanges"
+      @setOutput="setOutput"
+    />
   </header>
 </template>
 
@@ -8,15 +13,22 @@
 import SidebarView from "@/view/sidebarView.vue";
 export default {
   name: "MySidebar",
-  data() {
-    return { title: "myOldTitle" };
-  },
   components: {
     SidebarView,
   },
   methods: {
-    setTitle(newTitle) {
-      this.title = newTitle;
+    setHome() {
+      window.location.hash = "home";
+    },
+    setInput() {
+      window.location.hash = "Input";
+      console.log("wtf");
+    },
+    setChanges() {
+      window.location.hash = "Changes";
+    },
+    setOutput() {
+      window.location.hash = "Output";
     },
   },
 };

@@ -1,37 +1,31 @@
 <template>
   <div>
-    <h1>{{ title }}</h1>
-    <b-button v-on:click="setTitle">My Button Name </b-button>
-    <ButtonVue v-on:click="setTitle" text="My Button Name" />
-    <ul class="nav flex-sm-column">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Input</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Changes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Output</a>
-      </li>
-    </ul>
+    <b-nav pills vertical class="w-25">
+      <b-nav-item v-on:click="setHome">Home</b-nav-item>
+      <b-nav-item v-on:click="setInput">Input</b-nav-item>
+      <b-nav-item v-on:click="setChanges">Changes</b-nav-item>
+      <b-nav-item v-on:click="setOutput">Output</b-nav-item>
+    </b-nav>
   </div>
 </template>
 
 <script>
-import ButtonVue from "../components/Button.vue";
 export default {
   name: "MySidebarView",
-  components: {
-    ButtonVue,
-  },
-  props: ["title"],
-  emits: ["setTitle"],
+  components: {},
+  emits: ["setHome", "SetInput", "setChanges", "setOutput"],
   methods: {
-    setTitle() {
-      this.$emit("setTitle", "MyFancyNewTitle");
+    setHome() {
+      this.$emit("setHome");
+    },
+    setInput() {
+      this.$emit("setInput");
+    },
+    setChanges() {
+      this.$emit("setChanges");
+    },
+    setOutput() {
+      this.$emit("setOutput");
     },
   },
 };
