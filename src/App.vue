@@ -1,14 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <h1>Hello World!</h1>
+    <Header />
+    <Sidebar />
+    <Footer />
   </div>
 </template>
 
 <script>
+import Sidebar from "./vue/sidebarPresenter";
+import Header from "./vue/headerPresenter.vue";
+import Footer from "./vue/footerPresenter.vue";
 export default {
   name: "App",
-  components: {},
+  components: {
+    Sidebar,
+    Header,
+    Footer,
+  },
 };
 </script>
 
@@ -17,8 +25,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 1% 5%;
 }
 </style>
