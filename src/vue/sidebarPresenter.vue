@@ -1,12 +1,12 @@
 <template>
-  <header>
+  <sidebar>
     <SidebarView
       @setHome="setHome"
       @setInput="setInput"
       @setChanges="setChanges"
       @setOutput="setOutput"
     />
-  </header>
+  </sidebar>
 </template>
 
 <script>
@@ -22,7 +22,6 @@ export default {
     },
     setInput() {
       window.location.hash = "Input";
-      console.log("wtf");
     },
     setChanges() {
       window.location.hash = "Changes";
@@ -35,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-header {
+sidebar {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
