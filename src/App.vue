@@ -2,18 +2,20 @@
   <div id="app">
     <Header />
     <Sidebar />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Sidebar from "./vue/sidebarPresenter";
 import Header from "./vue/headerPresenter.vue";
-
+import Footer from "./vue/footerPresenter.vue";
 export default {
   name: "App",
   components: {
     Sidebar,
     Header,
+    Footer,
   },
 };
 </script>
