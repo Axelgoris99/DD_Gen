@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-nav pills vertical class="w-25">
-      <b-nav-item v-on:click="setHome">Home</b-nav-item>
+      <b-nav-item to="home" v-on:click="setHome">Home</b-nav-item>
       <b-nav-item v-on:click="setInput">Input</b-nav-item>
       <b-nav-item v-on:click="setChanges">Changes</b-nav-item>
       <b-nav-item v-on:click="setOutput">Output</b-nav-item>
