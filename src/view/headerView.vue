@@ -24,7 +24,7 @@ export default {
       this.$emit("login");
     },
     signup() {
-      this.emits("signup");
+      this.$emit("signup");
     },
   },
 };

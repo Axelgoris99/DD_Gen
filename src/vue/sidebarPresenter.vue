@@ -1,11 +1,6 @@
 <template>
   <div class="sidebar">
-    <MySidebarView
-      @setHome="setHome"
-      @setInput="setInput"
-      @setChanges="setChanges"
-      @setOutput="setOutput"
-    />
+    <MySidebarView />
   </div>
 </template>
 
@@ -17,20 +12,7 @@ export default {
   components: {
     MySidebarView,
   },
-  methods: {
-    setHome() {
-      window.location.hash = "home";
-    },
-    setInput() {
-      window.location.hash = "Input";
-    },
-    setChanges() {
-      window.location.hash = "Changes";
-    },
-    setOutput() {
-      window.location.hash = "Output";
-    },
-  },
+  methods: {},
 };
 </script>
 

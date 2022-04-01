@@ -2,7 +2,8 @@
   <div id="app">
     <Header />
     <div class="rowC">
-      <Sidebar /> <Home /> <Input /> <Changes /> <Output />
+      <Sidebar />
+      <router-view />
     </div>
 
     <Footer />
@@ -13,10 +14,6 @@
 import Sidebar from "./vue/sidebarPresenter.vue";
 import Header from "./vue/headerPresenter.vue";
 import Footer from "./vue/footerPresenter.vue";
-import Home from "./vue/homePresenter.vue";
-import Input from "./vue/inputPresenter.vue";
-import Changes from "./vue/changesPresenter.vue";
-import Output from "./vue/outputPresenter.vue";
 
 export default {
   name: "App",
@@ -24,15 +21,10 @@ export default {
     Sidebar,
     Header,
     Footer,
-    Home,
-    Input,
-    Changes,
-    Output,
   },
 };
 </script>
-
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -43,5 +35,17 @@ export default {
 .rowC {
   display: flex;
   flex-direction: row;
+}
+nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
