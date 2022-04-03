@@ -1,6 +1,9 @@
 <template>
   <div class="back">
     <h1>Changes</h1>
+    Now is the time to tweak what has been offered to you through the API. You
+    can decide on what you want to have but be careful, you'll lose possible
+    coherence doing this.
     <InputBarVue
       nameAttribute="Race"
       typeAttribute="dropdown"

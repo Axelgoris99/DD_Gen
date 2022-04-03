@@ -1,6 +1,10 @@
 <template>
   <div class="input">
     <h1>Input</h1>
+    This page is here for you to select whatever value that you want to prefix
+    and that won't be modified, meaning that the method will try to adjust other
+    params depending on what you selected.
+    <br />A dwarf will often be a warrior for example.
     <InputBarVue
       nameAttribute="Race"
       typeAttribute="dropdown"

@@ -1,6 +1,9 @@
 <template>
   <div class="back">
     <h1>Output</h1>
+    As the name suggests, you can find your whole new character right here!
+    You're know ready to play :)
+    <br />Have fun !
     <InputBarVue
       nameAttribute="Race"
       typeAttribute="dropdown"
