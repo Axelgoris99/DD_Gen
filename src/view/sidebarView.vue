@@ -27,4 +27,13 @@ div {
   margin-bottom: 20px;
   margin-right: 20px;
 }
+@media screen and (max-width: 992px) {
+  .sidebar {
+    display: block;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    text-align: center;
+  }
+}
 </style>
