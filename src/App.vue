@@ -36,6 +36,12 @@ export default {
   display: flex;
   flex-direction: row;
 }
+@media screen and (max-width: 992px) {
+  .rowC {
+    display: flex;
+    flex-direction: column;
+  }
+}
 nav {
   padding: 30px;
 

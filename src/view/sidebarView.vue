@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-nav pills vertical class="w-25">
+  <div class="sidebar" role="navigation">
+    <b-nav vertical pills>
       <b-nav-item to="home">Home</b-nav-item>
       <b-nav-item to="input">Input</b-nav-item>
       <b-nav-item to="changes">Changes</b-nav-item>
@@ -20,5 +20,11 @@ export default {
 <style scoped>
 div {
   background-color: #151f28;
+}
+.sidebar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 </style>

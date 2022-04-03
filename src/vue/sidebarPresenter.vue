@@ -16,10 +16,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.sidebar {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-</style>
+<style scoped></style>
