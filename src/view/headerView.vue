@@ -5,7 +5,7 @@
       <b-button variant="success" v-on:click="signup" to="register"
         >Register</b-button
       >
-      <b-button variant="success" v-on:click="signOut" to="home"
+      <b-button variant="danger" v-on:click="signOut" to="home"
         >Sign Out</b-button
       >
     </b-button-group>
