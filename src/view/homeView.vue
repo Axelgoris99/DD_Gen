@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="back">
     <h1>Home</h1>
     <b-button v-on:click="increment">{{ count }}</b-button>
     <br />
@@ -99,4 +99,8 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.back {
+  background-color: beige;
+}
+</style>
