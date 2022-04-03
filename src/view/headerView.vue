@@ -3,6 +3,7 @@
     <b-button-group>
       <b-button variant="primary" v-on:click="login">Login</b-button>
       <b-button variant="success" v-on:click="signup">Signup</b-button>
+      <b-button variant="success" v-on:click="signOut">Sign Out</b-button>
     </b-button-group>
     <b-img
       right
@@ -18,13 +19,16 @@
 export default {
   name: "MyHeaderView",
   components: {},
-  emits: ["login", "signup"],
+  emits: ["login", "signup", "signOut"],
   methods: {
     login() {
       this.$emit("login");
     },
     signup() {
       this.$emit("signup");
+    },
+    signOut() {
+      this.$emit("signOut");
     },
   },
 };

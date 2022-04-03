@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import home from "../vue/homePresenter.vue";
+import register from "../view/registerView.vue";
+import login from "../view/loginView.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +28,16 @@ const routes = [
     path: "/output",
     name: "output",
     component: () => import("../vue/outputPresenter.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: register,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: login,
   },
 ];
 
