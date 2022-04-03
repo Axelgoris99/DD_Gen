@@ -6,7 +6,7 @@
           <div class="card-header">Register</div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{ error }}</div>
-            <form action="#" @submit.prevent="submit">
+            <form id="myForm" action="#" @submit.prevent="submit">
               <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right"
                   >Name</label
@@ -21,7 +21,6 @@
                     value
                     required
                     autofocus
-                    v-model="form.name"
                   />
                 </div>
               </div>
@@ -40,7 +39,6 @@
                     value
                     required
                     autofocus
-                    v-model="form.email"
                   />
                 </div>
               </div>
@@ -59,7 +57,6 @@
                     class="form-control"
                     name="password"
                     required
-                    v-model="form.password"
                   />
                 </div>
               </div>
@@ -80,36 +77,22 @@
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-
 export default {
-  data() {
-    return {
-      form: {
-        name: "",
-        email: "",
-        password: "",
-      },
-      error: null,
-    };
+  name: "MyRegisterView",
+  props: {
+    error: String,
   },
+  emits: ["submit"],
   methods: {
     submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name,
-            })
-            .then(() => {});
-        })
-        .catch((err) => {
-          this.error = err.message;
-        });
+      var myForm = document.getElementById("myForm");
+      var formData = new FormData(myForm);
+      var dict = {};
+      for (var [key, value] of formData.entries()) {
+        dict[key] = value;
+      }
+
+      this.$emit("submit", dict);
     },
   },
 };

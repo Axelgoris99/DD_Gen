@@ -6,7 +6,7 @@
           <div class="card-header">Login</div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{ error }}</div>
-            <form action="#" @submit.prevent="submit">
+            <form id="myForm" action="#" @submit.prevent="submit">
               <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right"
                   >Email</label
@@ -21,7 +21,6 @@
                     value
                     required
                     autofocus
-                    v-model="form.email"
                   />
                 </div>
               </div>
@@ -40,7 +39,6 @@
                     class="form-control"
                     name="password"
                     required
-                    v-model="form.password"
                   />
                 </div>
               </div>
@@ -59,31 +57,23 @@
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-
 export default {
-  data() {
-    return {
-      form: {
-        email: "",
-        password: "",
-      },
-      error: null,
-    };
+  name: "MyLoginView",
+  props: {
+    error: String,
   },
+  emits: ["submit"],
   methods: {
     submit() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(() => {
-          this.$router.replace({ name: "home" });
-        })
-        .catch((err) => {
-          this.error = err.message;
-        });
+      //currently this is the only way to use FormData, we can't use it directly
+      var myForm = document.getElementById("myForm");
+      var formData = new FormData(myForm);
+      var dict = {};
+      for (var [key, value] of formData.entries()) {
+        dict[key] = value;
+      }
+
+      this.$emit("submit", dict);
     },
   },
 };

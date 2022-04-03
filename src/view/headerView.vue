@@ -1,9 +1,13 @@
 <template>
   <div class="header">
     <b-button-group>
-      <b-button variant="primary" v-on:click="login">Login</b-button>
-      <b-button variant="success" v-on:click="signup">Signup</b-button>
-      <b-button variant="success" v-on:click="signOut">Sign Out</b-button>
+      <b-button variant="primary" v-on:click="login" to="login">Login</b-button>
+      <b-button variant="success" v-on:click="signup" to="register"
+        >Register</b-button
+      >
+      <b-button variant="success" v-on:click="signOut" to="home"
+        >Sign Out</b-button
+      >
     </b-button-group>
     <b-img
       right
