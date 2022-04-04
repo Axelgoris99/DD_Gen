@@ -1,9 +1,12 @@
 <template>
   <div class="back">
     <h1>Changes</h1>
-    Now is the time to tweak what has been offered to you through the API. You
-    can decide on what you want to have but be careful, you'll lose possible
-    coherence doing this.
+    <p>
+      Now is the time to tweak what has been offered to you through the API. You
+      can decide on what you want to have but be careful, you'll lose possible
+      coherence doing this.
+    </p>
+    <h2>Qualitative</h2>
     <b-container class="bv-example-row" fluid>
       <b-row align-v="center">
         <b-col cols="8">
@@ -34,6 +37,8 @@
         </b-col>
       </b-row>
     </b-container>
+    <b-button class="space">Another time!</b-button>
+    <b-button to="output" class="space">Perfection!</b-button>
   </div>
 </template>
 
@@ -61,7 +66,6 @@ export default {
 }
 
 .space {
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin: 5px;
 }
 </style>

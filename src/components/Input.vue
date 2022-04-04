@@ -25,7 +25,11 @@
           max-rows="6"
         ></b-form-textarea>
       </b-col>
-      <b-col cols="8" v-else class="blockedBox"> Result </b-col>
+      <b-col cols="8" v-else class="blockedBox">
+        <textarea readonly>
+Result With a looooooot of text, crazy how much text there is in there, wow, amazing</textarea
+        >
+      </b-col>
     </b-row>
   </b-container>
 </template>
