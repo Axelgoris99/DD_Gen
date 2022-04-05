@@ -2,9 +2,7 @@
   <div class="header">
     <b-button-group>
       <template v-if="connect">
-        <b-button variant="success" v-on:click="signOut" to="home">{{
-          username
-        }}</b-button>
+        <b-button variant="success" to="profile">{{ username }}</b-button>
         <b-button variant="danger" v-on:click="signOut" to="home"
           >Sign Out</b-button
         >

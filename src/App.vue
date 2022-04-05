@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import Sidebar from "./vue/sidebarPresenter.vue";
-import Header from "./vue/headerPresenter.vue";
-import Footer from "./vue/footerPresenter.vue";
+import Sidebar from "./presenter/sidebarPresenter.vue";
+import Header from "./presenter/headerPresenter.vue";
+import Footer from "./presenter/footerPresenter.vue";
 
 export default {
   name: "App",

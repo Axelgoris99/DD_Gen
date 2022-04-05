@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import home from "../vue/homePresenter.vue";
+import home from "../presenter/homePresenter.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -15,27 +15,32 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import("../vue/inputPresenter.vue"),
+    component: () => import("../presenter/inputPresenter.vue"),
   },
   {
     path: "/changes",
     name: "changes",
-    component: () => import("../vue/changesPresenter.vue"),
+    component: () => import("../presenter/changesPresenter.vue"),
   },
   {
     path: "/output",
     name: "output",
-    component: () => import("../vue/outputPresenter.vue"),
+    component: () => import("../presenter/outputPresenter.vue"),
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("../vue/registerPresenter.vue"),
+    component: () => import("../presenter/registerPresenter.vue"),
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("../vue/loginPresenter.vue"),
+    component: () => import("../presenter/loginPresenter.vue"),
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () => import("../presenter/profilePresenter.vue"),
   },
 ];
 
