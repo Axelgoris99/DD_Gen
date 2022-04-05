@@ -2,6 +2,7 @@
   <div>
     <headerView
       :connect="this.$store.state.user.loggedIn"
+      :username="this.$store.state.user.data.displayName"
       @signup="signup"
       @login="login"
       @signOut="signOut"
@@ -23,21 +24,12 @@ export default {
   methods: {
     login() {
       console.log("Welcome user !");
-      this.$router.replace({ name: "login" });
     },
     signup() {
       console.log("New User Incoming ?");
-      this.$router.replace({ name: "register" });
     },
     signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({
-            name: "home",
-          });
-        });
+      firebase.auth().signOut();
     },
   },
 };

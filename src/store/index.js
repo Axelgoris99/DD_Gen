@@ -8,7 +8,7 @@ const store = new Vuex.Store({
     count: 0,
     user: {
       loggedIn: false,
-      data: null,
+      data: "",
     },
   },
   computed: {

@@ -14,8 +14,11 @@ export default {
 <style scoped>
 .footer {
   margin-top: 10px;
-  background: black;
+  background: #333;
   color: white;
   text-align: right;
+  right: 0;
+  bottom: 0;
+  width: 100%;
 }
 </style>
