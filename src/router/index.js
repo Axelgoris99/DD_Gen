@@ -27,6 +27,16 @@ const routes = [
     name: "output",
     component: () => import("../vue/outputPresenter.vue"),
   },
+  {
+    path: "/register",
+    name: "register",
+    component: () => import("../vue/registerPresenter.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../vue/loginPresenter.vue"),
+  },
 ];
 
 const router = new VueRouter({

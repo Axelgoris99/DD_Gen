@@ -1,8 +1,22 @@
 <template>
   <div class="header">
     <b-button-group>
-      <b-button variant="primary" v-on:click="login">Login</b-button>
-      <b-button variant="success" v-on:click="signup">Signup</b-button>
+      <template v-if="connect">
+        <b-button variant="success" v-on:click="signOut" to="home">{{
+          username
+        }}</b-button>
+        <b-button variant="danger" v-on:click="signOut" to="home"
+          >Sign Out</b-button
+        >
+      </template>
+      <template v-else>
+        <b-button variant="primary" v-on:click="login" to="login"
+          >Login</b-button
+        >
+        <b-button variant="success" v-on:click="signup" to="register"
+          >Signup</b-button
+        >
+      </template>
     </b-button-group>
     <b-img
       right
@@ -17,14 +31,22 @@
 <script>
 export default {
   name: "MyHeaderView",
+  props: {
+    connect: Boolean,
+    username: String,
+    keyComp: Number,
+  },
   components: {},
-  emits: ["login", "signup"],
+  emits: ["login", "signup", "signOut"],
   methods: {
     login() {
       this.$emit("login");
     },
     signup() {
       this.$emit("signup");
+    },
+    signOut() {
+      this.$emit("signOut");
     },
   },
 };
