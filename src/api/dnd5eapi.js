@@ -1,13 +1,13 @@
 import httpClient from "./httpClient";
 
-const URL = "https://dnd5eapi.co";
+const URL = "https://www.dnd5eapi.co/api/";
 const ENDPOINTS = {
-  RACES: "/api/races",
-  CLASSES: "/api/classes",
-  ALIGNMENTS: "/api/alignments",
-  ABILITY_SCORES: "api/ability-scores",
-  LANGUAGES: "api/languages",
-  TRAITS: "api/traits",
+  RACES: "races/",
+  CLASSES: "classes/",
+  ALIGNMENTS: "alignments/",
+  ABILITY_SCORES: "ability-scores/",
+  LANGUAGES: "languages/",
+  TRAITS: "traits/",
 };
 
 export default {
@@ -15,33 +15,33 @@ export default {
     return httpClient.get(`${URL}${ENDPOINTS.RACES}`);
   },
   raceGet(slug) {
-    return httpClient.get(`${URL}${ENDPOINTS.RACES}/${slug}`);
+    return httpClient.get(`${URL}${ENDPOINTS.RACES}${slug}`);
   },
   classList() {
     return httpClient.get(`${URL}${ENDPOINTS.CLASSES}`);
   },
   classGet(slug) {
-    return httpClient.get(`${URL}${ENDPOINTS.CLASSES}/${slug}`);
+    return httpClient.get(`${URL}${ENDPOINTS.CLASSES}${slug}`);
   },
   alignmentList() {
     return httpClient.get(`${URL}${ENDPOINTS.ALIGNMENTS}`);
   },
   alignmentGet(slug) {
-    return httpClient.get(`${URL}${ENDPOINTS.ALIGNMENTS}/${slug}`);
+    return httpClient.get(`${URL}${ENDPOINTS.ALIGNMENTS}${slug}`);
   },
   languageList() {
     return httpClient.get(`${URL}${ENDPOINTS.LANGUAGES}`);
   },
   languageGet(slug) {
-    return httpClient.get(`${URL}${ENDPOINTS.LANGUAGES}/${slug}`);
+    return httpClient.get(`${URL}${ENDPOINTS.LANGUAGES}${slug}`);
   },
   traitList() {
     return httpClient.get(`${URL}${ENDPOINTS.TRAITS}`);
   },
   traitGet(slug) {
-    return httpClient.get(`${URL}${ENDPOINTS.TRAITS}/${slug}`);
+    return httpClient.get(`${URL}${ENDPOINTS.TRAITS}${slug}`);
   },
   abilityScoreGet(slug) {
-    return httpClient.get(`${URL}${ENDPOINTS.ABILITY_SCORES}/${slug}`);
+    return httpClient.get(`${URL}${ENDPOINTS.ABILITY_SCORES}${slug}`);
   },
 };

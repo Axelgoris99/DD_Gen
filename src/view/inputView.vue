@@ -26,6 +26,7 @@
 
 <script>
 import InputBarVue from "../components/Input.vue";
+import dnd5 from "../api/dnd5eapi";
 
 export default {
   name: "MyInputView",
@@ -36,8 +37,20 @@ export default {
   methods: {},
   data: function () {
     return {
-      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
+      dropdownAttribute: [],
     };
+  },
+  mounted() {
+    dnd5
+      .raceList()
+      .then((resp) => {
+        this.dropdownAttribute = resp.data.results.map((r) => {
+          return r.name;
+        });
+      })
+      .catch(() => {
+        console.log("something went bad");
+      });
   },
 };
 </script>
