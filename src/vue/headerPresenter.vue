@@ -2,7 +2,7 @@
   <div>
     <headerView
       :connect="this.$store.state.user.loggedIn"
-      :username="this.$store.state.user.data.displayName"
+      :username="name"
       @signup="signup"
       @login="login"
       @signOut="signOut"
@@ -20,6 +20,20 @@ export default {
   name: "MyHeader",
   components: {
     headerView,
+  },
+  data() {
+    return {
+      componentKey: 0,
+    };
+  },
+  computed: {
+    name() {
+      if (this.$store.state.user.data) {
+        return this.$store.state.user.data.displayName;
+      } else {
+        return "0";
+      }
+    },
   },
   methods: {
     login() {

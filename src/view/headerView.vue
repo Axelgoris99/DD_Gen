@@ -2,7 +2,9 @@
   <div class="header">
     <b-button-group>
       <template v-if="connect">
-        <div>{{ username }}</div>
+        <b-button variant="success" v-on:click="signOut" to="home">{{
+          username
+        }}</b-button>
         <b-button variant="danger" v-on:click="signOut" to="home"
           >Sign Out</b-button
         >
@@ -29,7 +31,11 @@
 <script>
 export default {
   name: "MyHeaderView",
-  props: { connect: Boolean, username: String },
+  props: {
+    connect: Boolean,
+    username: String,
+    keyComp: Number,
+  },
   components: {},
   emits: ["login", "signup", "signOut"],
   methods: {
