@@ -1,6 +1,11 @@
 <template>
   <div>
-    <headerView @signup="signup" @login="login" />
+    <headerView
+      :connect="this.$store.state.user.loggedIn"
+      @signup="signup"
+      @login="login"
+      @signOut="signOut"
+    />
   </div>
 </template>
 
