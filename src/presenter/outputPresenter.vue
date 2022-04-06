@@ -1,6 +1,7 @@
 <template>
   <div>
     <MyOutputView @output="generateReport" />
+    <pdfVue></pdfVue>
     <div>
       <vue-html2pdf
         :show-layout="false"
@@ -12,7 +13,7 @@
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
-        pdf-orientation="landscape"
+        pdf-orientation="portrait"
         pdf-content-width="800px"
         @hasStartedGeneration="hasStartedGeneration()"
         @hasGenerated="hasGenerated($event)"
