@@ -7,39 +7,34 @@
       other params depending on what you selected.
       <br />A dwarf will often be a warrior for example.
     </p>
+    <b-form-select :options="races"></b-form-select>
+    <b-form-select :options="classes"></b-form-select>
+    <b-form-select :options="alignments"></b-form-select>
+    <b-form-select :options="languages"></b-form-select>
+    <b-form-select :options="traits"></b-form-select>
+    <b-form-select :options="backgrounds"></b-form-select>
     <h2>Qualitative</h2>
-    <InputBarVue
-      nameAttribute="Race"
-      typeAttribute="dropdown"
-      :dropdownAttribute="dropdownAttribute"
-      class="space"
-    />
-    <InputBarVue
-      nameAttribute="Strenght"
-      typeAttribute="number"
-      class="space"
-    />
-    <InputBarVue nameAttribute="Backstory" typeAttribute="text" class="space" />
     <b-button to="changes" class="space">Fill those fields!</b-button>
   </div>
 </template>
 
 <script>
-import InputBarVue from "../components/Input.vue";
-
 export default {
   name: "MyInputView",
-  components: {
-    InputBarVue,
-  },
   props: {
-    dropdownAttribute: Array,
+    races: Array,
+    classes: Array,
+    alignments: Array,
+    languages: Array,
+    traits: Array,
+    backgrounds: Array,
   },
   emits: [],
   methods: {},
 };
 </script>
-<style scoped>
+
+<stylescoped>
 .input {
   display: row;
   background-color: beige;
@@ -49,4 +44,4 @@ export default {
 .space {
   margin: 5px;
 }
-</style>
+</stylescoped>
