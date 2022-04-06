@@ -1,6 +1,12 @@
 <template>
   <div>
-    <MyRegisterView :error="error" @submit="submit" />
+    <MyRegisterView
+      :error="error"
+      @submit="submit"
+      @password="passwordChange"
+      @mail="mailChange"
+      @name="nameChange"
+    />
   </div>
 </template>
 
@@ -25,17 +31,28 @@ export default {
     };
   },
   methods: {
-    submit(formData) {
-      //console.log(formData.email, formData.password, formData.name);
+    passwordChange(event) {
+      this.form.password = event;
+    },
+    mailChange(event) {
+      this.form.email = event;
+    },
+    nameChange(event) {
+      this.form.name = event;
+    },
+    submit() {
       firebase
         .auth()
-        .createUserWithEmailAndPassword(formData.email, formData.password)
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then((data) => {
           data.user
             .updateProfile({
-              displayName: formData.name,
+              displayName: this.form.name,
             })
             .then(() => {});
+        })
+        .then(() => {
+          this.$router.replace({ name: "home" });
         })
         .catch((err) => {
           this.error = err.message;

@@ -3,72 +3,56 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Register</div>
+          <div class="card-header">Login</div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{ error }}</div>
-            <form id="myForm" action="#" @submit.prevent="submit">
-              <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right"
-                  >Name</label
-                >
+            <b-form @submit="onSubmit" @reset="onReset">
+              <b-form-group
+                id="input-group-1"
+                label="Your name:"
+                label-for="input-1"
+                description="We'll never share your name with anyone else. Or not."
+              >
+                <b-form-input
+                  id="input-1"
+                  type="text"
+                  placeholder="Reminder : azerty is not a valid name."
+                  required
+                  v-on:input="onNameInput"
+                ></b-form-input>
+              </b-form-group>
 
-                <div class="col-md-6">
-                  <input
-                    id="name"
-                    type="name"
-                    class="form-control"
-                    name="name"
-                    value
-                    required
-                    autofocus
-                  />
-                </div>
-              </div>
+              <b-form-group
+                id="input-group-2"
+                label="Email address:"
+                label-for="input-2"
+                description="We'll never share your email with anyone else."
+              >
+                <b-form-input
+                  id="input-2"
+                  type="email"
+                  placeholder="Enter email"
+                  required
+                  v-on:input="onMailInput"
+                ></b-form-input>
+              </b-form-group>
 
-              <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right"
-                  >Email</label
-                >
+              <b-form-group
+                id="input-group-3"
+                label="Password:"
+                label-for="input-3"
+              >
+                <b-form-input
+                  id="input-3"
+                  type="password"
+                  placeholder="Enter password"
+                  required
+                  v-on:input="onPasswordInput"
+                ></b-form-input>
+              </b-form-group>
 
-                <div class="col-md-6">
-                  <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="password"
-                  class="col-md-4 col-form-label text-md-right"
-                  >Password</label
-                >
-
-                <div class="col-md-6">
-                  <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
-                    Register
-                  </button>
-                </div>
-              </div>
-            </form>
+              <b-button type="submit" variant="primary">Login</b-button>
+            </b-form>
           </div>
         </div>
       </div>
@@ -82,17 +66,23 @@ export default {
   props: {
     error: String,
   },
-  emits: ["submit"],
+  emits: ["submit", "password", "mail", "name"],
   methods: {
-    submit() {
-      var myForm = document.getElementById("myForm");
-      var formData = new FormData(myForm);
-      var dict = {};
-      for (var [key, value] of formData.entries()) {
-        dict[key] = value;
-      }
-
-      this.$emit("submit", dict);
+    onSubmit(event) {
+      event.preventDefault();
+      this.$emit("submit");
+    },
+    onReset() {
+      // Reset our form values
+    },
+    onPasswordInput(event) {
+      this.$emit("password", event);
+    },
+    onMailInput(event) {
+      this.$emit("mail", event);
+    },
+    onNameInput(event) {
+      this.$emit("name", event);
     },
   },
 };

@@ -33,12 +33,8 @@ export default {
     ...mapGetters(["user", "loggedIn"]), // map all the getters to computed properties.
   },
   methods: {
-    login() {
-      console.log("Welcome user !");
-    },
-    signup() {
-      console.log("New User Incoming ?");
-    },
+    login() {},
+    signup() {},
     signOut() {
       firebase.auth().signOut();
     },
