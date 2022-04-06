@@ -17,6 +17,10 @@ export default {
     Header,
     Footer,
   },
+  created() {
+    // init options.
+    this.$store.dispatch("options/init");
+  },
 };
 </script>
 <style lang="scss">

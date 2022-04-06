@@ -1,5 +1,7 @@
 import dnd5 from "../../api/dnd5eapi";
 import open5 from "../../api/open5e";
+// This is a vuex module containing all the options from dnd5eapi and open5e apis.
+// This module should be initialized once on startup of the application.
 export default {
   namespaced: true,
   state: {
@@ -21,8 +23,8 @@ export default {
     SET_LANGUAGES(state, languages) {
       state.languages = languages;
     },
-    SET_ALIGNMNETS(state, alignmnets) {
-      state.alignmnets = alignmnets;
+    SET_ALIGNMENTS(state, alignments) {
+      state.alignments = alignments;
     },
     SET_TRAITS(state, traits) {
       state.traits = traits;
@@ -31,7 +33,26 @@ export default {
       state.backgrounds = backgrounds;
     },
   },
-
+  getters: {
+    races(state) {
+      return state.races;
+    },
+    classes(state) {
+      return state.classes;
+    },
+    languages(state) {
+      return state.languages;
+    },
+    alignments(state) {
+      return state.alignments;
+    },
+    traits(state) {
+      return state.traits;
+    },
+    backgrounds(state) {
+      return state.backgrounds;
+    },
+  },
   actions: {
     init({ commit }) {
       // Fetch data from apis to populate dropdowns

@@ -1,8 +1,8 @@
 <template>
   <div>
     <headerView
-      :connect="this.loggedIn"
-      :username="this.user.displayName"
+      :connect="loggedIn"
+      :username="user.displayName"
       @signup="signup"
       @login="login"
       @signOut="signOut"
