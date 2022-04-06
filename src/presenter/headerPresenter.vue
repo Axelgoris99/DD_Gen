@@ -2,7 +2,7 @@
   <div>
     <headerView
       :connect="loggedIn"
-      :username="user.displayName"
+      :username="name"
       @signup="signup"
       @login="login"
       @signOut="signOut"
@@ -31,6 +31,13 @@ export default {
   },
   computed: {
     ...mapGetters(["user", "loggedIn"]), // map all the getters to computed properties.
+    name() {
+      if (this.user.data) {
+        return this.user.data.displayName;
+      } else {
+        return "Nope";
+      }
+    },
   },
   methods: {
     login() {},
