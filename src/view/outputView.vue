@@ -29,14 +29,6 @@
             blocked=""
           />
         </b-col>
-        <b-col cols="4">
-          <img
-            right
-            src="../assets/icon/barbarian.png"
-            class="img-fluid"
-            alt="Responsive image"
-          />
-        </b-col>
       </b-row>
     </b-container>
     <b-button class="space" v-on:click="output">Export as PDF</b-button>

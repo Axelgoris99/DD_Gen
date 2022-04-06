@@ -1,13 +1,20 @@
 <template>
   <div>
-    <MyOutputView @output="generateReport" />
-    <pdfVue></pdfVue>
+    <div class="row-fluid">
+      <MyOutputView @output="generateReport" />
+      <pdfVue
+        myName="Leyndell"
+        :myClass="myClass"
+        :myRace="myRace"
+        :myAlignment="myAlignment"
+      ></pdfVue>
+    </div>
     <div>
       <vue-html2pdf
         :show-layout="false"
         :float-layout="true"
         :enable-download="true"
-        :preview-modal="true"
+        :preview-modal="false"
         :paginate-elements-by-height="1400"
         filename="Yahou!"
         :pdf-quality="2"
@@ -20,7 +27,12 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <pdfVue></pdfVue>
+          <pdfVue
+            myName="Leyndell"
+            :myClass="myClass"
+            :myRace="myRace"
+            :myAlignment="myAlignment"
+          ></pdfVue>
         </section>
       </vue-html2pdf>
     </div>
@@ -38,6 +50,20 @@ export default {
     VueHtml2pdf,
     pdfVue,
   },
+  data() {
+    return {
+      myClass: {
+        name: "Paladin",
+        hp: "18",
+      },
+      myRace: {
+        name: "Dwarf",
+      },
+      myAlignment: {
+        name: "Chaotic Evil",
+      },
+    };
+  },
   methods: {
     generateReport() {
       this.$refs.html2Pdf.generatePdf();
@@ -46,4 +72,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.row-fluid {
+  display: flex;
+}
+</style>
