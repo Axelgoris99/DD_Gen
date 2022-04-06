@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     increment() {
-      this.$store.commit("increment");
+      this.$store.commit("auth/increment");
     },
   },
 };
