@@ -31,17 +31,13 @@ export default {
       if (this.$store.state.user.data) {
         return this.$store.state.user.data.displayName;
       } else {
-        return "0";
+        return "What";
       }
     },
   },
   methods: {
-    login() {
-      console.log("Welcome user !");
-    },
-    signup() {
-      console.log("New User Incoming ?");
-    },
+    login() {},
+    signup() {},
     signOut() {
       firebase.auth().signOut();
     },

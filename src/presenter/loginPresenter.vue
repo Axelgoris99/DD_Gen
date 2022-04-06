@@ -1,6 +1,11 @@
 <template>
   <div>
-    <MyLoginView :error="error" @submit="submit" />
+    <MyLoginView
+      :error="error"
+      @submit="submit"
+      @password="passwordChange"
+      @mail="mailChange"
+    />
   </div>
 </template>
 
@@ -24,10 +29,16 @@ export default {
     };
   },
   methods: {
-    submit(formData) {
+    passwordChange(event) {
+      this.form.password = event;
+    },
+    mailChange(event) {
+      this.form.email = event;
+    },
+    submit() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(formData.email, formData.password)
+        .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(() => {
           this.$router.replace({ name: "home" });
         })

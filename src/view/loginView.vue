@@ -6,49 +6,38 @@
           <div class="card-header">Login</div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{ error }}</div>
-            <form id="myForm" action="#" @submit.prevent="submit">
-              <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right"
-                  >Email</label
-                >
+            <b-form @submit="onSubmit" @reset="onReset">
+              <b-form-group
+                id="input-group-1"
+                label="Email address:"
+                label-for="input-1"
+                description="We'll never share your email with anyone else."
+              >
+                <b-form-input
+                  id="input-1"
+                  type="email"
+                  placeholder="Enter email"
+                  required
+                  v-on:input="onMailInput"
+                ></b-form-input>
+              </b-form-group>
 
-                <div class="col-md-6">
-                  <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                  />
-                </div>
-              </div>
+              <b-form-group
+                id="input-group-2"
+                label="Password:"
+                label-for="input-2"
+              >
+                <b-form-input
+                  id="input-2"
+                  type="password"
+                  placeholder="Enter password"
+                  required
+                  v-on:input="onPasswordInput"
+                ></b-form-input>
+              </b-form-group>
 
-              <div class="form-group row">
-                <label
-                  for="password"
-                  class="col-md-4 col-form-label text-md-right"
-                  >Password</label
-                >
-
-                <div class="col-md-6">
-                  <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">Login</button>
-                </div>
-              </div>
-            </form>
+              <b-button type="submit" variant="primary">Login</b-button>
+            </b-form>
           </div>
         </div>
       </div>
@@ -62,18 +51,20 @@ export default {
   props: {
     error: String,
   },
-  emits: ["submit"],
+  emits: ["submit", "password", "mail"],
   methods: {
-    submit() {
-      //currently this is the only way to use FormData, we can't use it directly
-      var myForm = document.getElementById("myForm");
-      var formData = new FormData(myForm);
-      var dict = {};
-      for (var [key, value] of formData.entries()) {
-        dict[key] = value;
-      }
-
-      this.$emit("submit", dict);
+    onSubmit(event) {
+      event.preventDefault();
+      this.$emit("submit");
+    },
+    onReset() {
+      // Reset our form values
+    },
+    onPasswordInput(event) {
+      this.$emit("password", event);
+    },
+    onMailInput(event) {
+      this.$emit("mail", event);
     },
   },
 };
