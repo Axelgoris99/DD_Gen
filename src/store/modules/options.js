@@ -11,6 +11,7 @@ export default {
     alignments: [],
     traits: [],
     backgrounds: [],
+    ability_scores: [],
   },
 
   mutations: {
@@ -32,6 +33,9 @@ export default {
     SET_BACKGROUNDS(state, backgrounds) {
       state.backgrounds = backgrounds;
     },
+    SET_ABILITY_SCORE(state, ability_scores) {
+      state.ability_scores = ability_scores;
+    },
   },
   getters: {
     races(state) {
@@ -52,6 +56,9 @@ export default {
     backgrounds(state) {
       return state.backgrounds;
     },
+    ability(state) {
+      return state.ability_scores;
+    },
   },
   actions: {
     init({ commit }) {
@@ -63,6 +70,7 @@ export default {
         dnd5.languageList(),
         dnd5.traitList(),
         open5.backgroundList(),
+        dnd5.abilityScoreList(),
       ];
       Promise.all(promises)
         .then(
@@ -73,6 +81,7 @@ export default {
             { data: languages },
             { data: traits },
             { data: backgrounds },
+            { data: ability_scores },
           ]) => {
             commit(
               "SET_RACES",
@@ -114,6 +123,13 @@ export default {
               backgrounds.results.map((r) => ({
                 text: r.name,
                 value: r.slugs,
+              }))
+            );
+            commit(
+              "SET_ABILITY_SCORE",
+              ability_scores.results.map((r) => ({
+                text: r.name,
+                value: r.index,
               }))
             );
           }
