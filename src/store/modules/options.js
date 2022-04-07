@@ -56,7 +56,7 @@ export default {
     backgrounds(state) {
       return state.backgrounds;
     },
-    ability(state) {
+    abilities(state) {
       return state.ability_scores;
     },
   },

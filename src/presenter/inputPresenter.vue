@@ -7,7 +7,7 @@
       :languages="languages"
       :traits="traits"
       :backgrounds="backgrounds"
-      :abilities="ability"
+      :abilities="abilities"
     />
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       "languages",
       "traits",
       "backgrounds",
-      "ability",
+      "abilities",
     ]),
   },
 };
