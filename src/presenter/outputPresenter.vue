@@ -23,6 +23,7 @@
         pdf-format="a4"
         pdf-orientation="portrait"
         pdf-content-width="800px"
+        :html-to-pdf-options="htmlToPdfOptions"
         @hasStartedGeneration="hasStartedGeneration()"
         @hasGenerated="hasGenerated($event)"
         ref="html2Pdf"
@@ -67,7 +68,24 @@ export default {
         name: "Chaotic Evil",
       },
       myPicture: {
-        url: "src/assets/dd_logo.png",
+        url: "https://wow.zamimg.com/uploads/screenshots/small/962061.jpg",
+      },
+      htmlToPdfOptions: {
+        margin: 0,
+
+        filename: `hehehe.pdf`,
+
+        image: {
+          type: "png",
+          quality: 0.98,
+        },
+
+        enableLinks: false,
+
+        html2canvas: {
+          scale: 1,
+          useCORS: true,
+        },
       },
     };
   },
