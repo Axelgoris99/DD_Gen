@@ -75,5 +75,6 @@ export default {
 <style scoped>
 .row-fluid {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>
