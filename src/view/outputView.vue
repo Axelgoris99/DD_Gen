@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .back {
   display: row;
-  background-color: beige;
+  background-color: white;
   left: 0;
   right: 0;
 }
