@@ -40,6 +40,7 @@ export default {
       alignments: "options/alignments",
       languages: "options/languages",
       traits: "options/traits",
+      abilities: "options/abilities",
       backgrounds: "options/backgrounds",
 
       current_name: "current/name",
