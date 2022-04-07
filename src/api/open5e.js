@@ -6,7 +6,7 @@ const ENDPOINTS = {
 };
 
 export default {
-  backgrounds() {
+  backgroundList() {
     return httpClient.get(`${URL}${ENDPOINTS.BACKGROUNDS}`);
   },
   background(slug) {

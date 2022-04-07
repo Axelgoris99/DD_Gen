@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div>
-      <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar toggleable="lg" type="light" variant="info">
         <b-navbar-brand href="#">
           <b-img
             right
@@ -76,6 +76,5 @@ export default {
 <style scoped>
 .header {
   margin-bottom: 10px;
-  background: #ffffff;
 }
 </style>

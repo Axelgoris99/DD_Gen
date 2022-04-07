@@ -41,6 +41,9 @@ export default {
   traitGet(slug) {
     return httpClient.get(`${URL}${ENDPOINTS.TRAITS}${slug}`);
   },
+  abilityScoreList() {
+    return httpClient.get(`${URL}${ENDPOINTS.ABILITY_SCORES}`);
+  },
   abilityScoreGet(slug) {
     return httpClient.get(`${URL}${ENDPOINTS.ABILITY_SCORES}${slug}`);
   },

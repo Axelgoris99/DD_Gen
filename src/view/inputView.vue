@@ -8,41 +8,97 @@
       <br />A dwarf will often be a warrior for example.
     </p>
     <h2>Qualitative</h2>
-    <InputBarVue
-      nameAttribute="Race"
-      typeAttribute="dropdown"
-      :dropdownAttribute="dropdownAttribute"
-      class="space"
-    />
-    <InputBarVue
-      nameAttribute="Strenght"
-      typeAttribute="number"
-      class="space"
-    />
-    <InputBarVue nameAttribute="Backstory" typeAttribute="text" class="space" />
+
+    <b-form-group
+      id="races"
+      label="Races"
+      label-for="races"
+      description="Each race grants your character ability and skill bonuses as well as racial traits."
+    >
+      <b-form-select :options="races"></b-form-select>
+    </b-form-group>
+
+    <b-form-group
+      id="classes"
+      label="Classes"
+      label-for="classes"
+      description="A character class is a fundamental part of the identity and nature of characters in the Dungeons &amp; Dragons role-playing game."
+    >
+      <b-form-select :options="classes"></b-form-select>
+    </b-form-group>
+
+    <b-form-group
+      id="alignments"
+      label="Alignments"
+      label-for="alignments"
+      description="A typical creature in the game world has an alignment, which broadly describes its moral and personal attitudes."
+    >
+      <b-form-select :options="alignments"></b-form-select>
+    </b-form-group>
+
+    <b-form-group
+      id="languages"
+      label="Languages"
+      label-for="languages"
+      description="Your race indicates the languages your character can speak by default, and your background might give you access to one or more additional languages of your choice."
+    >
+      <b-form-select :options="languages"></b-form-select>
+    </b-form-group>
+
+    <b-form-group
+      id="traits"
+      label="Traits"
+      label-for="traits"
+      description="Your traits are special powers that your character have thanks to his race, class or background."
+    >
+      <b-form-select :options="traits"></b-form-select>
+    </b-form-group>
+
+    <b-form-group
+      id="background"
+      label="Backgrounds"
+      label-for="background"
+      description="Every story has a beginning. Your character's background reveals where you came from, how you became an adventurer, and your place in the world."
+    >
+      <b-form-select :options="backgrounds"></b-form-select>
+    </b-form-group>
+
+    <h2>Quantitative</h2>
+    <b-form-group
+      v-for="ability in abilities"
+      v-bind:key="ability.text"
+      id="background"
+      v-bind:label="ability.text"
+      label-for="background"
+      description=""
+    >
+      <b-form-input type="number" min="0" max="20"></b-form-input>
+    </b-form-group>
     <b-button to="changes" class="space">Fill those fields!</b-button>
   </div>
 </template>
 
 <script>
-import InputBarVue from "../components/Input.vue";
-
 export default {
   name: "MyInputView",
-  components: {
-    InputBarVue,
-  },
   props: {
-    dropdownAttribute: Array,
+    races: Array,
+    classes: Array,
+    alignments: Array,
+    languages: Array,
+    traits: Array,
+    backgrounds: Array,
+    abilities: Array,
   },
   emits: [],
   methods: {},
 };
 </script>
+
 <style scoped>
 .input {
   display: row;
-  background-color: beige;
+  background-color: white;
   left: 0;
   right: 0;
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="back">
     <h1>Home</h1>
-    <b-button v-on:click="increment">{{ count }}</b-button>
     <p>
       Welcome on this Dungeon &amp; Dragon Character Generator. The goal of this
       is to allow you to quickly create different characters, making you able to
@@ -30,6 +29,6 @@ export default {
 </script>
 <style scoped>
 .back {
-  background-color: beige;
+  background-color: white;
 }
 </style>
