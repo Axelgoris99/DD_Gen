@@ -113,7 +113,7 @@ export default {
               "SET_BACKGROUNDS",
               backgrounds.results.map((r) => ({
                 text: r.name,
-                value: r.slugs,
+                value: r.slug,
               }))
             );
           }

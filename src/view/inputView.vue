@@ -7,13 +7,23 @@
       other params depending on what you selected.
       <br />A dwarf will often be a warrior for example.
     </p>
-    <b-form-select :options="races"></b-form-select>
-    <b-form-select :options="classes"></b-form-select>
-    <b-form-select :options="alignments"></b-form-select>
-    <b-form-select :options="languages"></b-form-select>
-    <b-form-select :options="traits"></b-form-select>
-    <b-form-select :options="backgrounds"></b-form-select>
+    <b-form-select :options="races" @change="onChangeRace"></b-form-select>
+    <b-form-select :options="classes" @change="onChangeClass"></b-form-select>
+
+    <b-form-select
+      :options="alignments"
+      @change="onChangeAlignment"
+    ></b-form-select>
+
+    <b-form-select
+      :options="languages"
+      @change="onChangeLanguage"
+    ></b-form-select>
+
+    <b-form-select :options="traits" @change="onChangeTrait" />
+    <b-form-select :options="backgrounds" @change="onChangeBackground" />
     <h2>Qualitative</h2>
+    <b-button @click="onClick">Generate</b-button>
     <b-button to="changes" class="space">Fill those fields!</b-button>
   </div>
 </template>
@@ -29,8 +39,41 @@ export default {
     traits: Array,
     backgrounds: Array,
   },
-  emits: [],
-  methods: {},
+  emits: [
+    "setRace",
+    "setClass",
+    "setBackground",
+    "setAlignment",
+    "addLanguage",
+    "addTrait",
+    "generate",
+  ],
+  methods: {
+    onChangeRace(r) {
+      this.$emit("setRace", r);
+    },
+    onChangeClass(c) {
+      this.$emit("setClass", c);
+    },
+    onChangeBackground(b) {
+      this.$emit("setBackground", b);
+    },
+    onChangeAlignment(a) {
+      this.$emit("setAlignment", a);
+    },
+
+    //TODO: Make this "add" instead of change, will need to support multiselect in the UI.
+    onChangeLanguage(l) {
+      this.$emit("addLanguage", l);
+    },
+    onChangeTrait(t) {
+      this.$emit("addTrait", t);
+    },
+
+    onClick() {
+      this.$emit("generate");
+    },
+  },
 };
 </script>
 
