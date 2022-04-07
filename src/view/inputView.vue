@@ -90,8 +90,41 @@ export default {
     backgrounds: Array,
     abilities: Array,
   },
-  emits: [],
-  methods: {},
+  emits: [
+    "setRace",
+    "setClass",
+    "setBackground",
+    "setAlignment",
+    "addLanguage",
+    "addTrait",
+    "generate",
+  ],
+  methods: {
+    onChangeRace(r) {
+      this.$emit("setRace", r);
+    },
+    onChangeClass(c) {
+      this.$emit("setClass", c);
+    },
+    onChangeBackground(b) {
+      this.$emit("setBackground", b);
+    },
+    onChangeAlignment(a) {
+      this.$emit("setAlignment", a);
+    },
+
+    //TODO: Make this "add" instead of change, will need to support multiselect in the UI.
+    onChangeLanguage(l) {
+      this.$emit("addLanguage", l);
+    },
+    onChangeTrait(t) {
+      this.$emit("addTrait", t);
+    },
+
+    onClick() {
+      this.$emit("generate");
+    },
+  },
 };
 </script>
 
