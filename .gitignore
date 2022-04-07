@@ -5,6 +5,8 @@ node_modules
 # firebase config
 firebase.config.js
 
+#image Search config
+/src/api/rapidApiKey.js
 # local env files
 .env.local
 .env.*.local

@@ -103,7 +103,11 @@
         </div>
       </div>
     </article>
-    <div class="half bg"></div>
+
+    <div
+      class="half bg"
+      :style="{ 'background-image': 'url(' + myPicture + ')' }"
+    ></div>
     <div class="html2pdf__page-break"></div>
   </section>
 </template>
@@ -118,6 +122,7 @@ export default {
     myAlignment: Object,
     myAbilityScore: Object,
     myRace: Object,
+    myPicture: String,
   },
 };
 </script>
@@ -160,7 +165,6 @@ body .container .half {
 }
 
 body .container .half.bg {
-  background-image: url("../assets/icon/barbarian.png");
   background-size: 300px;
   width: 25%;
   background-repeat: no-repeat;

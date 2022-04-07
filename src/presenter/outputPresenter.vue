@@ -7,6 +7,7 @@
         :myClass="myClass"
         :myRace="myRace"
         :myAlignment="myAlignment"
+        :myPicture="myPicture.url"
       ></pdfVue>
     </div>
     <div>
@@ -32,6 +33,7 @@
             :myClass="myClass"
             :myRace="myRace"
             :myAlignment="myAlignment"
+            :myPicture="myPicture.url"
           ></pdfVue>
         </section>
       </vue-html2pdf>
@@ -43,6 +45,8 @@
 import MyOutputView from "../view/outputView.vue";
 import VueHtml2pdf from "vue-html2pdf";
 import pdfVue from "../components/pdf.vue";
+// import { RAPIDAPI_KEY } from "../api/rapidApiKey";
+
 export default {
   name: "MyOutput",
   components: {
@@ -62,6 +66,9 @@ export default {
       myAlignment: {
         name: "Chaotic Evil",
       },
+      myPicture: {
+        url: "src/assets/dd_logo.png",
+      },
     };
   },
   methods: {
@@ -69,6 +76,28 @@ export default {
       this.$refs.html2Pdf.generatePdf();
     },
   },
+  // mounted() {
+  //   const options = {
+  //     method: "GET",
+  //     url: "https://bing-image-search1.p.rapidapi.com/images/search",
+  //     params: { q: "paladin dwarf", safeSearch: "Moderate", count: "1" },
+  //     headers: {
+  //       "X-RapidAPI-Host": "bing-image-search1.p.rapidapi.com",
+  //       "X-RapidAPI-Key": RAPIDAPI_KEY,
+  //     },
+  //   };
+  //   const axios = require("axios");
+  //   const comp = this;
+  //   axios
+  //     .request(options)
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       comp.myPicture.url = response.data.value[0].contentUrl;
+  //     })
+  //     .catch(function (error) {
+  //       console.error(error);
+  //     });
+  // },
 };
 </script>
 
