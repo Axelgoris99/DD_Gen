@@ -83,9 +83,7 @@
     >
       <b-form-input type="number" min="0" max="20"></b-form-input>
     </b-form-group>
-    <b-button class="space" @click="onClick" to="changes"
-      >Fill those fields!</b-button
-    >
+    <b-button class="space" @click="onClick">Fill those fields!</b-button>
   </div>
 </template>
 
@@ -134,6 +132,7 @@ export default {
 
     onClick() {
       this.$emit("generate");
+      this.$router.push("changes");
     },
   },
 };
