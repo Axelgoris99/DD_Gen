@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="row-fluid">
-      <MyOutputView @output="generateReport" />
+      <MyOutputView
+        @output="generateReport"
+        :dropdownAttribute="dropdownAttribute"
+      />
       <pdfVue
         myName="Leyndell"
         :myClass="myClass"
@@ -62,6 +65,7 @@ export default {
       myAlignment: {
         name: "Chaotic Evil",
       },
+      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
     };
   },
   methods: {

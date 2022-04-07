@@ -49,10 +49,8 @@ export default {
       this.$emit("output");
     },
   },
-  data: function () {
-    return {
-      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
-    };
+  props: {
+    dropdownAttribute: Array,
   },
 };
 </script>

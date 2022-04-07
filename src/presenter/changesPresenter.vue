@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MyChangesView />
+    <MyChangesView :dropdownAttribute="dropdownAttribute" />
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   name: "MyChanges",
   components: {
     MyChangesView,
+  },
+  data() {
+    return {
+      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
+    };
   },
   methods: {},
 };
