@@ -8,6 +8,7 @@
       :traits="traits"
       :backgrounds="backgrounds"
       :abilities="abilities"
+      @setName="setName"
       @setRace="setRace"
       @setClass="setClass"
       @setBackground="setBackground"
@@ -53,6 +54,9 @@ export default {
     }),
   },
   methods: {
+    setName(n) {
+      this.$store.dispatch("current/setName", n);
+    },
     setRace(r) {
       this.$store.dispatch("current/setRace", r);
     },
@@ -122,6 +126,7 @@ export default {
           gender: current_gender,
         });
         this.$store.dispatch("current/setName", name);
+        console.log(name);
       }
     },
   },

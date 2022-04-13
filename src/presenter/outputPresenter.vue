@@ -6,10 +6,10 @@
         :dropdownAttribute="dropdownAttribute"
       />
       <pdfVue
-        myName="Leyndell"
+        :myName="name"
         :myClass="myClass"
-        :myRace="myRace"
-        :myAlignment="myAlignment"
+        :myRace="race"
+        :myAlignment="alignment"
       ></pdfVue>
     </div>
     <div>
@@ -31,10 +31,10 @@
       >
         <section slot="pdf-content">
           <pdfVue
-            myName="Leyndell"
+            :myName="name"
             :myClass="myClass"
-            :myRace="myRace"
-            :myAlignment="myAlignment"
+            :myRace="race"
+            :myAlignment="alignment"
           ></pdfVue>
         </section>
       </vue-html2pdf>
@@ -46,12 +46,24 @@
 import MyOutputView from "../view/outputView.vue";
 import VueHtml2pdf from "vue-html2pdf";
 import pdfVue from "../components/pdf.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "MyOutput",
   components: {
     MyOutputView,
     VueHtml2pdf,
     pdfVue,
+  },
+  computed: {
+    ...mapGetters({
+      name: "current/name",
+      gender: "current/gender",
+      race: "current/race",
+      alignment: "current/alignment",
+      background: "current/background",
+      languages: "current/languages",
+      traits: "current/traits",
+    }),
   },
   data() {
     return {

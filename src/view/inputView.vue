@@ -8,6 +8,14 @@
       <br />A dwarf will often be a warrior for example.
     </p>
     <h2>Qualitative</h2>
+    <b-form-group
+      id="name"
+      label="Name"
+      label-for="name"
+      description="A name is unique to a character. The more unique, the better !"
+    >
+      <b-form-input @change="onChangeName"></b-form-input>
+    </b-form-group>
 
     <b-form-group
       id="races"
@@ -109,6 +117,9 @@ export default {
     "generate",
   ],
   methods: {
+    onChangeName(n) {
+      this.$emit("setName", n);
+    },
     onChangeRace(r) {
       this.$emit("setRace", r);
     },
