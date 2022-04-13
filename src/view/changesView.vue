@@ -50,10 +50,8 @@ export default {
   components: { InputBarVue },
   emits: [],
   methods: {},
-  data: function () {
-    return {
-      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
-    };
+  props: {
+    dropdownAttribute: Array,
   },
 };
 </script>
