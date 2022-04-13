@@ -51,7 +51,7 @@ export default {
           });
         })
         .then(() => {
-          this.$router.replace({ name: "home" });
+          this.$router.push("home");
         })
         .catch((err) => {
           this.error = err.message;
