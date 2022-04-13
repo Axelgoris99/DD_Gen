@@ -32,6 +32,7 @@ export default {
   computed: {
     ...mapGetters(["user", "loggedIn"]), // map all the getters to computed properties.
     name() {
+      if (this.user.data) console.log(this.user.data);
       if (this.user.data) {
         return this.user.data.displayName;
       } else {
@@ -39,6 +40,12 @@ export default {
       }
     },
   },
+  watch: {
+    user(newUser) {
+      if (newUser) console.log(newUser);
+    },
+  },
+
   methods: {
     login() {},
     signup() {},

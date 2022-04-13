@@ -45,11 +45,10 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then((data) => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name,
-            })
-            .then(() => {});
+          console.log(data);
+          data.user.updateProfile({
+            displayName: this.form.name,
+          });
         })
         .then(() => {
           this.$router.replace({ name: "home" });
