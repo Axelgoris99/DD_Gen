@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <HttpLoader :isVisible="loading" />
     <Header />
     <router-view />
 
@@ -10,16 +11,56 @@
 <script>
 import Header from "./presenter/headerPresenter.vue";
 import Footer from "./presenter/footerPresenter.vue";
+import HttpLoader from "@/components/http-loader.vue";
+import httpClient from "./api/httpClient";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
+    HttpLoader,
     Header,
     Footer,
+  },
+  computed: {
+    ...mapState("loader", ["loading"]),
   },
   created() {
     // init options.
     this.$store.dispatch("options/init");
+    httpClient.interceptors.request.use(
+      (config) => {
+        if (config.showLoader) {
+          this.$store.dispatch("loader/pending");
+        }
+        return config;
+      },
+      (error) => {
+        if (error.config.showLoader) {
+          this.$store.dispatch("loader/done");
+        }
+        return Promise.reject(error);
+      }
+    );
+    httpClient.interceptors.response.use(
+      (response) => {
+        if (response.config.showLoader) {
+          this.$store.dispatch("loader/done");
+        }
+
+        return response;
+      },
+      (error) => {
+        let response = error.response;
+
+        if (response.config.showLoader) {
+          this.$store.dispatch("loader/done");
+        }
+
+        return Promise.reject(error);
+      }
+    );
+    httpClient.defaults.showLoader = true;
   },
 };
 </script>
