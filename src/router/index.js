@@ -4,6 +4,7 @@ import home from "../presenter/homePresenter.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", redirect: "/home" },
   {
     path: "/home",
     name: "home",

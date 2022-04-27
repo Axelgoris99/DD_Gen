@@ -2,7 +2,7 @@
   <div class="header">
     <div>
       <b-navbar toggleable="lg" type="light" variant="info">
-        <b-navbar-brand href="#">
+        <b-navbar-brand href="#" to="home">
           <b-img
             right
             src="../assets/dd_logo.png"

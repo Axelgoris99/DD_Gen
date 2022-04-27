@@ -5,8 +5,14 @@ node_modules
 # firebase config
 firebase.config.js
 
+<<<<<<< HEAD
 #image Search config
 /src/api/rapidApiKey.js
+=======
+# RapidApi config
+src/api/rapidApiKey.js
+
+>>>>>>> main
 # local env files
 .env.local
 .env.*.local
