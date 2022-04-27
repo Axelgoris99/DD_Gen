@@ -8,14 +8,9 @@
       <pdfVue
         :myName="name"
         :myClass="myClass"
-<<<<<<< HEAD
-        :myRace="myRace"
-        :myAlignment="myAlignment"
-        :myPicture="myPicture.url"
-=======
         :myRace="race"
         :myAlignment="alignment"
->>>>>>> main
+        :myPicture="myPicture.url"
       ></pdfVue>
     </div>
     <div>
@@ -40,14 +35,9 @@
           <pdfVue
             :myName="name"
             :myClass="myClass"
-<<<<<<< HEAD
-            :myRace="myRace"
-            :myAlignment="myAlignment"
-            :myPicture="myPicture.url"
-=======
             :myRace="race"
             :myAlignment="alignment"
->>>>>>> main
+            :myPicture="myPicture.url"
           ></pdfVue>
         </section>
       </vue-html2pdf>
@@ -59,12 +49,9 @@
 import MyOutputView from "../view/outputView.vue";
 import VueHtml2pdf from "vue-html2pdf";
 import pdfVue from "../components/pdf.vue";
-<<<<<<< HEAD
+import { mapGetters } from "vuex";
 // import { RAPIDAPI_KEY } from "../api/rapidApiKey";
 
-=======
-import { mapGetters } from "vuex";
->>>>>>> main
 export default {
   name: "MyOutput",
   components: {
@@ -78,9 +65,9 @@ export default {
       gender: "current/gender",
       race: "current/race",
       alignment: "current/alignment",
-      background: "current/background",
-      languages: "current/languages",
-      traits: "current/traits",
+      // background: "current/background",
+      // languages: "current/languages",
+      // traits: "current/traits",
     }),
   },
   data() {
@@ -95,7 +82,6 @@ export default {
       myAlignment: {
         name: "Chaotic Evil",
       },
-<<<<<<< HEAD
       myPicture: {
         url: "https://wow.zamimg.com/uploads/screenshots/small/962061.jpg",
       },
@@ -116,9 +102,7 @@ export default {
           useCORS: true,
         },
       },
-=======
       dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
->>>>>>> main
     };
   },
   methods: {
