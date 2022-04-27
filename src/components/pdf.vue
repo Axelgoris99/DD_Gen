@@ -98,16 +98,21 @@
                   <span>Common, Elvish, Undercommon, thieves’ cant</span>
                 </li>
               </ul>
+              <img
+                crossOrigin="anonymous"
+                referrerPolicy="origin"
+                :src="myPicture"
+              />
             </div>
           </form>
         </div>
       </div>
     </article>
 
-    <div
+    <!-- <div
       class="half bg"
       :style="{ 'background-image': 'url(' + myPicture + ')' }"
-    ></div>
+    ></div> -->
     <div class="html2pdf__page-break"></div>
   </section>
 </template>

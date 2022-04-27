@@ -83,7 +83,7 @@ export default {
         name: "Chaotic Evil",
       },
       myPicture: {
-        url: "https://wow.zamimg.com/uploads/screenshots/small/962061.jpg",
+        url: "https://cors-anywhere.herokuapp.com/https://wow.zamimg.com/uploads/screenshots/small/962061.jpg",
       },
       htmlToPdfOptions: {
         margin: 0,
@@ -110,28 +110,28 @@ export default {
       this.$refs.html2Pdf.generatePdf();
     },
   },
-  // mounted() {
-  //   const options = {
-  //     method: "GET",
-  //     url: "https://bing-image-search1.p.rapidapi.com/images/search",
-  //     params: { q: "paladin dwarf", safeSearch: "Moderate", count: "1" },
-  //     headers: {
-  //       "X-RapidAPI-Host": "bing-image-search1.p.rapidapi.com",
-  //       "X-RapidAPI-Key": RAPIDAPI_KEY,
-  //     },
-  //   };
-  //   const axios = require("axios");
-  //   const comp = this;
-  //   axios
-  //     .request(options)
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //       comp.myPicture.url = response.data.value[0].contentUrl;
-  //     })
-  //     .catch(function (error) {
-  //       console.error(error);
-  //     });
-  // },
+  mounted() {
+    // const options = {
+    //   method: "GET",
+    //   url: "https://bing-image-search1.p.rapidapi.com/images/search",
+    //   params: { q: "paladin dwarf", safeSearch: "Moderate", count: "1" },
+    //   headers: {
+    //     "X-RapidAPI-Host": "bing-image-search1.p.rapidapi.com",
+    //     "X-RapidAPI-Key": RAPIDAPI_KEY,
+    //   },
+    // };
+    // const axios = require("axios");
+    // const comp = this;
+    // axios
+    //   .request(options)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     comp.myPicture.url = response.data.value[0].contentUrl;
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //   });
+  },
 };
 </script>
 
