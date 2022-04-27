@@ -6,7 +6,7 @@
         :dropdownAttribute="dropdownAttribute"
       />
       <pdfVue
-        :myName="name"
+        myName="name"
         :myClass="myClass"
         :myRace="race"
         :myAlignment="alignment"
