@@ -33,6 +33,9 @@ export default {
   components: {
     MyInputView,
   },
+  created() {
+    this.$store.dispatch("options/init");
+  },
   // map all the getters to computed properties.
   computed: {
     ...mapGetters({
