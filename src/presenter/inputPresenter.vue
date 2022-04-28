@@ -33,6 +33,19 @@ export default {
   components: {
     MyInputView,
   },
+  // We store the selected slugs in component state.
+  data() {
+    return {
+      name: null,
+      gender: "male",
+      race_slug: null,
+      class_slug: null,
+      alignment_slug: null,
+      background_slug: null,
+      language_slug: null, // TODO: support multiple languages
+      trait_slug: null, //TODO: support multiple traits
+    };
+  },
   created() {
     this.$store.dispatch("options/init");
   },
@@ -47,90 +60,125 @@ export default {
       abilities: "options/abilities",
       backgrounds: "options/backgrounds",
 
-      current_name: "current/name",
-      current_gender: "current/gender",
       current_race: "current/race",
-      current_alignment: "current/alignment",
-      current_background: "current/background",
-      current_languages: "current/languages",
-      current_traits: "current/traits",
     }),
   },
   methods: {
     setName(n) {
-      this.$store.dispatch("current/setName", n);
+      this.name_slug = n;
     },
     setRace(r) {
-      this.$store.dispatch("current/setRace", r);
+      this.race_slug = r;
     },
     setClass(c) {
-      this.$store.dispatch("current/setClass", c);
+      this.class_slug = c;
     },
     setBackground(b) {
-      this.$store.dispatch("current/setBackground", b);
+      this.background_slug = b;
     },
     setAlignment(a) {
-      this.$store.dispatch("current/setAlignment", a);
+      this.alignment_slug = a;
     },
     //TODO: convert to add.
     setLanguage(l) {
-      this.$store.dispatch("current/addLanguage", l);
+      this.language_slug = l;
     },
     setTrait(t) {
-      this.$store.dispatch("current/addTrait", t);
+      this.trait_slug = t;
     },
-    generate() {
+    async generate() {
       const {
-        current_name,
-        current_gender,
-        current_race,
-        current_class,
-        current_alignment,
-        current_background,
-        current_traits,
-        current_languages,
+        name,
+        race_slug,
+        gender,
+        class_slug,
+        alignment_slug,
+        background_slug,
+        trait_slug,
+        language_slug,
+
         races,
         classes,
         alignments,
         backgrounds,
       } = this;
-      if (!current_race) {
-        const slug = sample(races).value;
-        this.$store.dispatch("current/setRace", slug);
-      }
 
-      if (!current_class) {
-        const slug = sample(classes).value;
-        this.$store.dispatch("current/setClass", slug);
-      }
+      // Set synchronous properties first.
+      this.$store.dispatch("current/setGender", gender);
 
-      if (!current_alignment) {
-        const slug = sample(alignments).value;
-        this.$store.dispatch("current/setAlignment", slug);
-      }
+      // Now we want to set the properties that are set asynchronously.
+      const promises = [];
 
-      if (!current_background) {
-        const slug = sample(backgrounds).value;
-        this.$store.dispatch("current/setBackground", slug);
-      }
-      if (current_languages.length == 0) {
-        current_race.languages.forEach((lang) => {
-          this.$store.dispatch("current/addLanguage", lang.index);
+      promises.push(
+        // set properties first by the slug in component state,
+        // then by picking a random slug.
+        this.$store.dispatch(
+          "current/setClass",
+          class_slug || sample(classes).value
+        ),
+        this.$store.dispatch(
+          "current/setAlignment",
+          alignment_slug || sample(alignments).value
+        ),
+        this.$store.dispatch(
+          "current/setBackground",
+          background_slug || sample(backgrounds).value
+        )
+      );
+
+      // Downstream properties may depend on race, so we need to do some promise chaining.
+      const racePromise = this.$store.dispatch(
+        "current/setRace",
+        race_slug || sample(races).value
+      );
+
+      // if we have chosen a language, we just add that.
+      if (language_slug) {
+        promises.push(
+          this.$store.dispatch("current/addLanguage", language_slug)
+        );
+        // Otherwise, we add languages dependent on the race.
+      } else {
+        racePromise.then(() => {
+          const current_race = this.$store.getters["current/race"];
+          return Promise.all(
+            current_race.languages.map((lang) =>
+              this.$store.dispatch("current/addLanguage", lang.index)
+            )
+          );
         });
       }
-      if (current_traits.length != 0) {
-        current_race.traits.foreach((trait) => {
-          this.$store.dispatch("current/addTrait", trait.index);
+      // if we have chosen a trait, we just add that.
+      if (trait_slug) {
+        promises.push(this.$store.dispatch("current/addTrait", trait_slug));
+      } else {
+        // Otherwise, we generate we add traits dependent on the race.
+        racePromise.then(() => {
+          const current_race = this.$store.getters["current/race"];
+          return Promise.all(
+            current_race.traits.map((trait) =>
+              this.$store.dispatch("current/addTrait", trait.index)
+            )
+          );
         });
       }
-      if (!current_name) {
-        const { name } = Names.generate({
-          race: camelCase(current_race.index),
-          gender: current_gender,
-        });
+      // if we have chosen a name, we just add that.
+      if (name) {
         this.$store.dispatch("current/setName", name);
-        console.log(name);
+      } else {
+        // Otherwise, we generate a random one from the race and gender.
+        racePromise.then(() => {
+          const current_race = this.$store.getters["current/race"];
+          const { gen_name } = Names.generate({
+            race: camelCase(current_race.index),
+            gender: gender,
+          });
+          return this.$store.dispatch("current/setName", gen_name);
+        });
       }
+      // add race promise and resolve.
+      promises.push(racePromise);
+      await Promise.all(promises);
     },
   },
 };

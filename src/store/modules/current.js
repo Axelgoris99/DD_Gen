@@ -34,7 +34,6 @@ export default {
       Vue.set(state, "alignment", alignment);
     },
     ADD_LANGUAGE(state, language) {
-      Vue.set(state, "language", language);
       state.languages.push(language);
     },
     REMOVE_LANGUAGE(state, language) {
@@ -85,55 +84,87 @@ export default {
       commit("SET_GENDER", gender);
     },
     setRace({ commit }, slug) {
-      dnd5
-        .raceGet(slug)
-        .then((resp) => commit("SET_RACE", resp.data))
-        .catch(() => console.log("error"));
+      return new Promise((resolve, reject) => {
+        dnd5
+          .raceGet(slug)
+          .then((resp) => {
+            commit("SET_RACE", resp.data);
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
     },
     unsetRace({ commit }) {
       commit("SET_RACE", null);
     },
+
     setClass({ commit }, slug) {
-      dnd5
-        .classGet(slug)
-        .then((resp) => commit("SET_CLASS", resp.data))
-        .catch(() => console.log("error"));
+      return new Promise((resolve, reject) => {
+        dnd5
+          .classGet(slug)
+          .then((resp) => {
+            commit("SET_CLASS", resp.data);
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
     },
+
     unsetClass({ commit }) {
       commit("SET_CLASS", null);
     },
     setBackground({ commit }, slug) {
-      open5
-        .backgroundGet(slug)
-        .then((resp) => commit("SET_BACKGROUND", resp.data))
-        .catch(() => console.log("error"));
+      return new Promise((resolve, reject) => {
+        open5
+          .backgroundGet(slug)
+          .then((resp) => {
+            commit("SET_BACKGROUND", resp.data);
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
     },
     unsetBackground({ commit }) {
       commit("SET_BACKGROUND", null);
     },
     setAlignment({ commit }, slug) {
-      dnd5
-        .alignmentGet(slug)
-        .then((resp) => commit("SET_ALIGNMENT", resp.data))
-        .catch(() => console.log("error"));
+      return new Promise((resolve, reject) => {
+        dnd5
+          .alignmentGet(slug)
+          .then((resp) => {
+            commit("SET_ALIGNMENT", resp.data);
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
     },
     unsetAlignment({ commit }) {
       commit("SET_ALIGNMENT", null);
     },
     addLanguage({ commit }, slug) {
-      dnd5
-        .languageGet(slug)
-        .then((resp) => commit("ADD_LANGUAGE", resp.data))
-        .catch(() => console.log("error"));
+      return new Promise((resolve, reject) => {
+        dnd5
+          .languageGet(slug)
+          .then((resp) => {
+            commit("ADD_LANGUAGE", resp.data);
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
     },
     removeLanguage({ commit }, lang) {
       commit("REMOVE_LANGUAGE", lang);
     },
     addTrait({ commit }, slug) {
-      dnd5
-        .traitGet(slug)
-        .then((resp) => commit("ADD_TRAIT", resp.data))
-        .catch(() => console.log("error"));
+      return new Promise((resolve, reject) => {
+        dnd5
+          .traitGet(slug)
+          .then((resp) => {
+            commit("ADD_TRAIT", resp.data);
+            resolve();
+          })
+          .catch((error) => reject(error));
+      });
     },
     removeTrait({ commit }, trait) {
       commit("REMOVE_TRAIT", trait);
