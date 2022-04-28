@@ -2,7 +2,8 @@
   <div id="app">
     <HttpLoader :isVisible="loading" />
     <Header />
-    <router-view />
+    <Error v-if="error" />
+    <router-view v-else />
 
     <Footer />
   </div>
@@ -12,6 +13,7 @@
 import Header from "./presenter/headerPresenter.vue";
 import Footer from "./presenter/footerPresenter.vue";
 import HttpLoader from "@/components/http-loader.vue";
+import Error from "@/components/error.vue";
 import httpClient from "./api/httpClient";
 import { mapState } from "vuex";
 
@@ -19,11 +21,13 @@ export default {
   name: "App",
   components: {
     HttpLoader,
+    Error,
     Header,
     Footer,
   },
   computed: {
     ...mapState("loader", ["loading"]),
+    ...mapState("loader", ["error"]),
   },
   created() {
     // init options.
@@ -39,6 +43,8 @@ export default {
         if (error.config.showLoader) {
           this.$store.dispatch("loader/done");
         }
+
+        this.$store.dispatch("loader/error");
         return Promise.reject(error);
       }
     );
@@ -57,6 +63,7 @@ export default {
           this.$store.dispatch("loader/done");
         }
 
+        this.$store.dispatch("loader/error");
         return Promise.reject(error);
       }
     );

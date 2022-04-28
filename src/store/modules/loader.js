@@ -3,43 +3,51 @@ export default {
   state: {
     loading: false,
     requestsPending: 0,
+    error: false,
   },
   actions: {
     show({ commit }) {
-      commit("show");
+      commit("SET_SHOW");
     },
     hide({ commit }) {
-      commit("hide");
+      commit("SET_HIDE");
     },
     pending({ commit }) {
-      commit("pending");
+      commit("SET_PENDING");
     },
     done({ commit }) {
-      commit("done");
+      commit("SET_DONE");
+    },
+    error({ commit }) {
+      commit("SET_ERROR");
     },
   },
   mutations: {
-    show(state) {
+    SET_SHOW(state) {
       state.loading = true;
     },
-    hide(state) {
+    SET_HIDE(state) {
       state.loading = false;
     },
-    pending(state) {
+
+    SET_PENDING(state) {
       if (state.requestsPending === 0) {
-        this.commit("loader/show");
+        this.commit("loader/SET_SHOW");
       }
 
       state.requestsPending++;
     },
-    done(state) {
+    SET_DONE(state) {
       if (state.requestsPending >= 1) {
         state.requestsPending--;
       }
 
       if (state.requestsPending <= 0) {
-        this.commit("loader/hide");
+        this.commit("loader/SET_HIDE");
       }
+    },
+    SET_ERROR(state) {
+      state.error = true;
     },
   },
 };
