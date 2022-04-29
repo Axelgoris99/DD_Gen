@@ -117,19 +117,7 @@
         @change="onSelectBackground"
       ></Multiselect>
     </b-form-group>
-
-    <h2>Quantitative</h2>
-    <b-form-group
-      v-for="ability in abilities"
-      v-bind:key="ability.text"
-      id="background"
-      v-bind:label="ability.text"
-      label-for="background"
-      description=""
-    >
-      <b-form-input type="number" min="0" max="20"></b-form-input>
-    </b-form-group>
-    <b-button class="space" @click="onClick">Fill those fields!</b-button>
+    <b-button class="space" @click="onClick">Generate Character</b-button>
   </div>
 </template>
 
