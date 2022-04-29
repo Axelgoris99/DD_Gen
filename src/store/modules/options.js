@@ -86,49 +86,49 @@ export default {
             commit(
               "SET_RACES",
               races.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.index,
               }))
             );
             commit(
               "SET_CLASSES",
               classes.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.index,
               }))
             );
             commit(
               "SET_ALIGNMENTS",
               alignments.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.index,
               }))
             );
             commit(
               "SET_LANGUAGES",
               languages.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.index,
               }))
             );
             commit(
               "SET_TRAITS",
               traits.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.index,
               }))
             );
             commit(
               "SET_BACKGROUNDS",
               backgrounds.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.slug,
               }))
             );
             commit(
               "SET_ABILITY_SCORE",
               ability_scores.results.map((r) => ({
-                text: r.name,
+                label: r.name,
                 value: r.index,
               }))
             );

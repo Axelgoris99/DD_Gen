@@ -23,7 +23,11 @@
       label-for="races"
       description="Each race grants your character ability and skill bonuses as well as racial traits."
     >
-      <b-form-select :options="races" @change="onChangeRace"></b-form-select>
+      <Multiselect
+        mode="single"
+        :options="races"
+        @select="onChangeRace"
+      ></Multiselect>
     </b-form-group>
 
     <b-form-group
@@ -32,7 +36,11 @@
       label-for="classes"
       description="A character class is a fundamental part of the identity and nature of characters in the Dungeons &amp; Dragons role-playing game."
     >
-      <b-form-select :options="classes" @change="onChangeClass"></b-form-select>
+      <Multiselect
+        mode="single"
+        :options="classes"
+        @select="onChangeClass"
+      ></Multiselect>
     </b-form-group>
 
     <b-form-group
@@ -41,10 +49,11 @@
       label-for="alignments"
       description="A typical creature in the game world has an alignment, which broadly describes its moral and personal attitudes."
     >
-      <b-form-select
+      <Multiselect
+        mode="single"
         :options="alignments"
-        @change="onChangeAlignment"
-      ></b-form-select>
+        @select="onChangeAlignment"
+      ></Multiselect>
     </b-form-group>
 
     <b-form-group
@@ -54,7 +63,6 @@
       description="Your race indicates the languages your character can speak by default, and your background might give you access to one or more additional languages of your choice."
     >
       <Multiselect
-        label="text"
         mode="tags"
         :options="languages"
         @select="onSelectLanguage"
@@ -70,7 +78,6 @@
       description="Your traits are special powers that your character have thanks to his race, class or background."
     >
       <Multiselect
-        label="text"
         mode="tags"
         :options="traits"
         @select="onSelectTrait"
@@ -85,10 +92,11 @@
       label-for="background"
       description="Every story has a beginning. Your character's background reveals where you came from, how you became an adventurer, and your place in the world."
     >
-      <b-form-select
+      <Multiselect
+        mode="single"
         :options="backgrounds"
         @change="onChangeBackground"
-      ></b-form-select>
+      ></Multiselect>
     </b-form-group>
 
     <h2>Quantitative</h2>
