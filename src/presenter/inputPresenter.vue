@@ -14,7 +14,11 @@
       @setBackground="setBackground"
       @setAlignment="setAlignment"
       @addLanguage="addLanguage"
+      @removeLanguage="removeLanguage"
+      @clearLanguages="clearLanguages"
+      @removeTrait="removeTrait"
       @addTrait="addTrait"
+      @clearTraits="clearTraits"
       @generate="generate"
     />
   </div>
@@ -81,8 +85,20 @@ export default {
     addLanguage(l) {
       this.language_slugs.push(l);
     },
+    removeLanguage(l) {
+      this.language_slugs = this.language_slugs.filter((item) => item !== l);
+    },
+    clearLanguages() {
+      this.language_slugs.splice(0);
+    },
     addTrait(t) {
       this.trait_slugs.push(t);
+    },
+    removeTrait(t) {
+      this.trait_slugs = this.trait_slugs.filter((item) => item !== t);
+    },
+    clearTraits() {
+      this.trait_slugs.splice(0);
     },
     async generate() {
       const {

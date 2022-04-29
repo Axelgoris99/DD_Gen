@@ -57,7 +57,9 @@
         label="text"
         mode="tags"
         :options="languages"
-        @select="onChangeLanguage"
+        @select="onSelectLanguage"
+        @deselect="onDeselectLanguage"
+        @clear="onClearLanguages"
       ></Multiselect>
     </b-form-group>
 
@@ -71,7 +73,9 @@
         label="text"
         mode="tags"
         :options="traits"
-        @select="onChangeTrait"
+        @select="onSelectTrait"
+        @deselect="onDeselectTrait"
+        @clear="onClearTraits"
       ></Multiselect>
     </b-form-group>
 
@@ -128,7 +132,11 @@ export default {
     "setBackground",
     "setAlignment",
     "addLanguage",
+    "removeLanguage",
+    "clearLanguages",
     "addTrait",
+    "removeTrait",
+    "clearTraits",
     "generate",
   ],
   methods: {
@@ -149,12 +157,23 @@ export default {
     },
 
     //TODO: Make this "add" instead of change, will need to support multiselect in the UI.
-    onChangeLanguage(l) {
+    onSelectLanguage(l) {
       this.$emit("addLanguage", l);
     },
-    onChangeTrait(t) {
-      console.log(t);
+    onDeselectLanguage(l) {
+      this.$emit("removeLanguage", l);
+    },
+    onClearLanguages() {
+      this.$emit("clearLanguages");
+    },
+    onSelectTrait(t) {
       this.$emit("addTrait", t);
+    },
+    onDeselectTrait(t) {
+      this.$emit("removeTrait", t);
+    },
+    onClearTraits() {
+      this.$emit("clearTraits");
     },
     onClick() {
       this.$emit("generate");
