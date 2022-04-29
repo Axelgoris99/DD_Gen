@@ -13,8 +13,8 @@
       @setClass="setClass"
       @setBackground="setBackground"
       @setAlignment="setAlignment"
-      @setLanguage="setLanguage"
-      @setTrait="setTrait"
+      @addLanguage="addLanguage"
+      @addTrait="addTrait"
       @generate="generate"
     />
   </div>
@@ -42,8 +42,9 @@ export default {
       class_slug: null,
       alignment_slug: null,
       background_slug: null,
-      language_slug: null, // TODO: support multiple languages
-      trait_slug: null, //TODO: support multiple traits
+
+      language_slugs: [],
+      trait_slugs: [],
     };
   },
   created() {
@@ -79,12 +80,11 @@ export default {
     setAlignment(a) {
       this.alignment_slug = a;
     },
-    //TODO: convert to add.
-    setLanguage(l) {
-      this.language_slug = l;
+    addLanguage(l) {
+      this.language_slugs.push(l);
     },
-    setTrait(t) {
-      this.trait_slug = t;
+    addTrait(t) {
+      this.trait_slugs.push(t);
     },
     async generate() {
       const {
@@ -94,8 +94,8 @@ export default {
         class_slug,
         alignment_slug,
         background_slug,
-        trait_slug,
-        language_slug,
+        trait_slugs,
+        language_slugs,
 
         races,
         classes,
@@ -132,11 +132,11 @@ export default {
         race_slug || sample(races).value
       );
 
-      // if we have chosen a language, we just add that.
-      if (language_slug) {
-        promises.push(
-          this.$store.dispatch("current/addLanguage", language_slug)
-        );
+      // if we have chosen languages, we just add them.
+      if (language_slugs.length() < 1) {
+        language_slugs.array.forEach((slug) => {
+          promises.push(this.$store.dispatch("current/addLanguage", slug));
+        });
         // Otherwise, we add languages dependent on the race.
       } else {
         racePromise.then(() => {
@@ -148,9 +148,11 @@ export default {
           );
         });
       }
-      // if we have chosen a trait, we just add that.
-      if (trait_slug) {
-        promises.push(this.$store.dispatch("current/addTrait", trait_slug));
+      // if we have chosen traits, we just add them.
+      if (trait_slugs.length() < 1) {
+        trait_slugs.forEach((slug) => {
+          promises.push(this.$store.dispatch("current/addTrait", slug));
+        });
       } else {
         // Otherwise, we generate we add traits dependent on the race.
         racePromise.then(() => {

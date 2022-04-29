@@ -53,10 +53,12 @@
       label-for="languages"
       description="Your race indicates the languages your character can speak by default, and your background might give you access to one or more additional languages of your choice."
     >
-      <b-form-select
+      <Multiselect
+        label="text"
+        mode="tags"
         :options="languages"
-        @change="onChangeLanguage"
-      ></b-form-select>
+        @select="onChangeLanguage"
+      ></Multiselect>
     </b-form-group>
 
     <b-form-group
@@ -65,8 +67,13 @@
       label-for="traits"
       description="Your traits are special powers that your character have thanks to his race, class or background."
     >
+      <Multiselect
+        label="text"
+        mode="tags"
+        :options="traits"
+        @select="onChangeTrait"
+      ></Multiselect>
     </b-form-group>
-    <b-form-select :options="traits" @change="onChangeTrait"></b-form-select>
 
     <b-form-group
       id="background"
@@ -96,8 +103,16 @@
 </template>
 
 <script>
+import Multiselect from "@vueform/multiselect/dist/multiselect.vue2.js";
+
 export default {
   name: "MyInputView",
+  components: { Multiselect },
+  data() {
+    return {
+      selectedTraits: [],
+    };
+  },
   props: {
     races: Array,
     classes: Array,
@@ -138,9 +153,9 @@ export default {
       this.$emit("addLanguage", l);
     },
     onChangeTrait(t) {
+      console.log(t);
       this.$emit("addTrait", t);
     },
-
     onClick() {
       this.$emit("generate");
       this.$router.push("changes");
@@ -148,7 +163,7 @@ export default {
   },
 };
 </script>
-
+<style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
 .input {
   display: row;
