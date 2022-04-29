@@ -60,8 +60,6 @@ export default {
       traits: "options/traits",
       abilities: "options/abilities",
       backgrounds: "options/backgrounds",
-
-      current_race: "current/race",
     }),
   },
   methods: {
@@ -89,8 +87,8 @@ export default {
     async generate() {
       const {
         name,
-        race_slug,
         gender,
+        race_slug,
         class_slug,
         alignment_slug,
         background_slug,
@@ -133,8 +131,8 @@ export default {
       );
 
       // if we have chosen languages, we just add them.
-      if (language_slugs.length() < 1) {
-        language_slugs.array.forEach((slug) => {
+      if (language_slugs.length > 0) {
+        language_slugs.forEach((slug) => {
           promises.push(this.$store.dispatch("current/addLanguage", slug));
         });
         // Otherwise, we add languages dependent on the race.
@@ -149,7 +147,7 @@ export default {
         });
       }
       // if we have chosen traits, we just add them.
-      if (trait_slugs.length() < 1) {
+      if (trait_slugs.length > 0) {
         trait_slugs.forEach((slug) => {
           promises.push(this.$store.dispatch("current/addTrait", slug));
         });
