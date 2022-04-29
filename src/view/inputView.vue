@@ -26,7 +26,8 @@
       <Multiselect
         mode="single"
         :options="races"
-        @select="onChangeRace"
+        @select="onSelectRace"
+        @clear="onClearRace"
       ></Multiselect>
     </b-form-group>
 
@@ -39,7 +40,8 @@
       <Multiselect
         mode="single"
         :options="classes"
-        @select="onChangeClass"
+        @select="onSelectClass"
+        @clear="onClearClass"
       ></Multiselect>
     </b-form-group>
 
@@ -52,7 +54,8 @@
       <Multiselect
         mode="single"
         :options="alignments"
-        @select="onChangeAlignment"
+        @select="onSelectAlignment"
+        @clear="onClearAlignment"
       ></Multiselect>
     </b-form-group>
 
@@ -95,7 +98,7 @@
       <Multiselect
         mode="single"
         :options="backgrounds"
-        @change="onChangeBackground"
+        @change="onSelectBackground"
       ></Multiselect>
     </b-form-group>
 
@@ -151,20 +154,30 @@ export default {
     onChangeName(n) {
       this.$emit("setName", n);
     },
-    onChangeRace(r) {
+    onSelectRace(r) {
       this.$emit("setRace", r);
     },
-    onChangeClass(c) {
+    onClearRace() {
+      this.$emit("setRace", null);
+    },
+    onSelectClass(c) {
       this.$emit("setClass", c);
     },
-    onChangeBackground(b) {
+    onClearClass() {
+      this.$emit("setClass", null);
+    },
+    onSelectBackground(b) {
       this.$emit("setBackground", b);
     },
-    onChangeAlignment(a) {
+    onClearBackground() {
+      this.$emit("setBackground", null);
+    },
+    onSelectAlignment(a) {
       this.$emit("setAlignment", a);
     },
-
-    //TODO: Make this "add" instead of change, will need to support multiselect in the UI.
+    onClearAlignment() {
+      this.$emit("setAlignment", null);
+    },
     onSelectLanguage(l) {
       this.$emit("addLanguage", l);
     },
