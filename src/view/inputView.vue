@@ -16,6 +16,22 @@
     >
       <b-form-input @change="onChangeName"></b-form-input>
     </b-form-group>
+    <b-form-group
+      id="Gender"
+      label="Gender"
+      label-for="gender"
+      description="The gender of your character."
+    >
+      <Multiselect
+        mode="single"
+        :options="[
+          { label: 'Male', value: 'male' },
+          { label: 'Female', value: 'female' },
+        ]"
+        @select="onSelectGender"
+        @clear="onClearGender"
+      ></Multiselect>
+    </b-form-group>
 
     <b-form-group
       id="races"
@@ -138,6 +154,8 @@ export default {
     abilities: Array,
   },
   emits: [
+    "setName",
+    "setGender",
     "setRace",
     "setClass",
     "setBackground",
@@ -153,6 +171,12 @@ export default {
   methods: {
     onChangeName(n) {
       this.$emit("setName", n);
+    },
+    onSelectGender(r) {
+      this.$emit("setGender", r);
+    },
+    onClearGender() {
+      this.$emit("setGender", null);
     },
     onSelectRace(r) {
       this.$emit("setRace", r);

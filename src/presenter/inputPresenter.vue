@@ -9,6 +9,7 @@
       :backgrounds="backgrounds"
       :abilities="abilities"
       @setName="setName"
+      @setGender="setGender"
       @setRace="setRace"
       @setClass="setClass"
       @setBackground="setBackground"
@@ -41,7 +42,7 @@ export default {
   data() {
     return {
       name: null,
-      gender: "male",
+      gender: null,
       race_slug: null,
       class_slug: null,
       alignment_slug: null,
@@ -68,7 +69,10 @@ export default {
   },
   methods: {
     setName(n) {
-      this.name_slug = n;
+      this.name = n;
+    },
+    setGender(g) {
+      this.gender = g;
     },
     setRace(r) {
       this.race_slug = r;
@@ -118,7 +122,10 @@ export default {
       } = this;
 
       // Set synchronous properties first.
-      this.$store.dispatch("current/setGender", gender);
+      this.$store.dispatch(
+        "current/setGender",
+        gender || sample(["male", "female"])
+      );
 
       // Now we want to set the properties that are set asynchronously.
       const promises = [];
@@ -185,11 +192,12 @@ export default {
         // Otherwise, we generate a random one from the race and gender.
         racePromise.then(() => {
           const current_race = this.$store.getters["current/race"];
-          const { gen_name } = Names.generate({
+          const current_gender = this.$store.getters["current/gender"];
+          const gen = Names.generate({
             race: camelCase(current_race.index),
-            gender: gender,
+            gender: current_gender,
           });
-          return this.$store.dispatch("current/setName", gen_name);
+          return this.$store.dispatch("current/setName", gen.name);
         });
       }
       // add race promise and resolve.

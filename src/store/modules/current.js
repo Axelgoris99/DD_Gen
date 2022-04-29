@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     name: null,
-    gender: "male",
+    gender: null,
     race: null,
     class: null,
     background: null,
