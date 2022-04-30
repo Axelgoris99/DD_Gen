@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row-fluid">
+    <div>
       <MyOutputView
         @output="generateReport"
         :dropdownAttribute="dropdownAttribute"
@@ -88,9 +88,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.row-fluid {
-  display: flex;
-  flex-wrap: wrap;
-}
-</style>
+<style scoped></style>

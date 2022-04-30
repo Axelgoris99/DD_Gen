@@ -1,13 +1,13 @@
 <template>
   <div>
-    <MyInputView
+    <MyInputView> </MyInputView>
+    <MyCharacter
       :races="races"
       :classes="classes"
       :alignments="alignments"
       :languages="languages"
       :traits="traits"
       :backgrounds="backgrounds"
-      :abilities="abilities"
       @setName="setName"
       @setGender="setGender"
       @setRace="setRace"
@@ -20,23 +20,26 @@
       @removeTrait="removeTrait"
       @addTrait="addTrait"
       @clearTraits="clearTraits"
-      @generate="generate"
-    />
+    ></MyCharacter>
+    <b-button class="space" @click="generate">Generate Character</b-button>
   </div>
 </template>
 
 <script>
 import MyInputView from "../view/inputView.vue";
+import MyCharacter from "../components/char.vue";
 import sample from "lodash.sample";
 import camelCase from "lodash.camelcase";
 import { Names } from "fantasy-content-generator";
 import { mapGetters } from "vuex";
+
 // helpers for the "options" module
 
 export default {
   name: "MyInput",
   components: {
     MyInputView,
+    MyCharacter,
   },
   // We store the selected slugs in component state.
   data() {
@@ -203,6 +206,7 @@ export default {
       // add race promise and resolve.
       promises.push(racePromise);
       await Promise.all(promises);
+      this.$router.push("changes");
     },
   },
 };
