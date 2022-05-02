@@ -6,8 +6,6 @@
       can decide on what you want to have but be careful, you'll lose possible
       coherence doing this.
     </p>
-    <b-button class="space">Another time!</b-button>
-    <b-button to="output" class="space">Perfection!</b-button>
   </div>
 </template>
 

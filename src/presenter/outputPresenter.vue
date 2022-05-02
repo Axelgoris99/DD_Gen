@@ -11,6 +11,10 @@
         :myAlignment="alignment"
       ></pdfVue>
     </div>
+    <b-button class="space" v-on:click="generateReport">Export as PDF</b-button>
+    <b-button class="space">Add to my Characters</b-button>
+    <b-button class="space" to="input">New character</b-button>
+
     <div>
       <vue-html2pdf
         :show-layout="false"
@@ -75,4 +79,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.space {
+  margin: 5px;
+}
+</style>

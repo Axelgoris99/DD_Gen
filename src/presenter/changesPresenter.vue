@@ -39,6 +39,8 @@
         :myAlignment="currentAlignment"
       ></pdfVue>
     </div>
+    <b-button to="input" class="space">Another time!</b-button>
+    <b-button to="output" class="space">Perfection!</b-button>
   </div>
 </template>
 
@@ -139,5 +141,8 @@ export default {
 .row-fluid {
   display: flex;
   flex-wrap: wrap;
+}
+.space {
+  margin: 5px;
 }
 </style>

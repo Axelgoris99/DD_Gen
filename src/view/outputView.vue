@@ -5,10 +5,6 @@
       As the name suggests, you can find your whole new character right here! We
       hope you'll like it! You're now ready to play :) <br />Have fun !
     </p>
-
-    <b-button class="space" v-on:click="output">Export as PDF</b-button>
-    <b-button class="space">Add to my Characters</b-button>
-    <b-button class="space" to="input">New character</b-button>
   </div>
 </template>
 
