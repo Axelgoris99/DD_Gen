@@ -119,13 +119,8 @@
 import Multiselect from "@vueform/multiselect/dist/multiselect.vue2.js";
 
 export default {
-  name: "MyCharacter",
+  name: "MyCharacterView",
   components: { Multiselect },
-  data() {
-    return {
-      selectedTraits: [],
-    };
-  },
   props: {
     races: Array,
     classes: Array,
