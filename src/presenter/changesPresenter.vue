@@ -31,8 +31,10 @@
         @clearTraits="clearTraits"
       ></MyCharacter>
       <pdfVue
+        :download="false"
         :myName="currentName"
         :myClass="currentClass"
+        :myBackground="currentBackground"
         :myRace="currentRace"
         :myAlignment="currentAlignment"
       ></pdfVue>

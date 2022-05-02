@@ -1,13 +1,12 @@
 <template>
   <div>
     <div>
-      <MyOutputView
-        @output="generateReport"
-        :dropdownAttribute="dropdownAttribute"
-      />
+      <MyOutputView @output="generateReport" />
       <pdfVue
+        :download="false"
         :myName="name"
-        :myClass="myClass"
+        :myClass="class1"
+        :myBackground="background"
         :myRace="race"
         :myAlignment="alignment"
       ></pdfVue>
@@ -31,8 +30,10 @@
       >
         <section slot="pdf-content">
           <pdfVue
+            :download="true"
             :myName="name"
-            :myClass="myClass"
+            :myClass="class1"
+            :myBackground="background"
             :myRace="race"
             :myAlignment="alignment"
           ></pdfVue>
@@ -57,6 +58,7 @@ export default {
   computed: {
     ...mapGetters({
       name: "current/name",
+      class1: "current/class",
       gender: "current/gender",
       race: "current/race",
       alignment: "current/alignment",
@@ -64,21 +66,6 @@ export default {
       languages: "current/languages",
       traits: "current/traits",
     }),
-  },
-  data() {
-    return {
-      myClass: {
-        name: "Paladin",
-        hp: "18",
-      },
-      myRace: {
-        name: "Dwarf",
-      },
-      myAlignment: {
-        name: "Chaotic Evil",
-      },
-      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
-    };
   },
   methods: {
     generateReport() {

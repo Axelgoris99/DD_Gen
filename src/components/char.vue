@@ -21,7 +21,7 @@
           { label: 'Male', value: 'male' },
           { label: 'Female', value: 'female' },
         ]"
-        :label="currentGender"
+        id="0"
         @select="onSelectGender"
         @clear="onClearGender"
       ></Multiselect>

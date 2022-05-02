@@ -1,10 +1,18 @@
 <template>
-  <section class="container">
+  <section
+    class="container"
+    :style="[
+      download ? { 'overflow-y': 'visible' } : { 'overflow-y': 'scroll' },
+    ]"
+  >
     <article class="half">
       <h1>{{ myName }}</h1>
       <h2>{{ myClass.name }}</h2>
       <p class="detail" style="text-align: center">
         {{ myRace.name }} - {{ myAlignment.name }}
+      </p>
+      <p class="detail" style="text-align: center">
+        {{ myBackground.desc }}
       </p>
       <div class="tabs">
         <span class="tab main active">Abilities</span>
@@ -56,55 +64,70 @@
               </div>
             </div>
             <hr />
-
-            <div class="profs">
-              <h3>
-                Proficiencies <span class="detail">(+2 Proficiency Bonus)</span>
-              </h3>
-
-              <ul>
-                <li>
-                  <span class="bold">Saving Throws </span>
-                  <span>Dex +5, Int +3</span>
-                </li>
-                <li>
-                  <span class="bold">Skills </span
-                  ><span>
-                    Deception +5, Insight +3, Investigation +3, Perception +5*,
-                    Persuasion +5, Sleight of Hand +5, Stealth +7*</span
-                  >
-                </li>
-                <li>
-                  <span class="bold">Tools </span>
-                  <span>disguise kit, poisoner’s kit, thieves’ tools</span>
-                </li>
-                <li>
-                  <span class="bold">Armor </span>
-                  <span>Light Armor (studded leather)</span>
-                </li>
-                <li>
-                  <span class="bold">Weapons </span>
-                  <span
-                    >simple weapons, hand crossbows, longswords, rapiers,
-                    shortswords</span
-                  >
-                </li>
-                <li>
-                  <span class="bold">Senses </span>
-                  <span>passive (Perception) 15</span>
-                </li>
-                <li>
-                  <span class="bold">Languages </span>
-                  <span>Common, Elvish, Undercommon, thieves’ cant</span>
-                </li>
-              </ul>
-            </div>
+            <p class="detail" style="text-align: center">
+              {{ myAlignment.desc }}
+            </p>
+            <p class="detail" style="text-align: center">
+              {{ myRace.age }}
+            </p>
           </form>
         </div>
       </div>
     </article>
     <div class="half bg"></div>
     <div class="html2pdf__page-break"></div>
+    <article class="half">
+      <h1>{{ myName }}</h1>
+      <h2>{{ myClass.name }}</h2>
+      <p class="detail" style="text-align: center">
+        {{ myRace.name }} - {{ myAlignment.name }}
+      </p>
+      <div class="profs">
+        <h3>Traits</h3>
+      </div>
+      <div class="profs">
+        <h3>
+          Proficiencies <span class="detail">(+2 Proficiency Bonus)</span>
+        </h3>
+
+        <ul>
+          <li>
+            <span class="bold">Saving Throws </span>
+            <span>Dex +5, Int +3</span>
+          </li>
+          <li>
+            <span class="bold">Skills </span
+            ><span>
+              Deception +5, Insight +3, Investigation +3, Perception +5*,
+              Persuasion +5, Sleight of Hand +5, Stealth +7*</span
+            >
+          </li>
+          <li>
+            <span class="bold">Tools </span>
+            <span>disguise kit, poisoner’s kit, thieves’ tools</span>
+          </li>
+          <li>
+            <span class="bold">Armor </span>
+            <span>Light Armor (studded leather)</span>
+          </li>
+          <li>
+            <span class="bold">Weapons </span>
+            <span
+              >simple weapons, hand crossbows, longswords, rapiers,
+              shortswords</span
+            >
+          </li>
+          <li>
+            <span class="bold">Senses </span>
+            <span>passive (Perception) 15</span>
+          </li>
+          <li>
+            <span class="bold">Languages </span>
+            <span>Common, Elvish, Undercommon, thieves’ cant</span>
+          </li>
+        </ul>
+      </div>
+    </article>
   </section>
 </template>
 
@@ -112,6 +135,7 @@
 export default {
   name: "MyPDF",
   props: {
+    download: Boolean,
     myName: String,
     myClass: Object,
     myBackground: Object,
@@ -137,10 +161,8 @@ body {
   font-family: "Lato", sans-serif;
   background-color: #f8f8f8;
 }
-
 body .container {
   position: relative;
-  overflow: hidden;
   width: 95%;
   max-width: 740px;
   height: 900px;
