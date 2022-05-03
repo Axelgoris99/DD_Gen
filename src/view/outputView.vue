@@ -40,7 +40,9 @@
       </b-row>
     </b-container>
     <b-button class="space" v-on:click="output">Export as PDF</b-button>
-    <b-button class="space">Add to my Characters</b-button>
+    <b-button class="space" v-on:click="saveCharacter"
+      >Add to my Characters</b-button
+    >
     <b-button class="space" to="input">New character</b-button>
   </div>
 </template>
@@ -51,10 +53,13 @@ import InputBarVue from "../components/Input.vue";
 export default {
   name: "MyOutputView",
   components: { InputBarVue },
-  emits: [],
+  emits: ["saveCharacter"],
   methods: {
     output() {
       this.$emit("output");
+    },
+    saveCharacter() {
+      this.$emit("saveCharacter");
     },
   },
   data: function () {

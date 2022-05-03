@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MyOutputView @output="generateReport" />
+    <MyOutputView @output="generateReport" @saveCharacter="saveCharacter" />
     <div>
       <vue-html2pdf
         :show-layout="false"
@@ -40,6 +40,12 @@ export default {
   methods: {
     generateReport() {
       this.$refs.html2Pdf.generatePdf();
+    },
+    saveCharacter() {
+      this.$store.commit("characters/ADD_CHARACTER", {
+        name: "Thomas",
+      });
+      this.$router.replace({ name: "profile" });
     },
   },
 };

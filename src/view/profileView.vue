@@ -3,7 +3,6 @@
     <h1>My Profile</h1>
     <h2>My Characters</h2>
     <span v-for="character in characters" :key="character.name">
-      <img v-bind:src="renderImage(character.src)" />
       <div>{{ character.name }}</div>
     </span>
   </div>
@@ -17,7 +16,7 @@ export default {
   },
   methods: {
     renderImage(char) {
-      return "../assets/icon/" + char;
+      return "img/icon/" + char;
     },
   },
 };

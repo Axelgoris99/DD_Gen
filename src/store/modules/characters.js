@@ -1,4 +1,9 @@
-import firebase from "firebase/compat/app";
+import { initializeApp } from "firebase/app";
+import { getDatabase, set, ref } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import firebaseConfig from "../../../firebase.config";
+initializeApp(firebaseConfig);
+var database = getDatabase();
 
 export default {
   namespaced: true,
@@ -15,18 +20,24 @@ export default {
       function hasSameName(character) {
         return character.name != characterToAdd.name;
       }
+      let userId = getAuth().currentUser.uid;
+      console.log(userId);
       let lengthCharacters = state.characters.length;
-      if ((state.characters.filter(hasSameName).length = lengthCharacters)) {
+      if (state.characters.filter(hasSameName).length == lengthCharacters) {
         state.characters = [...state.characters, characterToAdd];
-
-        firebase
-          .database()
-          .ref(
-            this.$store.module.auth.state.user.data.displayName +
-              "/characters/" +
-              characterToAdd.name
-          )
-          .set(characterToAdd);
+        set(
+          ref(
+            database,
+            "/users/" + userId + "/characters/" + characterToAdd.name
+          ),
+          characterToAdd
+        )
+          .then(() => {
+            console.log("succes");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     },
     REMOVE_CHARACTER(state, charcaterToRemove) {
@@ -36,10 +47,9 @@ export default {
       let lengthCharacters = state.characters.length;
       if (state.characters.filter(hasSameName).length < lengthCharacters) {
         state.characters = state.characters.filter(hasSameName);
-        firebase
-          .database()
+        database
           .ref(
-            this.$store.module.auth.state.user.data.displayName +
+            this.$store.state.auth.state.user.data.displayName +
               "/characters/" +
               charcaterToRemove.name
           )
@@ -50,16 +60,12 @@ export default {
   },
   actions: {
     fetchCharacters({ commit }) {
-      firebase
-        .database()
-        .ref(
-          this.$store.module.auth.state.user.data.displayName + "/characters"
-        )
+      database
+        .ref(this.$store.state.auth.state.user.data.displayName + "/characters")
         .on("child_added", (snapshot) => {
           commit("ADD_CHARACTER", snapshot.val());
         });
-      firebase
-        .database()
+      database
         .ref(
           this.$store.module.auth.state.user.data.displayName + "/characters"
         )
