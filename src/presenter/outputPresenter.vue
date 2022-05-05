@@ -50,7 +50,7 @@ import MyOutputView from "../view/outputView.vue";
 import VueHtml2pdf from "vue-html2pdf";
 import pdfVue from "../components/pdf.vue";
 import { mapGetters } from "vuex";
-// import { RAPIDAPI_KEY } from "../api/rapidApiKey";
+import { RAPIDAPI_KEY } from "../api/rapidApiKey";
 
 export default {
   name: "MyOutput",
@@ -83,7 +83,7 @@ export default {
         name: "Chaotic Evil",
       },
       myPicture: {
-        url: "https://cors-anywhere.herokuapp.com/https://wow.zamimg.com/uploads/screenshots/small/962061.jpg",
+        url: "https://wow.zamimg.com/uploads/screenshots/small/962061.jpg",
       },
       htmlToPdfOptions: {
         margin: 0,
@@ -111,28 +111,52 @@ export default {
     },
   },
   mounted() {
-    // const options = {
-    //   method: "GET",
-    //   url: "https://bing-image-search1.p.rapidapi.com/images/search",
-    //   params: { q: "paladin dwarf", safeSearch: "Moderate", count: "1" },
-    //   headers: {
-    //     "X-RapidAPI-Host": "bing-image-search1.p.rapidapi.com",
-    //     "X-RapidAPI-Key": RAPIDAPI_KEY,
-    //   },
-    // };
-    // const axios = require("axios");
-    // const comp = this;
-    // axios
-    //   .request(options)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     comp.myPicture.url = response.data.value[0].contentUrl;
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //   });
+    const options = {
+      method: "GET",
+      url: "https://bing-image-search1.p.rapidapi.com/images/search",
+      params: { q: "CHAOS ELF", safeSearch: "Moderate", count: "1" },
+      headers: {
+        "X-RapidAPI-Host": "bing-image-search1.p.rapidapi.com",
+        "X-RapidAPI-Key": RAPIDAPI_KEY,
+      },
+    };
+    const axios = require("axios");
+    const comp = this;
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        comp.myPicture.url = response.data.value[0].contentUrl;
+        toDataURL(response.data.value[0].contentUrl, function (dataUrl) {
+          console.log("RESULT:", dataUrl);
+          comp.myPicture.url = dataUrl;
+        });
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   },
 };
+function toDataURL(src, callback, outputFormat) {
+  var img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.onload = function () {
+    var canvas = document.createElement("CANVAS");
+    var ctx = canvas.getContext("2d");
+    var dataURL;
+    canvas.height = this.naturalHeight;
+    canvas.width = this.naturalWidth;
+    ctx.drawImage(this, 0, 0);
+    dataURL = canvas.toDataURL(outputFormat);
+    callback(dataURL);
+  };
+  img.src = src;
+  if (img.complete || img.complete === undefined) {
+    img.src =
+      "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+    img.src = src;
+  }
+}
 </script>
 
 <style scoped>
