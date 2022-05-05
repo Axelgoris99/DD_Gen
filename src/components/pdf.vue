@@ -9,6 +9,9 @@
       <h1>{{ myName }}</h1>
       <h2>{{ myClass.name }}</h2>
       <p class="detail" style="text-align: center">
+        {{ myGender }}
+      </p>
+      <p class="detail" style="text-align: center">
         {{ myRace.name }} - {{ myAlignment.name }}
       </p>
       <p class="detail" style="text-align: center">
@@ -26,12 +29,12 @@
                 <div class="inpt number">18</div>
               </div>
               <div>
-                <label for="armor">Armor Class</label>
-                <div class="inpt number">15</div>
+                <label for="armor">Hit Die</label>
+                <div class="inpt number">{{ myClass.hit_die }}</div>
               </div>
               <div>
                 <label for="speed">Speed</label>
-                <div class="inpt number">30</div>
+                <div class="inpt number"></div>
               </div>
             </div>
             <hr />
@@ -74,7 +77,7 @@
         </div>
       </div>
     </article>
-    <div class="half bg"></div>
+    <img class="halfBg" :src="require(`@/assets/icon/${myPicture}`)" />
     <div class="html2pdf__page-break"></div>
     <article class="half">
       <h1>{{ myName }}</h1>
@@ -84,49 +87,23 @@
       </p>
       <div class="profs">
         <h3>Traits</h3>
-      </div>
-      <div class="profs">
-        <h3>
-          Proficiencies <span class="detail">(+2 Proficiency Bonus)</span>
-        </h3>
-
         <ul>
-          <li>
-            <span class="bold">Saving Throws </span>
-            <span>Dex +5, Int +3</span>
-          </li>
-          <li>
-            <span class="bold">Skills </span
-            ><span>
-              Deception +5, Insight +3, Investigation +3, Perception +5*,
-              Persuasion +5, Sleight of Hand +5, Stealth +7*</span
-            >
-          </li>
-          <li>
-            <span class="bold">Tools </span>
-            <span>disguise kit, poisoner’s kit, thieves’ tools</span>
-          </li>
-          <li>
-            <span class="bold">Armor </span>
-            <span>Light Armor (studded leather)</span>
-          </li>
-          <li>
-            <span class="bold">Weapons </span>
-            <span
-              >simple weapons, hand crossbows, longswords, rapiers,
-              shortswords</span
-            >
-          </li>
-          <li>
-            <span class="bold">Senses </span>
-            <span>passive (Perception) 15</span>
-          </li>
-          <li>
-            <span class="bold">Languages </span>
-            <span>Common, Elvish, Undercommon, thieves’ cant</span>
+          <li v-for="trait in myTraits" :key="trait.index">
+            <span class="bold">{{ trait.name }} </span>
+            <p>{{ trait.desc }}</p>
           </li>
         </ul>
       </div>
+      <div class="profs">
+        <h3>Languages</h3>
+        <ul>
+          <li v-for="lang in myLanguages" :key="lang.index">
+            <span class="bold">{{ lang.name }} </span>
+            <p>{{ lang.desc }}</p>
+          </li>
+        </ul>
+      </div>
+      <img class="smallImg" :src="require(`@/assets/icon/${myPicture}`)" />
     </article>
   </section>
 </template>
@@ -142,6 +119,10 @@ export default {
     myAlignment: Object,
     myAbilityScore: Object,
     myRace: Object,
+    myTraits: Array,
+    myLanguages: Array,
+    myGender: String,
+    myPicture: String,
   },
 };
 </script>
@@ -190,6 +171,14 @@ body .container .half.bg {
   background-position-y: 10%;
 }
 
+.halfBg {
+  object-fit: cover;
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  height: 300px;
+  width: 160px;
+}
 body .container h1 {
   font-size: 18px;
   font-weight: 700;
@@ -519,5 +508,13 @@ body .container .content .signup-cont {
   color: inherit;
   font-weight: 700;
   text-decoration: none;
+}
+
+.smallImg {
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 </style>

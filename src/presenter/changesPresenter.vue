@@ -9,14 +9,19 @@
           currentClass &&
           currentBackground &&
           currentAlignment &&
-          currentRace
+          currentRace &&
+          currentGender
         "
         :download="false"
+        :myPicture="pictureUrl"
         :myName="currentName"
         :myClass="currentClass"
         :myBackground="currentBackground"
         :myRace="currentRace"
         :myAlignment="currentAlignment"
+        :myTraits="currentTraits"
+        :myLanguages="currentLanguages"
+        :myGender="currentGender"
       ></pdfVue>
     </div>
     <b-button to="input" class="space">Another time!</b-button>
@@ -50,6 +55,20 @@ export default {
       currentTraits: "current/traits",
       currentBackground: "current/background",
     }),
+    pictureUrl() {
+      let number = Math.floor(Math.random() * 3);
+      return (
+        this.currentGender +
+        this.currentRace.name.toLowerCase() +
+        this.currentClass.name.toLowerCase() +
+        "/" +
+        this.currentGender +
+        this.currentRace.name.toLowerCase() +
+        this.currentClass.name.toLowerCase() +
+        number +
+        ".png"
+      );
+    },
   },
 };
 </script>
