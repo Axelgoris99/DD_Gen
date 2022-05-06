@@ -1,51 +1,53 @@
 <template>
   <div>
-    <MyChangesView></MyChangesView>
-    <div class="row-fluid">
-      <MyCharacter></MyCharacter>
-      <pdfVue
-        v-if="
-          currentName &&
-          currentClass &&
-          currentBackground &&
-          currentAlignment &&
-          currentRace &&
-          currentGender
-        "
-        :download="false"
-        :myPicture="pictureUrl"
-        :myName="currentName"
-        :myClass="currentClass"
-        :myBackground="currentBackground"
-        :myRace="currentRace"
-        :myAlignment="currentAlignment"
-        :myTraits="currentTraits"
-        :myLanguages="currentLanguages"
-        :myGender="currentGender"
-      ></pdfVue>
-    </div>
-    <b-button to="input" class="space">Another time!</b-button>
-    <b-button to="output" class="space">Perfection!</b-button>
+    <MyChangesView
+      :races="races"
+      :classes="classes"
+      :alignments="alignments"
+      :languages="languages"
+      :traits="traits"
+      :backgrounds="backgrounds"
+      :currentName="currentName"
+      :currentGender="currentGender"
+      :currentRace="currentRace"
+      :currentClass="currentClass"
+      :currentAlignment="currentAlignment"
+      :currentBackground="currentBackground"
+      :currentLanguages="currentLanguages"
+      :currentTraits="currentTraits"
+      @setName="setName"
+      @setGender="setGender"
+      @setRace="setRace"
+      @setClass="setClass"
+      @setBackground="setBackground"
+      @setAlignment="setAlignment"
+      @addLanguage="addLanguage"
+      @removeLanguage="removeLanguage"
+      @removeTrait="removeTrait"
+      @addTrait="addTrait"
+    />
   </div>
 </template>
 
 <script>
 import MyChangesView from "../view/changesView.vue";
-import MyCharacter from "./charPresenter.vue";
 import { mapGetters } from "vuex";
-import pdfVue from "../components/pdf.vue";
-// helpers for the "options" module
 
 export default {
   name: "MyChanges",
   components: {
     MyChangesView,
-    MyCharacter,
-    pdfVue,
   },
   // map all the getters to computed properties.
   computed: {
     ...mapGetters({
+      races: "options/races",
+      classes: "options/classes",
+      alignments: "options/alignments",
+      languages: "options/languages",
+      traits: "options/traits",
+      abilities: "options/abilities",
+      backgrounds: "options/backgrounds",
       currentName: "current/name",
       currentGender: "current/gender",
       currentRace: "current/race",
@@ -68,6 +70,38 @@ export default {
         number +
         ".png"
       );
+    },
+  },
+  methods: {
+    setName(n) {
+      this.$store.dispatch("current/setName", n);
+    },
+    setGender(g) {
+      this.$store.dispatch("current/setGender", g);
+    },
+    setRace(r) {
+      this.$store.dispatch("current/setRace", r);
+    },
+    setClass(c) {
+      this.$store.dispatch("current/setClass", c);
+    },
+    setBackground(b) {
+      this.$store.dispatch("current/setBackground", b);
+    },
+    setAlignment(a) {
+      this.$store.dispatch("current/setAlignment", a);
+    },
+    addLanguage(l) {
+      this.$store.dispatch("current/addLanguage", l);
+    },
+    removeLanguage(l) {
+      this.$store.dispatch("current/removeLanguage", l);
+    },
+    addTrait(t) {
+      this.$store.dispatch("current/addTrait", t);
+    },
+    removeTrait(t) {
+      this.$store.dispatch("current/removeTrait", t);
     },
   },
 };

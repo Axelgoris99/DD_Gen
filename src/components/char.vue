@@ -17,11 +17,11 @@
     >
       <Multiselect
         mode="single"
+        ref="gender"
         :options="[
           { label: 'Male', value: 'male' },
           { label: 'Female', value: 'female' },
         ]"
-        id="0"
         @select="onSelectGender"
         @clear="onClearGender"
       ></Multiselect>
@@ -35,6 +35,7 @@
     >
       <Multiselect
         mode="single"
+        ref="race"
         :options="races"
         @select="onSelectRace"
         @clear="onClearRace"
@@ -49,6 +50,7 @@
     >
       <Multiselect
         mode="single"
+        ref="class"
         :options="classes"
         @select="onSelectClass"
         @clear="onClearClass"
@@ -63,6 +65,7 @@
     >
       <Multiselect
         mode="single"
+        ref="alignment"
         :options="alignments"
         @select="onSelectAlignment"
         @clear="onClearAlignment"
@@ -77,6 +80,7 @@
     >
       <Multiselect
         mode="tags"
+        ref="languages"
         :options="languages"
         @select="onSelectLanguage"
         @deselect="onDeselectLanguage"
@@ -92,6 +96,7 @@
     >
       <Multiselect
         mode="tags"
+        ref="traits"
         :options="traits"
         @select="onSelectTrait"
         @deselect="onDeselectTrait"
@@ -107,6 +112,7 @@
     >
       <Multiselect
         mode="single"
+        ref="background"
         :options="backgrounds"
         @change="onSelectBackground"
       ></Multiselect>
@@ -120,6 +126,28 @@ import Multiselect from "@vueform/multiselect/dist/multiselect.vue2.js";
 export default {
   name: "MyCharacterView",
   components: { Multiselect },
+  mounted() {
+    if (this.currentGender) this.$refs.gender.select(this.currentGender);
+    if (this.currentRace) this.$refs.race.select(this.currentRace);
+    if (this.currentClass) this.$refs.class.select(this.currentClass);
+
+    if (this.currentAlignment)
+      this.$refs.alignment.select(this.currentAlignment);
+
+    if (this.currentBackground)
+      this.$refs.background.select(this.currentBackground);
+
+    if (this.currentLanguages) {
+      this.currentLanguages.forEach((lang) => {
+        this.$refs.languages.select(lang);
+      });
+    }
+    if (this.currentTraits) {
+      this.currentTraits.forEach((trait) => {
+        this.$refs.traits.select(trait);
+      });
+    }
+  },
   props: {
     races: Array,
     classes: Array,
@@ -128,8 +156,15 @@ export default {
     traits: Array,
     backgrounds: Array,
     abilities: Array,
+
     currentName: String,
     currentGender: String,
+    currentRace: String,
+    currentClass: String,
+    currentBackground: String,
+    currentAlignment: String,
+    currentLanguages: Array,
+    currentTraits: Array,
   },
   emits: [
     "setName",
@@ -144,7 +179,6 @@ export default {
     "addTrait",
     "removeTrait",
     "clearTraits",
-    "generate",
   ],
   methods: {
     onChangeName(n) {
