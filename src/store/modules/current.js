@@ -34,13 +34,19 @@ export default {
       Vue.set(state, "alignment", alignment);
     },
     ADD_LANGUAGE(state, language) {
-      state.languages.push(language);
+      if (
+        state.languages.filter((l) => l.index === language.index).length === 0
+      ) {
+        Vue.set(state, "languages", [...state.languages, language]);
+      }
     },
     REMOVE_LANGUAGE(state, language) {
       state.languages = state.languages.filter((l) => l.index !== language);
     },
     ADD_TRAIT(state, trait) {
-      state.traits.push(trait);
+      if (state.traits.filter((t) => t.index === trait.index).length === 0) {
+        Vue.set(state, "traits", [...state.traits, trait]);
+      }
     },
     REMOVE_TRAIT(state, trait) {
       state.traits = state.traits.filter((t) => t.index !== trait);

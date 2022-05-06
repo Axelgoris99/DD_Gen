@@ -158,34 +158,41 @@ export default {
 
       // if we have chosen languages, we just add them.
       if (language_slugs.length > 0) {
-        language_slugs.forEach((slug) => {
-          promises.push(this.$store.dispatch("current/addLanguage", slug));
-        });
+        // map slugs to promises and reduce to a promise chain.
+        promises.push(
+          language_slugs
+            .map((slug) => this.$store.dispatch("current/addLanguage", slug))
+            .reduce((prev, next) => prev.then(next), Promise.resolve())
+        );
+
         // Otherwise, we add languages dependent on the race.
       } else {
         racePromise.then(() => {
           const current_race = this.$store.getters["current/race"];
-          return Promise.all(
-            current_race.languages.map((lang) =>
+          // map slugs to promises and reduce to a promise chain.
+          return current_race.languages
+            .map((lang) =>
               this.$store.dispatch("current/addLanguage", lang.index)
             )
-          );
+            .reduce((prev, next) => prev.then(next), Promise.resolve());
         });
       }
       // if we have chosen traits, we just add them.
       if (trait_slugs.length > 0) {
-        trait_slugs.forEach((slug) => {
-          promises.push(this.$store.dispatch("current/addTrait", slug));
-        });
+        // map slugs to promises and reduce to a promise chain.
+        promises.push(
+          trait_slugs
+            .map((slug) => this.$store.dispatch("current/addTrait", slug))
+            .reduce((prev, next) => prev.then(next), Promise.resolve())
+        );
       } else {
         // Otherwise, we generate we add traits dependent on the race.
         racePromise.then(() => {
           const current_race = this.$store.getters["current/race"];
-          return Promise.all(
-            current_race.traits.map((trait) =>
-              this.$store.dispatch("current/addTrait", trait.index)
-            )
-          );
+
+          return current_race.traits
+            .map((lang) => this.$store.dispatch("current/addTrait", lang.index))
+            .reduce((prev, next) => prev.then(next), Promise.resolve());
         });
       }
       // if we have chosen a name, we just add that.
@@ -200,13 +207,12 @@ export default {
             race: camelCase(current_race.index),
             gender: current_gender,
           });
-          return this.$store.dispatch("current/setName", gen.name);
+          this.$store.dispatch("current/setName", gen.name);
         });
       }
       // add race promise and resolve.
       promises.push(racePromise);
-      await Promise.all(promises);
-      this.$router.push("changes");
+      await Promise.all(promises).then(() => this.$router.push("changes"));
     },
   },
 };

@@ -19,6 +19,7 @@
         mode="single"
         ref="gender"
         :canClear="clearable"
+        :canDeselect="clearable"
         :options="[
           { label: 'Male', value: 'male' },
           { label: 'Female', value: 'female' },
@@ -38,6 +39,7 @@
         mode="single"
         ref="race"
         :canClear="clearable"
+        :canDeselect="clearable"
         :options="races"
         @select="onSelectRace"
         @clear="onClearRace"
@@ -54,6 +56,7 @@
         mode="single"
         ref="class"
         :canClear="clearable"
+        :canDeselect="clearable"
         :options="classes"
         @select="onSelectClass"
         @clear="onClearClass"
@@ -71,6 +74,7 @@
         ref="alignment"
         :options="alignments"
         :canClear="clearable"
+        :canDeselect="clearable"
         @select="onSelectAlignment"
         @clear="onClearAlignment"
       ></Multiselect>
@@ -87,6 +91,7 @@
         ref="languages"
         :options="languages"
         :canClear="clearable"
+        :canDeselect="clearable"
         @select="onSelectLanguage"
         @deselect="onDeselectLanguage"
         @clear="onClearLanguages"
@@ -104,6 +109,7 @@
         ref="traits"
         :options="traits"
         :canClear="clearable"
+        :canDeselect="clearable"
         @select="onSelectTrait"
         @deselect="onDeselectTrait"
         @clear="onClearTraits"
@@ -120,6 +126,7 @@
         mode="single"
         ref="background"
         :canClear="clearable"
+        :canDeselect="clearable"
         :options="backgrounds"
         @change="onSelectBackground"
       ></Multiselect>
@@ -144,16 +151,17 @@ export default {
     if (this.currentBackground)
       this.$refs.background.select(this.currentBackground);
 
-    if (this.currentLanguages) {
+    if (this.currentLanguages && this.currentLanguages.length > 0) {
       this.currentLanguages.forEach((lang) => {
-        console.log(lang);
         this.$refs.languages.select(lang);
       });
+      this.$forceUpdate(); // force update of the UI.
     }
-    if (this.currentTraits) {
+    if (this.currentTraits && this.currentTraits.length > 0) {
       this.currentTraits.forEach((trait) => {
         this.$refs.traits.select(trait);
       });
+      this.$forceUpdate(); // force update of the UI.
     }
   },
   props: {
