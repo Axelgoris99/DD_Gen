@@ -139,6 +139,7 @@ export default {
 
     if (this.currentLanguages) {
       this.currentLanguages.forEach((lang) => {
+        console.log(lang);
         this.$refs.languages.select(lang);
       });
     }

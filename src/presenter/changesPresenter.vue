@@ -1,6 +1,16 @@
 <template>
   <div>
     <MyChangesView
+      v-if="
+        currentGender &&
+        currentName &&
+        currentRace &&
+        currentClass &&
+        currentAlignment &&
+        currentBackground &&
+        currentLanguages.length > 0 &&
+        currentTraits.length > 0
+      "
       :races="races"
       :classes="classes"
       :alignments="alignments"

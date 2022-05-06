@@ -8,14 +8,6 @@
     </p>
     <div class="row-fluid">
       <MyCharacter
-        v-if="
-          currentName &&
-          currentClass &&
-          currentBackground &&
-          currentAlignment &&
-          currentRace &&
-          currentGender
-        "
         :races="races"
         :classes="classes"
         :alignments="alignments"
@@ -42,14 +34,6 @@
         @addTrait="addTrait"
       />
       <pdfVue
-        v-if="
-          currentName &&
-          currentClass &&
-          currentBackground &&
-          currentAlignment &&
-          currentRace &&
-          currentGender
-        "
         :download="false"
         :myPicture="pictureUrl"
         :myName="currentName"
