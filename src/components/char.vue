@@ -140,7 +140,13 @@ import Multiselect from "@vueform/multiselect/dist/multiselect.vue2.js";
 export default {
   name: "MyCharacterView",
   components: { Multiselect },
+  data() {
+    return {
+      selected: false,
+    };
+  },
   mounted() {
+    // select all that are supposed to be set.
     if (this.currentGender) this.$refs.gender.select(this.currentGender);
     if (this.currentRace) this.$refs.race.select(this.currentRace);
     if (this.currentClass) this.$refs.class.select(this.currentClass);
@@ -151,18 +157,19 @@ export default {
     if (this.currentBackground)
       this.$refs.background.select(this.currentBackground);
 
-    if (this.currentLanguages && this.currentLanguages.length > 0) {
+    if (this.currentLanguages) {
       this.currentLanguages.forEach((lang) => {
         this.$refs.languages.select(lang);
       });
-      this.$forceUpdate(); // force update of the UI.
     }
-    if (this.currentTraits && this.currentTraits.length > 0) {
+    if (this.currentTraits) {
       this.currentTraits.forEach((trait) => {
         this.$refs.traits.select(trait);
       });
-      this.$forceUpdate(); // force update of the UI.
     }
+
+    this.selected = true;
+    this.$forceUpdate();
   },
   props: {
     clearable: Boolean,
@@ -208,31 +215,31 @@ export default {
       this.$emit("setGender", null);
     },
     onSelectRace(r) {
-      this.$emit("setRace", r);
+      if (this.selected) this.$emit("setRace", r);
     },
     onClearRace() {
       this.$emit("setRace", null);
     },
     onSelectClass(c) {
-      this.$emit("setClass", c);
+      if (this.selected) this.$emit("setClass", c);
     },
     onClearClass() {
       this.$emit("setClass", null);
     },
     onSelectBackground(b) {
-      this.$emit("setBackground", b);
+      if (this.selected) this.$emit("setBackground", b);
     },
     onClearBackground() {
       this.$emit("setBackground", null);
     },
     onSelectAlignment(a) {
-      this.$emit("setAlignment", a);
+      if (this.selected) this.$emit("setAlignment", a);
     },
     onClearAlignment() {
       this.$emit("setAlignment", null);
     },
     onSelectLanguage(l) {
-      this.$emit("addLanguage", l);
+      if (this.selected) this.$emit("addLanguage", l);
     },
     onDeselectLanguage(l) {
       this.$emit("removeLanguage", l);
@@ -241,7 +248,7 @@ export default {
       this.$emit("clearLanguages");
     },
     onSelectTrait(t) {
-      this.$emit("addTrait", t);
+      if (this.selected) this.$emit("addTrait", t);
     },
     onDeselectTrait(t) {
       this.$emit("removeTrait", t);
