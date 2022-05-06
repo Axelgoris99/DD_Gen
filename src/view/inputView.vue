@@ -14,6 +14,7 @@
       :languages="languages"
       :traits="traits"
       :backgrounds="backgrounds"
+      :clearable="true"
       @setName="setName"
       @setGender="setGender"
       @setRace="setRace"

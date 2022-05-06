@@ -18,6 +18,7 @@
       <Multiselect
         mode="single"
         ref="gender"
+        :canClear="clearable"
         :options="[
           { label: 'Male', value: 'male' },
           { label: 'Female', value: 'female' },
@@ -36,6 +37,7 @@
       <Multiselect
         mode="single"
         ref="race"
+        :canClear="clearable"
         :options="races"
         @select="onSelectRace"
         @clear="onClearRace"
@@ -51,6 +53,7 @@
       <Multiselect
         mode="single"
         ref="class"
+        :canClear="clearable"
         :options="classes"
         @select="onSelectClass"
         @clear="onClearClass"
@@ -67,6 +70,7 @@
         mode="single"
         ref="alignment"
         :options="alignments"
+        :canClear="clearable"
         @select="onSelectAlignment"
         @clear="onClearAlignment"
       ></Multiselect>
@@ -82,6 +86,7 @@
         mode="tags"
         ref="languages"
         :options="languages"
+        :canClear="clearable"
         @select="onSelectLanguage"
         @deselect="onDeselectLanguage"
         @clear="onClearLanguages"
@@ -98,6 +103,7 @@
         mode="tags"
         ref="traits"
         :options="traits"
+        :canClear="clearable"
         @select="onSelectTrait"
         @deselect="onDeselectTrait"
         @clear="onClearTraits"
@@ -113,6 +119,7 @@
       <Multiselect
         mode="single"
         ref="background"
+        :canClear="clearable"
         :options="backgrounds"
         @change="onSelectBackground"
       ></Multiselect>
@@ -150,6 +157,7 @@ export default {
     }
   },
   props: {
+    clearable: Boolean,
     races: Array,
     classes: Array,
     alignments: Array,

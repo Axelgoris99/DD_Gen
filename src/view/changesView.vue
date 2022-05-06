@@ -8,6 +8,7 @@
     </p>
     <div class="row-fluid">
       <MyCharacter
+        :clearable="false"
         :races="races"
         :classes="classes"
         :alignments="alignments"
