@@ -30,8 +30,6 @@ export default {
     ...mapState("loader", ["error"]),
   },
   created() {
-    // init options.
-    this.$store.dispatch("options/init");
     httpClient.interceptors.request.use(
       (config) => {
         if (config.showLoader) {

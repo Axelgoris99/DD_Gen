@@ -7,12 +7,104 @@
       other params depending on what you selected.
       <br />A dwarf will often be a warrior for example.
     </p>
+    <MyCharacterView
+      :races="races"
+      :classes="classes"
+      :alignments="alignments"
+      :languages="languages"
+      :traits="traits"
+      :backgrounds="backgrounds"
+      @setName="setName"
+      @setGender="setGender"
+      @setRace="setRace"
+      @setClass="setClass"
+      @setBackground="setBackground"
+      @setAlignment="setAlignment"
+      @addLanguage="addLanguage"
+      @removeLanguage="removeLanguage"
+      @clearLanguages="clearLanguages"
+      @removeTrait="removeTrait"
+      @addTrait="addTrait"
+      @clearTraits="clearTraits"
+    />
+    <b-button v-on:click="onGenerate">Generate</b-button>
   </div>
 </template>
 
 <script>
+import MyCharacterView from "@/components/char.vue";
 export default {
   name: "MyInputView",
+  components: {
+    MyCharacterView,
+  },
+  props: {
+    races: Array,
+    classes: Array,
+    alignments: Array,
+    languages: Array,
+    traits: Array,
+    backgrounds: Array,
+    abilities: Array,
+    currentName: String,
+    currentGender: String,
+  },
+  emits: [
+    "setName",
+    "setGender",
+    "setRace",
+    "setClass",
+    "setBackground",
+    "setAlignment",
+    "addLanguage",
+    "removeLanguage",
+    "clearLanguages",
+    "addTrait",
+    "removeTrait",
+    "clearTraits",
+    "generate",
+  ],
+  methods: {
+    setName(n) {
+      this.$emit("setName", n);
+    },
+    setGender(r) {
+      this.$emit("setGender", r);
+    },
+    setRace(r) {
+      this.$emit("setRace", r);
+    },
+    setClass(c) {
+      this.$emit("setClass", c);
+    },
+    setBackground(b) {
+      this.$emit("setBackground", b);
+    },
+    setAlignment(a) {
+      this.$emit("setAlignment", a);
+    },
+    addLanguage(l) {
+      this.$emit("addLanguage", l);
+    },
+    removeLanguage(l) {
+      this.$emit("removeLanguage", l);
+    },
+    clearLanguages() {
+      this.$emit("clearLanguages");
+    },
+    addTrait(t) {
+      this.$emit("addTrait", t);
+    },
+    removeTrait(t) {
+      this.$emit("removeTrait", t);
+    },
+    clearTraits() {
+      this.$emit("clearTraits");
+    },
+    onGenerate() {
+      this.$emit("generate");
+    },
+  },
 };
 </script>
 <style scoped>

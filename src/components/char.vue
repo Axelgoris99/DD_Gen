@@ -111,7 +111,6 @@
         @change="onSelectBackground"
       ></Multiselect>
     </b-form-group>
-    <slot> </slot>
   </div>
 </template>
 
