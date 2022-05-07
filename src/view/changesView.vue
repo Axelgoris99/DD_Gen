@@ -100,17 +100,7 @@ export default {
     },
     pictureUrl() {
       let number = Math.floor(Math.random() * 3);
-      return (
-        this.currentGender +
-        this.currentRace.name.toLowerCase() +
-        this.currentClass.name.toLowerCase() +
-        "/" +
-        this.currentGender +
-        this.currentRace.name.toLowerCase() +
-        this.currentClass.name.toLowerCase() +
-        number +
-        ".png"
-      );
+      return `${this.currentRace.index}/${this.currentGender}/${this.currentClass.index}/${number}.png`;
     },
   },
   methods: {
