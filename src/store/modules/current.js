@@ -106,11 +106,10 @@ export default {
       commit("SET_IMAGE", Math.floor(Math.random() * 3));
 
       // Now we want to set the properties that are set asynchronously.
-      const promises = [];
+      // collect the base promises (that independent of each other).
+      const basePromises = [];
 
-      promises.push(
-        // set properties first by the slug in component state,
-        // then by picking a random slug.
+      basePromises.push(
         dispatch(
           "setClass",
           rootGetters["input/class"] ||
@@ -133,7 +132,8 @@ export default {
         )
       );
 
-      Promise.all(promises)
+      // Chain on dependent promises.
+      Promise.all(basePromises)
         .then(() => {
           const language_slugs = rootGetters["input/languages"];
           if (language_slugs.length > 0) {
@@ -173,7 +173,7 @@ export default {
           if (name) {
             this.$store.dispatch("current/setName", name);
           } else {
-            // Otherwise, we generate a random one from the race and gender.
+            // Generate random name.
             const current_race = getters.race;
             const current_gender = getters.gender;
             const gen = Names.generate({
@@ -183,6 +183,7 @@ export default {
             dispatch("setName", gen.name);
           }
         })
+        // Set the ready flag.
         .finally(() => {
           commit("SET_READY", true);
         });
