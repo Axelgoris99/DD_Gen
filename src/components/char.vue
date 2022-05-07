@@ -167,9 +167,7 @@ export default {
         this.$refs.traits.select(trait);
       });
     }
-
     this.selected = true;
-    this.$forceUpdate();
   },
   props: {
     clearable: Boolean,
@@ -206,10 +204,10 @@ export default {
   ],
   methods: {
     onChangeName(n) {
-      this.$emit("setName", n);
+      if (this.selected) this.$emit("setName", n);
     },
     onSelectGender(r) {
-      this.$emit("setGender", r);
+      if (this.selected) this.$emit("setGender", r);
     },
     onClearGender() {
       this.$emit("setGender", null);

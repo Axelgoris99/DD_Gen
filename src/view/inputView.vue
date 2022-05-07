@@ -28,7 +28,7 @@
       @addTrait="addTrait"
       @clearTraits="clearTraits"
     />
-    <b-button v-on:click="onGenerate">Generate</b-button>
+    <b-button to="changes">Generate</b-button>
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
     abilities: Array,
     currentName: String,
     currentGender: String,
+    generate: Function,
   },
   emits: [
     "setName",
@@ -63,7 +64,6 @@ export default {
     "addTrait",
     "removeTrait",
     "clearTraits",
-    "generate",
   ],
   methods: {
     setName(n) {
@@ -101,9 +101,6 @@ export default {
     },
     clearTraits() {
       this.$emit("clearTraits");
-    },
-    onGenerate() {
-      this.$emit("generate");
     },
   },
 };

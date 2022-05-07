@@ -1,10 +1,15 @@
 import Vue from "vue";
+import sample from "lodash.sample";
+import camelCase from "lodash.camelcase";
 import dnd5 from "../../api/dnd5eapi";
 import open5 from "../../api/open5e";
+import { Names } from "fantasy-content-generator";
 
 export default {
   namespaced: true,
   state: {
+    image: null,
+    ready: false,
     name: null,
     gender: null,
     race: null,
@@ -15,6 +20,12 @@ export default {
     traits: [],
   },
   mutations: {
+    SET_READY(state, ready) {
+      Vue.set(state, "ready", ready);
+    },
+    SET_IMAGE(state, image) {
+      Vue.set(state, "image", image);
+    },
     SET_NAME(state, name) {
       Vue.set(state, "name", name);
     },
@@ -53,6 +64,9 @@ export default {
     },
   },
   getters: {
+    ready(state) {
+      return state.ready;
+    },
     name(state) {
       return state.name;
     },
@@ -77,9 +91,103 @@ export default {
     traits(state) {
       return state.traits;
     },
+    image(state) {
+      return state.image;
+    },
   },
 
   actions: {
+    init({ dispatch, commit, getters, rootGetters }) {
+      // Set synchronous properties first.
+      dispatch(
+        "setGender",
+        rootGetters["input/gender"] || sample(["male", "female"])
+      );
+      commit("SET_IMAGE", Math.floor(Math.random() * 3));
+
+      // Now we want to set the properties that are set asynchronously.
+      const promises = [];
+
+      promises.push(
+        // set properties first by the slug in component state,
+        // then by picking a random slug.
+        dispatch(
+          "setClass",
+          rootGetters["input/class"] ||
+            sample(rootGetters["options/classes"]).value
+        ),
+        dispatch(
+          "setAlignment",
+          rootGetters["input/alignment"] ||
+            sample(rootGetters["options/alignments"]).value
+        ),
+        dispatch(
+          "setBackground",
+          rootGetters["input/background"] ||
+            sample(rootGetters["options/backgrounds"]).value
+        ),
+        dispatch(
+          "setRace",
+          rootGetters["input/race"] ||
+            sample(rootGetters["options/races"]).value
+        )
+      );
+
+      Promise.all(promises)
+        .then(() => {
+          const language_slugs = rootGetters["input/languages"];
+          if (language_slugs.length > 0) {
+            // map slugs to promises and reduce to a promise chain.
+            return Promise.all(
+              language_slugs.map((slug) => dispatch("addLanguage", slug))
+            );
+
+            // Otherwise, we add languages dependent on the race.
+          } else {
+            const current_race = getters.race;
+            // map slugs to promises and reduce to a promise chain.
+            return Promise.all(
+              current_race.languages.map((lang) =>
+                dispatch("addLanguage", lang.index)
+              )
+            );
+          }
+        })
+        .then(() => {
+          const trait_slugs = rootGetters["input/traits"];
+          if (trait_slugs.length > 0) {
+            // map slugs to promises and reduce to a promise chain.
+            return Promise.all(
+              trait_slugs.map((slug) => dispatch("addTrait", slug))
+            );
+          } else {
+            // Otherwise, we generate we add traits dependent on the race.
+            const current_race = getters.race;
+            return Promise.all(
+              current_race.traits.map((t) => dispatch("addTrait", t.index))
+            );
+          }
+        })
+        .then(() => {
+          const name = rootGetters["input/name"];
+          if (name) {
+            this.$store.dispatch("current/setName", name);
+          } else {
+            // Otherwise, we generate a random one from the race and gender.
+            const current_race = getters.race;
+            const current_gender = getters.gender;
+            const gen = Names.generate({
+              race: camelCase(current_race.index),
+              gender: current_gender,
+            });
+            dispatch("setName", gen.name);
+          }
+        })
+        .finally(() => {
+          commit("SET_READY", true);
+        });
+    },
+
     setName({ commit }, name) {
       commit("SET_NAME", name);
     },

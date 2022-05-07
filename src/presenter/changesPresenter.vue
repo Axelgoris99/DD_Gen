@@ -1,6 +1,7 @@
 <template>
   <div>
     <MyChangesView
+      :ready="currentReady"
       :races="races"
       :classes="classes"
       :alignments="alignments"
@@ -15,6 +16,7 @@
       :currentBackground="currentBackground"
       :currentLanguages="currentLanguages"
       :currentTraits="currentTraits"
+      :currentImage="currentImage"
       @setName="setName"
       @setGender="setGender"
       @setRace="setRace"
@@ -38,6 +40,9 @@ export default {
   components: {
     MyChangesView,
   },
+  mounted() {
+    this.$store.dispatch("current/init");
+  },
   // map all the getters to computed properties.
   computed: {
     ...mapGetters({
@@ -48,6 +53,8 @@ export default {
       traits: "options/traits",
       abilities: "options/abilities",
       backgrounds: "options/backgrounds",
+      currentReady: "current/ready",
+      currentImage: "current/image",
       currentName: "current/name",
       currentGender: "current/gender",
       currentRace: "current/race",
@@ -57,20 +64,6 @@ export default {
       currentTraits: "current/traits",
       currentBackground: "current/background",
     }),
-    pictureUrl() {
-      let number = Math.floor(Math.random() * 3);
-      return (
-        this.currentGender +
-        this.currentRace.name.toLowerCase() +
-        this.currentClass.name.toLowerCase() +
-        "/" +
-        this.currentGender +
-        this.currentRace.name.toLowerCase() +
-        this.currentClass.name.toLowerCase() +
-        number +
-        ".png"
-      );
-    },
   },
   methods: {
     setName(n) {

@@ -122,7 +122,12 @@ export default {
     myTraits: Array,
     myLanguages: Array,
     myGender: String,
-    myPicture: String,
+    myImageNumber: Number,
+  },
+  computed: {
+    myPicture() {
+      return `${this.myRace.index}/${this.myGender}/${this.myClass.index}/${this.myImageNumber}.png`;
+    },
   },
 };
 </script>

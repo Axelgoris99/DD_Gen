@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import auth from "./modules/auth";
 import options from "./modules/options";
+import input from "./modules/input";
 import current from "./modules/current";
 import loader from "./modules/loader";
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
   modules: {
     auth,
     options,
+    input,
     current,
     loader,
   },

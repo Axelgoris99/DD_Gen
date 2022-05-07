@@ -8,6 +8,7 @@
     </p>
     <div class="row-fluid">
       <MyCharacter
+        v-if="ready"
         :clearable="false"
         :races="races"
         :classes="classes"
@@ -35,8 +36,9 @@
         @addTrait="addTrait"
       />
       <pdfVue
+        v-if="ready"
         :download="false"
-        :myPicture="pictureUrl"
+        :myImageNumber="currentImage"
         :myName="currentName"
         :myClass="currentClass"
         :myBackground="currentBackground"
@@ -62,6 +64,7 @@ export default {
     pdfVue,
   },
   props: {
+    ready: Boolean,
     races: Array,
     classes: Array,
     alignments: Array,
@@ -78,6 +81,7 @@ export default {
     currentAlignment: Object,
     currentLanguages: Array,
     currentTraits: Array,
+    currentImage: Number,
   },
   emits: [
     "setName",
@@ -97,10 +101,6 @@ export default {
     },
     currentTraitLabels() {
       return this.currentTraits.map((a) => a.index);
-    },
-    pictureUrl() {
-      let number = Math.floor(Math.random() * 3);
-      return `${this.currentRace.index}/${this.currentGender}/${this.currentClass.index}/${number}.png`;
     },
   },
   methods: {
