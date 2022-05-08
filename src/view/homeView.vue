@@ -8,6 +8,17 @@
       who does not want to bother with creating a complicated character, this
       one is for you.
     </p>
+    <ul>
+      <li>Select what you really want in the Input page</li>
+      <li>
+        Generate your cool character and tweak it a bit on the Changes page
+      </li>
+      <li>
+        Add it to your character or export it as a pdf at the end! Be careful,
+        the pdf generation is still a bit wonky.
+      </li>
+    </ul>
+
     <b-button to="input">Start</b-button>
   </div>
 </template>

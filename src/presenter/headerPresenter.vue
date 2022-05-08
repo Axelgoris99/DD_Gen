@@ -3,6 +3,7 @@
     <headerView
       :connect="loggedIn"
       :username="name"
+      :ready="!ready"
       @signup="signup"
       @login="login"
       @signOut="signOut"
@@ -15,22 +16,19 @@ import headerView from "../view/headerView.vue";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { createNamespacedHelpers } from "vuex";
-// helpers for the "auth" module
-const { mapGetters } = createNamespacedHelpers("auth");
+import { mapGetters } from "vuex";
 
 export default {
   name: "MyHeader",
   components: {
     headerView,
   },
-  data() {
-    return {
-      componentKey: 0,
-    };
-  },
   computed: {
-    ...mapGetters(["user", "loggedIn"]), // map all the getters to computed properties.
+    ...mapGetters({
+      user: "auth/user",
+      loggedIn: "auth/loggedIn",
+      ready: "current/ready",
+    }), // map all the getters to computed properties.
     name() {
       if (this.user.data) {
         return this.user.data.displayName;
