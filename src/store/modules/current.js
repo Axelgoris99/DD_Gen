@@ -54,6 +54,9 @@ export default {
     REMOVE_LANGUAGE(state, language) {
       state.languages = state.languages.filter((l) => l.index !== language);
     },
+    CLEAR_LANGUAGES(state) {
+      state.languages = [];
+    },
     ADD_TRAIT(state, trait) {
       if (state.traits.filter((t) => t.index === trait.index).length === 0) {
         Vue.set(state, "traits", [...state.traits, trait]);
@@ -61,6 +64,9 @@ export default {
     },
     REMOVE_TRAIT(state, trait) {
       state.traits = state.traits.filter((t) => t.index !== trait);
+    },
+    CLEAR_TRAITS(state) {
+      state.traits = [];
     },
   },
   getters: {
@@ -283,6 +289,29 @@ export default {
     },
     removeTrait({ commit }, trait) {
       commit("REMOVE_TRAIT", trait);
+    },
+    resetTraits({ commit }) {
+      commit("CLEAR_TRAITS");
+    },
+    resetLanguages({ commit }) {
+      commit("CLEAR_LANGUAGES");
+    },
+    resetReady({ commit }) {
+      commit("SET_READY", false);
+    },
+    resetImage({ commit }) {
+      commit("SET_IMAGE", null);
+    },
+    reset({ dispatch }) {
+      dispatch("unsetName");
+      dispatch("unsetBackground");
+      dispatch("unsetClass");
+      dispatch("unsetRace");
+      dispatch("unsetAlignment");
+      dispatch("resetTraits");
+      dispatch("resetLanguages");
+      dispatch("resetReady");
+      dispatch("resetImage");
     },
   },
 };

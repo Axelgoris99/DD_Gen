@@ -3,15 +3,17 @@
     <div>
       <MyOutputView @output="generateReport" />
       <pdfVue
+        v-if="ready"
         :download="false"
-        :myName="name"
+        :myName="name1"
         :myClass="class1"
         :myBackground="background"
         :myRace="race"
         :myAlignment="alignment"
         :myTraits="traits"
         :myLanguages="languages"
-        :myPicture="image"
+        :myGender="gender"
+        :myImageNumber="image"
       ></pdfVue>
     </div>
     <b-button class="space" v-on:click="generateReport">Export as PDF</b-button>
@@ -25,20 +27,17 @@
         :enable-download="true"
         :preview-modal="false"
         :paginate-elements-by-height="1400"
-        filename="Yahou!"
-        :pdf-quality="2"
         :manual-pagination="false"
-        pdf-format="a4"
-        pdf-orientation="portrait"
-        pdf-content-width="800px"
+        :htmlToPdfOptions="option"
         @hasStartedGeneration="hasStartedGeneration()"
         @hasGenerated="hasGenerated($event)"
         ref="html2Pdf"
       >
         <section slot="pdf-content">
           <pdfVue
+            v-if="ready"
             :download="true"
-            :myName="name"
+            :myName="name1"
             :myClass="class1"
             :myBackground="background"
             :myRace="race"
@@ -46,7 +45,7 @@
             :myTraits="traits"
             :myGender="gender"
             :myLanguages="languages"
-            :myPicture="image"
+            :myImageNumber="image"
           ></pdfVue>
         </section>
       </vue-html2pdf>
@@ -66,9 +65,14 @@ export default {
     VueHtml2pdf,
     pdfVue,
   },
+  data() {
+    return {
+      option: null,
+    };
+  },
   computed: {
     ...mapGetters({
-      name: "current/name",
+      name1: "current/name",
       class1: "current/class",
       gender: "current/gender",
       race: "current/race",
@@ -77,6 +81,7 @@ export default {
       languages: "current/languages",
       traits: "current/traits",
       image: "current/image",
+      ready: "current/ready",
     }),
   },
   methods: {
@@ -84,11 +89,22 @@ export default {
       this.$refs.html2Pdf.generatePdf();
     },
   },
+  created() {
+    this.option = {
+      filename: this.name1,
+      html2canvas: {
+        scale: 4,
+        letterRendering: true,
+        useCORS: true,
+      },
+      image: {
+        type: "jpeg",
+        quality: 0.98,
+      },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+  },
 };
 </script>
 
-<style scoped>
-.space {
-  margin: 5px;
-}
-</style>
+<style scoped></style>

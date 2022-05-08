@@ -33,6 +33,7 @@ export default {
   },
   created() {
     this.$store.dispatch("options/init");
+    this.$store.dispatch("current/reset");
   },
   computed: {
     ...mapGetters({
@@ -85,5 +86,4 @@ export default {
   },
 };
 </script>
-
 <style scoped></style>

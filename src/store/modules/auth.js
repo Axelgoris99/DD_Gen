@@ -1,7 +1,6 @@
 export default {
   namespaced: true,
   state: {
-    count: 0,
     user: {
       loggedIn: false,
       data: {
@@ -19,9 +18,6 @@ export default {
     },
   },
   mutations: {
-    increment(state) {
-      state.count++;
-    },
     SET_LOGGED_IN(state, value) {
       state.user.loggedIn = value;
     },
