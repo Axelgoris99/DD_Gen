@@ -11,7 +11,7 @@
         :myAlignment="alignment"
         :myTraits="traits"
         :myLanguages="languages"
-        :myPicture="pictureUrl"
+        :myPicture="image"
       ></pdfVue>
     </div>
     <b-button class="space" v-on:click="generateReport">Export as PDF</b-button>
@@ -46,7 +46,7 @@
             :myTraits="traits"
             :myGender="gender"
             :myLanguages="languages"
-            :myPicture="pictureUrl"
+            :myPicture="image"
           ></pdfVue>
         </section>
       </vue-html2pdf>
@@ -76,21 +76,8 @@ export default {
       background: "current/background",
       languages: "current/languages",
       traits: "current/traits",
+      image: "current/image",
     }),
-    pictureUrl() {
-      let number = Math.floor(Math.random() * 3);
-      return (
-        this.gender +
-        this.race.name.toLowerCase() +
-        this.class1.name.toLowerCase() +
-        "/" +
-        this.gender +
-        this.race.name.toLowerCase() +
-        this.class1.name.toLowerCase() +
-        number +
-        ".png"
-      );
-    },
   },
   methods: {
     generateReport() {
