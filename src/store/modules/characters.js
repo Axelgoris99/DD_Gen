@@ -59,13 +59,14 @@ export default {
   },
   actions: {
     fetchCharacters({ commit }) {
+      console.log("firebase");
       let userId = getAuth().currentUser.uid;
       onChildAdded(
-        ref(database, "/users/" + userId + "/characters/"),
+        ref(database, "/users/" + userId + "/characters"),
         (snapshot) => commit("ADD_CHARACTER", snapshot.val())
       );
       onChildRemoved(
-        ref(database, "/users/" + userId + "/characters/"),
+        ref(database, "/users/" + userId + "/characters"),
         (snapshot) => commit("REMOVE_CHARACTER", snapshot.val())
       );
     },
