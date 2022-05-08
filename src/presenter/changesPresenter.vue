@@ -100,12 +100,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.row-fluid {
-  display: flex;
-  flex-wrap: wrap;
-}
-.space {
-  margin: 5px;
-}
-</style>
+<style scoped></style>

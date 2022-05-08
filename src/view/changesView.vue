@@ -148,4 +148,8 @@ export default {
 .space {
   margin: 5px;
 }
+.row-fluid {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
