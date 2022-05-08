@@ -15,16 +15,8 @@
 <script>
 export default {
   name: "MyHomeView",
-  props: {
-    count: Number,
-  },
+  props: {},
   components: {},
-  emits: ["increment"],
-  methods: {
-    increment() {
-      this.$emit("increment");
-    },
-  },
 };
 </script>
 <style scoped>
