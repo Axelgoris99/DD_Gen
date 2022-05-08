@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <MyOutputView @output="generateReport" />
-      <pdfVue
-        v-if="ready"
+      <MyOutputView
+        @output="generateReport"
+        :ready="ready"
         :download="false"
         :myName="name1"
         :myClass="class1"
@@ -14,12 +14,8 @@
         :myLanguages="languages"
         :myGender="gender"
         :myImageNumber="image"
-      ></pdfVue>
+      />
     </div>
-    <b-button class="space" v-on:click="generateReport">Export as PDF</b-button>
-    <b-button class="space">Add to my Characters</b-button>
-    <b-button class="space" to="input">New character</b-button>
-
     <div>
       <vue-html2pdf
         :show-layout="false"
