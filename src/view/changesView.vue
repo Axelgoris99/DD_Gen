@@ -35,6 +35,20 @@
         @removeTrait="removeTrait"
         @addTrait="addTrait"
       />
+      <b-form-group
+        id="imageNumber"
+        label="Image Choice"
+        label-for="imageNumber"
+        description="The choice of your character image! Pick between 3 different ones."
+      >
+        <b-form-input
+          @change="changeImage"
+          type="number"
+          :value="currentImage"
+          :min="0"
+          :max="2"
+        ></b-form-input>
+      </b-form-group>
       <pdfVue
         v-if="ready"
         :download="false"
@@ -94,6 +108,7 @@ export default {
     "removeLanguage",
     "addTrait",
     "removeTrait",
+    "changeNumber",
   ],
   computed: {
     currentLanguageLabels() {
@@ -133,6 +148,9 @@ export default {
     },
     removeTrait(t) {
       this.$emit("removeTrait", t);
+    },
+    changeImage(i) {
+      this.$emit("changeImage", i);
     },
   },
 };

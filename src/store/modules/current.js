@@ -299,6 +299,9 @@ export default {
     resetReady({ commit }) {
       commit("SET_READY", false);
     },
+    setImage({ commit }, num) {
+      commit("SET_IMAGE", num);
+    },
     resetImage({ commit }) {
       commit("SET_IMAGE", null);
     },

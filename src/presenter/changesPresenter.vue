@@ -27,6 +27,7 @@
       @removeLanguage="removeLanguage"
       @removeTrait="removeTrait"
       @addTrait="addTrait"
+      @changeImage="changeImage"
     />
   </div>
 </template>
@@ -97,6 +98,9 @@ export default {
     },
     removeTrait(t) {
       this.$store.dispatch("current/removeTrait", t);
+    },
+    changeImage(i) {
+      this.$store.dispatch("current/setImage", Number(i));
     },
   },
 };
