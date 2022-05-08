@@ -2,7 +2,7 @@
   <div class="header">
     <div>
       <b-navbar toggleable="lg" type="light" variant="info">
-        <b-navbar-brand href="#">
+        <b-navbar-brand href="#" to="home">
           <b-img
             right
             src="../assets/dd_logo.png"
@@ -19,7 +19,7 @@
             <b-nav-item to="home">Home</b-nav-item>
             <b-nav-item to="input">Input</b-nav-item>
             <b-nav-item to="changes">Changes</b-nav-item>
-            <b-nav-item to="output">Output</b-nav-item>
+            <b-nav-item to="output" :disabled="ready">Output</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
@@ -55,7 +55,7 @@ export default {
   props: {
     connect: Boolean,
     username: String,
-    keyComp: Number,
+    ready: Boolean,
   },
   components: {},
   emits: ["login", "signup", "signOut"],

@@ -1,9 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import home from "../presenter/homePresenter.vue";
+import store from "../store/index.js";
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/", redirect: "/home" },
   {
     path: "/home",
     name: "home",
@@ -48,6 +50,13 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+// eslint-disable-next-line
+router.beforeEach((to, from, next) => {
+  if (to.name == "output" && !store.getters["current/ready"]) {
+    next({ name: "home" });
+  } else next();
 });
 
 export default router;

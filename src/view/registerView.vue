@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Login</div>
+          <div class="card-header">Register</div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{ error }}</div>
             <b-form @submit="onSubmit" @reset="onReset">
@@ -51,7 +51,7 @@
                 ></b-form-input>
               </b-form-group>
 
-              <b-button type="submit" variant="primary">Login</b-button>
+              <b-button type="submit" variant="primary">Register</b-button>
             </b-form>
           </div>
         </div>

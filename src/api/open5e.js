@@ -9,7 +9,7 @@ export default {
   backgroundList() {
     return httpClient.get(`${URL}${ENDPOINTS.BACKGROUNDS}`);
   },
-  background(slug) {
+  backgroundGet(slug) {
     return httpClient.get(`${URL}${ENDPOINTS.BACKGROUNDS}/${slug}`);
   },
 };

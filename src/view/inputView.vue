@@ -7,20 +7,38 @@
       other params depending on what you selected.
       <br />A dwarf will often be a warrior for example.
     </p>
-    <b-form-select :options="races"></b-form-select>
-    <b-form-select :options="classes"></b-form-select>
-    <b-form-select :options="alignments"></b-form-select>
-    <b-form-select :options="languages"></b-form-select>
-    <b-form-select :options="traits"></b-form-select>
-    <b-form-select :options="backgrounds"></b-form-select>
-    <h2>Qualitative</h2>
-    <b-button to="changes" class="space">Fill those fields!</b-button>
+    <MyCharacterView
+      :races="races"
+      :classes="classes"
+      :alignments="alignments"
+      :languages="languages"
+      :traits="traits"
+      :backgrounds="backgrounds"
+      :clearable="true"
+      @setName="setName"
+      @setGender="setGender"
+      @setRace="setRace"
+      @setClass="setClass"
+      @setBackground="setBackground"
+      @setAlignment="setAlignment"
+      @addLanguage="addLanguage"
+      @removeLanguage="removeLanguage"
+      @clearLanguages="clearLanguages"
+      @removeTrait="removeTrait"
+      @addTrait="addTrait"
+      @clearTraits="clearTraits"
+    />
+    <b-button to="changes">Generate</b-button>
   </div>
 </template>
 
 <script>
+import MyCharacterView from "@/components/char.vue";
 export default {
   name: "MyInputView",
+  components: {
+    MyCharacterView,
+  },
   props: {
     races: Array,
     classes: Array,
@@ -28,20 +46,73 @@ export default {
     languages: Array,
     traits: Array,
     backgrounds: Array,
+    abilities: Array,
+    currentName: String,
+    currentGender: String,
+    generate: Function,
   },
-  emits: [],
-  methods: {},
+  emits: [
+    "setName",
+    "setGender",
+    "setRace",
+    "setClass",
+    "setBackground",
+    "setAlignment",
+    "addLanguage",
+    "removeLanguage",
+    "clearLanguages",
+    "addTrait",
+    "removeTrait",
+    "clearTraits",
+  ],
+  methods: {
+    setName(n) {
+      this.$emit("setName", n);
+    },
+    setGender(r) {
+      this.$emit("setGender", r);
+    },
+    setRace(r) {
+      this.$emit("setRace", r);
+    },
+    setClass(c) {
+      this.$emit("setClass", c);
+    },
+    setBackground(b) {
+      this.$emit("setBackground", b);
+    },
+    setAlignment(a) {
+      this.$emit("setAlignment", a);
+    },
+    addLanguage(l) {
+      this.$emit("addLanguage", l);
+    },
+    removeLanguage(l) {
+      this.$emit("removeLanguage", l);
+    },
+    clearLanguages() {
+      this.$emit("clearLanguages");
+    },
+    addTrait(t) {
+      this.$emit("addTrait", t);
+    },
+    removeTrait(t) {
+      this.$emit("removeTrait", t);
+    },
+    clearTraits() {
+      this.$emit("clearTraits");
+    },
+  },
 };
 </script>
-
-<stylescoped>
+<style scoped>
 .input {
   display: row;
-  background-color: beige;
+  background-color: white;
   left: 0;
   right: 0;
 }
 .space {
   margin: 5px;
 }
-</stylescoped>
+</style>

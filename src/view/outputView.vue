@@ -5,40 +5,20 @@
       As the name suggests, you can find your whole new character right here! We
       hope you'll like it! You're now ready to play :) <br />Have fun !
     </p>
-    <h2>Qualitative</h2>
-    <b-container class="bv-example-row" fluid>
-      <b-row align-v="center">
-        <b-col cols="8">
-          <InputBarVue
-            nameAttribute="Race"
-            typeAttribute="dropdown"
-            :dropdownAttribute="dropdownAttribute"
-            class="space"
-            blocked=""
-          />
-          <InputBarVue
-            nameAttribute="Strenght"
-            typeAttribute="number"
-            class="space"
-            blocked=""
-          />
-          <InputBarVue
-            nameAttribute="Backstory"
-            typeAttribute="text"
-            class="space"
-            blocked=""
-          />
-        </b-col>
-        <b-col cols="4">
-          <img
-            right
-            src="../assets/icon/barbarian.png"
-            class="img-fluid"
-            alt="Responsive image"
-          />
-        </b-col>
-      </b-row>
-    </b-container>
+    <pdfVue
+      v-if="ready"
+      :download="download"
+      :myName="myName"
+      :myClass="myClass"
+      :myBackground="myBackground"
+      :myRace="myRace"
+      :myAlignment="myAlignment"
+      :myTraits="myTraits"
+      :myLanguages="myLanguages"
+      :myGender="myGender"
+      :myImageNumber="myImageNumber"
+    ></pdfVue>
+
     <b-button class="space" v-on:click="output">Export as PDF</b-button>
     <b-button class="space" v-on:click="saveCharacter"
       >Add to my Characters</b-button
@@ -48,12 +28,26 @@
 </template>
 
 <script>
-import InputBarVue from "../components/Input.vue";
-
+import pdfVue from "@/components/pdf.vue";
 export default {
   name: "MyOutputView",
-  components: { InputBarVue },
-  emits: ["saveCharacter"],
+  props: {
+    ready: Boolean,
+    download: Boolean,
+    myName: String,
+    myClass: Object,
+    myBackground: Object,
+    myRace: Object,
+    myAlignment: Object,
+    myTraits: Array,
+    myLanguages: Array,
+    myGender: String,
+    myImageNumber: Number,
+  },
+  components: {
+    pdfVue,
+  },
+  emits: ["output", "saveCharacter"],
   methods: {
     output() {
       this.$emit("output");
@@ -62,17 +56,12 @@ export default {
       this.$emit("saveCharacter");
     },
   },
-  data: function () {
-    return {
-      dropdownAttribute: ["Elf", "Gnome", "Dwarf", "Human", "Troll"],
-    };
-  },
 };
 </script>
 <style scoped>
 .back {
   display: row;
-  background-color: beige;
+  background-color: white;
   left: 0;
   right: 0;
 }
