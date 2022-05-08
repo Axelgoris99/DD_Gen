@@ -102,7 +102,7 @@ export default {
       commit("SET_RACE", null);
     },
     setClass({ commit }, c) {
-      commit("SET_ClASS", c);
+      commit("SET_CLASS", c);
     },
     unsetClass({ commit }) {
       commit("SET_CLASS", null);
