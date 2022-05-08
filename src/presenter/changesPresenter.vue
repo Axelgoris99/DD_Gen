@@ -41,7 +41,9 @@ export default {
     MyChangesView,
   },
   mounted() {
-    this.$store.dispatch("current/init");
+    if (!this.currentReady) {
+      this.$store.dispatch("current/init");
+    }
   },
   // map all the getters to computed properties.
   computed: {
