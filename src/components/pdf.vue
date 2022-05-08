@@ -78,13 +78,15 @@
       </div>
     </article>
     <img class="halfBg" :src="require(`@/assets/icon/${myPicture}`)" />
-    <div class="html2pdf__page-break"></div>
+    <div v-if="download" class="html2pdf__page-break"></div>
     <article class="half">
-      <h1>{{ myName }}</h1>
-      <h2>{{ myClass.name }}</h2>
-      <p class="detail" style="text-align: center">
-        {{ myRace.name }} - {{ myAlignment.name }}
-      </p>
+      <div v-if="download">
+        <h1>{{ myName }}</h1>
+        <h2>{{ myClass.name }}</h2>
+        <p class="detail" style="text-align: center">
+          {{ myRace.name }} - {{ myAlignment.name }}
+        </p>
+      </div>
       <div class="profs">
         <h3>Traits</h3>
         <ul>
@@ -102,6 +104,43 @@
             <p>{{ lang.desc }}</p>
           </li>
         </ul>
+      </div>
+      <div class="profs">
+        <h3>Proficiencies</h3>
+        <div class="flex">
+          <div
+            v-for="prof in myClass.proficiencies"
+            :key="prof.index"
+            class="bold"
+          >
+            <div class="marginLR">{{ prof.name }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="profs">
+        <br />
+        <h3>Saving Throws</h3>
+        <div class="flex">
+          <div
+            v-for="saving in myClass.saving_throws"
+            :key="saving.index"
+            class="bold"
+          >
+            <div class="marginLR">{{ saving.name }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="profs">
+        <h3>Starting Equipment</h3>
+        <div class="flex">
+          <div
+            v-for="items in myClass.starting_equipment"
+            :key="items.equipment.index"
+            class="bold"
+          >
+            <div class="marginLR">{{ items.equipment.name }}</div>
+          </div>
+        </div>
       </div>
       <img class="smallImg" :src="require(`@/assets/icon/${myPicture}`)" />
     </article>
@@ -521,5 +560,16 @@ body .container .content .signup-cont {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.marginLR {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 </style>
