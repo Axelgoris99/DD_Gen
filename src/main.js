@@ -7,9 +7,7 @@ import router from "./router";
 import store from "./store";
 import { auth } from "./firebase";
 import VueCompositionAPI from "@vue/composition-api";
-import AsyncComputed from "vue-async-computed";
 Vue.use(VueCompositionAPI);
-Vue.use(AsyncComputed);
 Vue.config.productionTip = false;
 
 auth.onAuthStateChanged((user) => {
