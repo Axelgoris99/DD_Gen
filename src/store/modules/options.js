@@ -72,7 +72,7 @@ export default {
         open5.backgroundList(),
         dnd5.abilityScoreList(),
       ];
-      Promise.all(promises)
+      return Promise.all(promises)
         .then(
           ([
             { data: races },

@@ -43,7 +43,13 @@ export default {
   },
   mounted() {
     if (!this.currentReady) {
-      this.$store.dispatch("current/init");
+      if (!this.races[0]) {
+        this.$store
+          .dispatch("options/init")
+          .then(() => this.$store.dispatch("current/init"));
+      } else {
+        this.$store.dispatch("current/init");
+      }
     }
   },
   // map all the getters to computed properties.
