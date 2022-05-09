@@ -12,44 +12,56 @@ export default {
     traits: [],
   },
   mutations: {
-    SET_NAME(state, name) {
-      Vue.set(state, "name", name);
+    SET_NAME(state, payload) {
+      Vue.set(state, "name", payload.input_name);
     },
-    SET_GENDER(state, gender) {
-      Vue.set(state, "gender", gender);
+    SET_GENDER(state, payload) {
+      Vue.set(state, "gender", payload.input_gender);
     },
-    SET_RACE(state, race) {
-      Vue.set(state, "race", race);
+    SET_RACE(state, payload) {
+      Vue.set(state, "race", payload.input_race);
     },
-    SET_CLASS(state, c) {
-      Vue.set(state, "class", c);
+    SET_CLASS(state, payload) {
+      Vue.set(state, "class", payload.input_class);
     },
-    SET_BACKGROUND(state, background) {
-      Vue.set(state, "background", background);
+    SET_BACKGROUND(state, payload) {
+      Vue.set(state, "background", payload.input_background);
     },
-    SET_ALIGNMENT(state, alignment) {
-      Vue.set(state, "alignment", alignment);
+    SET_ALIGNMENT(state, payload) {
+      Vue.set(state, "alignment", payload.input_alignment);
     },
-    ADD_LANGUAGE(state, language) {
+    ADD_LANGUAGE(state, payload) {
       if (
-        state.languages.filter((l) => l.index === language.index).length === 0
+        state.languages.filter(
+          (l) => l.index === payload.input_add_language.index
+        ).length === 0
       ) {
-        Vue.set(state, "languages", [...state.languages, language]);
+        Vue.set(state, "languages", [
+          ...state.languages,
+          payload.input_add_language,
+        ]);
       }
     },
-    REMOVE_LANGUAGE(state, language) {
-      state.languages = state.languages.filter((l) => l.index !== language);
+    REMOVE_LANGUAGE(state, payload) {
+      state.languages = state.languages.filter(
+        (l) => l.index !== payload.input_remove_language
+      );
     },
     CLEAR_LANGUAGES(state) {
       state.languages = state.languages.splice(0);
     },
-    ADD_TRAIT(state, trait) {
-      if (state.traits.filter((t) => t.index === trait.index).length === 0) {
-        Vue.set(state, "traits", [...state.traits, trait]);
+    ADD_TRAIT(state, payload) {
+      if (
+        state.traits.filter((t) => t.index === payload.input_add_trait.index)
+          .length === 0
+      ) {
+        Vue.set(state, "traits", [...state.traits, payload.input_add_trait]);
       }
     },
-    REMOVE_TRAIT(state, trait) {
-      state.traits = state.traits.filter((t) => t.index !== trait);
+    REMOVE_TRAIT(state, payload) {
+      state.traits = state.traits.filter(
+        (t) => t.index !== payload.input_remove_trait
+      );
     },
     CLEAR_TRAITS(state) {
       state.traits = state.traits.splice(0);
@@ -90,7 +102,7 @@ export default {
       commit("SET_NAME", { input_name: name });
     },
     unsetName({ commit }) {
-      commit("SET_NAME", null);
+      commit("SET_NAME", { input_name: null });
     },
     setGender({ commit }, gender) {
       commit("SET_GENDER", { input_gender: gender });
@@ -99,25 +111,25 @@ export default {
       commit("SET_RACE", { input_race: race });
     },
     unsetRace({ commit }) {
-      commit("SET_RACE", null);
+      commit("SET_RACE", { input_race: null });
     },
     setClass({ commit }, c) {
       commit("SET_CLASS", { input_class: c });
     },
     unsetClass({ commit }) {
-      commit("SET_CLASS", null);
+      commit("SET_CLASS", { input_class: null });
     },
     setBackground({ commit }, background) {
       commit("SET_BACKGROUND", { input_background: background });
     },
     unsetBackground({ commit }) {
-      commit("SET_BACKGROUND", null);
+      commit("SET_BACKGROUND", { input_background: null });
     },
     setAlignment({ commit }, alignment) {
       commit("SET_ALIGNMENT", { input_alignment: alignment });
     },
     unsetAlignment({ commit }) {
-      commit("SET_ALIGNMENT", null);
+      commit("SET_ALIGNMENT", { input_alignment: null });
     },
     addLanguage({ commit }, lang) {
       commit("ADD_LANGUAGE", { input_add_language: lang });

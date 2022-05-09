@@ -23,47 +23,63 @@ export default {
     SET_READY(state, ready) {
       Vue.set(state, "ready", ready);
     },
-    SET_IMAGE(state, image) {
-      Vue.set(state, "image", image);
+    SET_IMAGE(state, payload) {
+      Vue.set(state, "image", payload.current_char_image);
     },
-    SET_NAME(state, name) {
-      Vue.set(state, "name", name);
+    SET_NAME(state, payload) {
+      Vue.set(state, "name", payload.current_char_name);
     },
-    SET_GENDER(state, gender) {
-      Vue.set(state, "gender", gender);
+    SET_GENDER(state, payload) {
+      Vue.set(state, "gender", payload.current_char_gender);
     },
-    SET_RACE(state, race) {
-      Vue.set(state, "race", race);
+    SET_RACE(state, payload) {
+      Vue.set(state, "race", payload.current_char_race);
     },
-    SET_CLASS(state, c) {
-      Vue.set(state, "class", c);
+    SET_CLASS(state, payload) {
+      Vue.set(state, "class", payload.current_char_class);
     },
-    SET_BACKGROUND(state, background) {
-      Vue.set(state, "background", background);
+    SET_BACKGROUND(state, payload) {
+      Vue.set(state, "background", payload.current_char_background);
     },
-    SET_ALIGNMENT(state, alignment) {
-      Vue.set(state, "alignment", alignment);
+    SET_ALIGNMENT(state, payload) {
+      Vue.set(state, "alignment", payload.current_char_alignment);
     },
-    ADD_LANGUAGE(state, language) {
+    ADD_LANGUAGE(state, payload) {
       if (
-        state.languages.filter((l) => l.index === language.index).length === 0
+        state.languages.filter(
+          (l) => l.index === payload.current_char_add_language.index
+        ).length === 0
       ) {
-        Vue.set(state, "languages", [...state.languages, language]);
+        Vue.set(state, "languages", [
+          ...state.languages,
+          payload.current_char_add_language,
+        ]);
       }
     },
-    REMOVE_LANGUAGE(state, language) {
-      state.languages = state.languages.filter((l) => l.index !== language);
+    REMOVE_LANGUAGE(state, payload) {
+      state.languages = state.languages.filter(
+        (l) => l.index !== payload.current_char_remove_language
+      );
     },
     CLEAR_LANGUAGES(state) {
       state.languages = [];
     },
-    ADD_TRAIT(state, trait) {
-      if (state.traits.filter((t) => t.index === trait.index).length === 0) {
-        Vue.set(state, "traits", [...state.traits, trait]);
+    ADD_TRAIT(state, payload) {
+      if (
+        state.traits.filter(
+          (t) => t.index === payload.current_char_add_trait.index
+        ).length === 0
+      ) {
+        Vue.set(state, "traits", [
+          ...state.traits,
+          payload.current_char_add_trait,
+        ]);
       }
     },
-    REMOVE_TRAIT(state, trait) {
-      state.traits = state.traits.filter((t) => t.index !== trait);
+    REMOVE_TRAIT(state, payload) {
+      state.traits = state.traits.filter(
+        (t) => t.index !== payload.current_char_remove_trait
+      );
     },
     CLEAR_TRAITS(state) {
       state.traits = [];
@@ -109,7 +125,7 @@ export default {
         "setGender",
         rootGetters["input/gender"] || sample(["male", "female"])
       );
-      commit("SET_IMAGE", Math.floor(Math.random() * 3));
+      dispatch("setImage", Math.floor(Math.random() * 3));
 
       // Now we want to set the properties that are set asynchronously.
       // collect the base promises (that independent of each other).
@@ -196,27 +212,27 @@ export default {
     },
 
     setName({ commit }, name) {
-      commit("SET_NAME", name);
+      commit("SET_NAME", { current_char_name: name });
     },
     unsetName({ commit }) {
-      commit("SET_NAME", null);
+      commit("SET_NAME", { current_char_name: null });
     },
     setGender({ commit }, gender) {
-      commit("SET_GENDER", gender);
+      commit("SET_GENDER", { current_char_gender: gender });
     },
     setRace({ commit }, slug) {
       return new Promise((resolve, reject) => {
         dnd5
           .raceGet(slug)
           .then((resp) => {
-            commit("SET_RACE", resp.data);
+            commit("SET_RACE", { current_char_race: resp.data });
             resolve();
           })
           .catch((error) => reject(error));
       });
     },
     unsetRace({ commit }) {
-      commit("SET_RACE", null);
+      commit("SET_RACE", { current_char_race: null });
     },
 
     setClass({ commit }, slug) {
@@ -224,7 +240,7 @@ export default {
         dnd5
           .classGet(slug)
           .then((resp) => {
-            commit("SET_CLASS", resp.data);
+            commit("SET_CLASS", { current_char_class: resp.data });
             resolve();
           })
           .catch((error) => reject(error));
@@ -232,63 +248,63 @@ export default {
     },
 
     unsetClass({ commit }) {
-      commit("SET_CLASS", null);
+      commit("SET_CLASS", { current_char_class: null });
     },
     setBackground({ commit }, slug) {
       return new Promise((resolve, reject) => {
         open5
           .backgroundGet(slug)
           .then((resp) => {
-            commit("SET_BACKGROUND", resp.data);
+            commit("SET_BACKGROUND", { current_char_background: resp.data });
             resolve();
           })
           .catch((error) => reject(error));
       });
     },
     unsetBackground({ commit }) {
-      commit("SET_BACKGROUND", null);
+      commit("SET_BACKGROUND", { current_char_background: null });
     },
     setAlignment({ commit }, slug) {
       return new Promise((resolve, reject) => {
         dnd5
           .alignmentGet(slug)
           .then((resp) => {
-            commit("SET_ALIGNMENT", resp.data);
+            commit("SET_ALIGNMENT", { current_char_alignment: resp.data });
             resolve();
           })
           .catch((error) => reject(error));
       });
     },
     unsetAlignment({ commit }) {
-      commit("SET_ALIGNMENT", null);
+      commit("SET_ALIGNMENT", { current_char_alignement: null });
     },
     addLanguage({ commit }, slug) {
       return new Promise((resolve, reject) => {
         dnd5
           .languageGet(slug)
           .then((resp) => {
-            commit("ADD_LANGUAGE", resp.data);
+            commit("ADD_LANGUAGE", { current_char_add_language: resp.data });
             resolve();
           })
           .catch((error) => reject(error));
       });
     },
     removeLanguage({ commit }, lang) {
-      commit("REMOVE_LANGUAGE", lang);
+      commit("REMOVE_LANGUAGE", { current_char_remove_language: lang });
     },
     addTrait({ commit }, slug) {
       return new Promise((resolve, reject) => {
         dnd5
           .traitGet(slug)
           .then((resp) => {
-            commit("ADD_TRAIT", resp.data);
+            commit("ADD_TRAIT", { current_char_add_trait: resp.data });
             resolve();
           })
           .catch((error) => reject(error));
       });
     },
     removeTrait({ commit }, trait) {
-      commit("REMOVE_TRAIT", trait);
+      commit("REMOVE_TRAIT", { current_char_remove_trait: trait });
     },
     resetTraits({ commit }) {
       commit("CLEAR_TRAITS");
@@ -300,10 +316,10 @@ export default {
       commit("SET_READY", false);
     },
     setImage({ commit }, num) {
-      commit("SET_IMAGE", num);
+      commit("SET_IMAGE", { current_char_image: num });
     },
     resetImage({ commit }) {
-      commit("SET_IMAGE", null);
+      commit("SET_IMAGE", { current_char_image: null });
     },
     reset({ dispatch }) {
       dispatch("unsetName");

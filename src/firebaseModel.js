@@ -8,7 +8,6 @@ import {
   ref,
   onChildAdded,
   onChildRemoved,
-  onValue,
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import firebaseConfig from "../firebase.config";
@@ -136,11 +135,103 @@ function updateFirebaseFromModel(payload) {
       payload.input_add_trait
     );
   }
-  if (payload.input_remove_language) {
+  if (payload.input_remove_trait) {
     set(
       ref(
         database,
         "/users/" + userId + "/input_char/traits/" + payload.input_remove_trait
+      ),
+      null
+    );
+  }
+
+  // current character
+  if (payload.current_char_name) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/name"),
+      payload.current_char_name
+    );
+  }
+  if (payload.current_char_gender) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/gender"),
+      payload.current_char_gender
+    );
+  }
+  if (payload.current_char_race) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/race"),
+      payload.current_char_race
+    );
+  }
+  if (payload.current_char_class) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/class"),
+      payload.current_char_class
+    );
+  }
+  if (payload.current_char_background) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/background"),
+      payload.current_char_background
+    );
+  }
+  if (payload.current_char_alignment) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/alignment"),
+      payload.current_char_alignment
+    );
+  }
+  if (payload.current_char_image) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/image"),
+      payload.current_char_image
+    );
+  }
+  if (payload.current_char_add_language) {
+    set(
+      ref(
+        database,
+        "/users/" +
+          userId +
+          "/current_char/languages/" +
+          payload.current_char_add_language.name
+      ),
+      payload.current_char_add_language
+    );
+  }
+  if (payload.current_char_remove_language) {
+    set(
+      ref(
+        database,
+        "/users/" +
+          userId +
+          "/current_char/languages/" +
+          payload.current_char_remove_language.name
+      ),
+      null
+    );
+  }
+  if (payload.current_char_add_trait) {
+    set(
+      ref(
+        database,
+        "/users/" +
+          userId +
+          "/current_char/traits/" +
+          payload.current_char_add_trait.name
+      ),
+      payload.current_char_add_trait
+    );
+  }
+  if (payload.current_char_remove_trait) {
+    set(
+      ref(
+        database,
+        "/users/" +
+          userId +
+          "/current_char/traits/" +
+          payload.current_char_remove_trait.name
       ),
       null
     );
@@ -157,21 +248,21 @@ function updateModelFromFirebase(store) {
     (snapshot) => store.commit("characters/REMOVE_CHARACTER", snapshot.val())
   );
 
-  onValue(
-    ref(database, "/users/" + userId + "/input_char/name"),
-    (snapshot) => {
-      console.log(snapshot.val());
-      store.dispatch("input/setName", snapshot.val());
-    }
-  );
-  onChildAdded(
-    ref(database, "/users/" + userId + "/input_char/languages"),
-    (snapshot) => store.commit("input/ADD_LANGUAGE", snapshot.val())
-  );
-  onChildRemoved(
-    ref(database, "/users/" + userId + "/input_char/languages"),
-    (snapshot) => store.commit("input/REMOVE_LANGUAGE", snapshot.val())
-  );
+  // onValue(
+  //   ref(database, "/users/" + userId + "/input_char/name"),
+  //   (snapshot) => {
+  //     console.log(snapshot.val());
+  //     store.dispatch("input/setName", snapshot.val());
+  //   }
+  // );
+  // onChildAdded(
+  //   ref(database, "/users/" + userId + "/input_char/languages"),
+  //   (snapshot) => store.commit("input/ADD_LANGUAGE", snapshot.val())
+  // );
+  // onChildRemoved(
+  //   ref(database, "/users/" + userId + "/input_char/languages"),
+  //   (snapshot) => store.commit("input/REMOVE_LANGUAGE", snapshot.val())
+  // );
 }
 export {
   signUp,
