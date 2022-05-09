@@ -177,7 +177,7 @@ export default {
         .then(() => {
           const name = rootGetters["input/name"];
           if (name) {
-            this.$store.dispatch("current/setName", name);
+            dispatch("setName", name);
           } else {
             // Generate random name.
             const current_race = getters.race;
