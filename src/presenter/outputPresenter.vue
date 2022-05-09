@@ -86,8 +86,19 @@ export default {
       this.$refs.html2Pdf.generatePdf();
     },
     saveCharacter() {
-      this.$store.commit("characters/ADD_CHARACTER", {
-        name: "Thomas",
+      this.$store.dispatch("characters/addChar", {
+        characterToAdd: {
+          name: this.name1,
+          class: this.class1,
+          gender: this.gender,
+          race: this.race,
+          alignment: this.alignment,
+          background: this.background,
+          languages: this.languages,
+          traits: this.traits,
+          image: this.image,
+          ready: this.ready,
+        },
       });
       this.$router.replace({ name: "profile" });
     },
