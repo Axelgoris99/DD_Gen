@@ -44,7 +44,7 @@
 
 <script>
 import MyChangesView from "../view/changesView.vue";
-import { storage } from "../firebase";
+import { getImage } from "../api/images";
 import { mapGetters } from "vuex";
 
 export default {
@@ -59,7 +59,6 @@ export default {
     };
   },
   mounted() {
-    const self = this;
     this.$store
       .dispatch("current/init")
       .then(() => {
@@ -67,15 +66,22 @@ export default {
         const currentGender = this.$store.getters["current/gender"];
         const currentClass = this.$store.getters["current/class"].index;
         const currentImageNr = this.$store.getters["current/image"];
-        return storage
-          .ref()
-          .child(
-            `icon/${currentRace}/${currentGender}/${currentClass}/${currentImageNr}.png`
-          )
-          .getDownloadURL();
+        this.$store.dispatch("loader/pending");
+        return getImage(
+          currentRace,
+          currentGender,
+          currentClass,
+          currentImageNr
+        );
       })
       .then((value) => {
-        self.imageUrl = value;
+        this.imageUrl = value;
+        this.$store.dispatch("loader/done");
+      })
+      .catch((error) => {
+        this.$store.dispatch("loader/done");
+        this.$store.dispatch("loader/error");
+        return Promise.reject(error);
       });
   },
   // map all the getters to computed properties.
