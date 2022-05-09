@@ -5,17 +5,14 @@ import "./plugins/bootstrap-vue";
 import App from "./presenter/App";
 import router from "./router";
 import store from "./store";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-import firebaseConfig from "../firebase.config";
+import { auth } from "./firebase";
 import VueCompositionAPI from "@vue/composition-api";
+import AsyncComputed from "vue-async-computed";
 Vue.use(VueCompositionAPI);
+Vue.use(AsyncComputed);
 Vue.config.productionTip = false;
 
-firebase.initializeApp(firebaseConfig);
-
-firebase.auth().onAuthStateChanged((user) => {
+auth.onAuthStateChanged((user) => {
   store.dispatch("auth/fetchUser", user);
 });
 

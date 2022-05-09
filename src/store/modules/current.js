@@ -162,60 +162,62 @@ export default {
       );
 
       // Chain on dependent promises.
-      Promise.all(basePromises)
-        .then(() => {
-          const language_slugs = rootGetters["input/languages"];
-          if (language_slugs.length > 0) {
-            // map slugs to promises and reduce to a promise chain.
-            return Promise.all(
-              language_slugs.map((slug) => dispatch("addLanguage", slug))
-            );
+      return (
+        Promise.all(basePromises)
+          .then(() => {
+            const language_slugs = rootGetters["input/languages"];
+            if (language_slugs.length > 0) {
+              // map slugs to promises and reduce to a promise chain.
+              return Promise.all(
+                language_slugs.map((slug) => dispatch("addLanguage", slug))
+              );
 
-            // Otherwise, we add languages dependent on the race.
-          } else {
-            const current_race = getters.race;
-            // map slugs to promises and reduce to a promise chain.
-            return Promise.all(
-              current_race.languages.map((lang) =>
-                dispatch("addLanguage", lang.index)
-              )
-            );
-          }
-        })
-        .then(() => {
-          const trait_slugs = rootGetters["input/traits"];
-          if (trait_slugs.length > 0) {
-            // map slugs to promises and reduce to a promise chain.
-            return Promise.all(
-              trait_slugs.map((slug) => dispatch("addTrait", slug))
-            );
-          } else {
-            // Otherwise, we generate we add traits dependent on the race.
-            const current_race = getters.race;
-            return Promise.all(
-              current_race.traits.map((t) => dispatch("addTrait", t.index))
-            );
-          }
-        })
-        .then(() => {
-          const name = rootGetters["input/name"];
-          if (name) {
-            this.$store.dispatch("current/setName", name);
-          } else {
-            // Generate random name.
-            const current_race = getters.race;
-            const current_gender = getters.gender;
-            const gen = Names.generate({
-              race: camelCase(current_race.index),
-              gender: current_gender,
-            });
-            dispatch("setName", gen.name);
-          }
-        })
-        // Set the ready flag.
-        .finally(() => {
-          commit("SET_READY", true);
-        });
+              // Otherwise, we add languages dependent on the race.
+            } else {
+              const current_race = getters.race;
+              // map slugs to promises and reduce to a promise chain.
+              return Promise.all(
+                current_race.languages.map((lang) =>
+                  dispatch("addLanguage", lang.index)
+                )
+              );
+            }
+          })
+          .then(() => {
+            const trait_slugs = rootGetters["input/traits"];
+            if (trait_slugs.length > 0) {
+              // map slugs to promises and reduce to a promise chain.
+              return Promise.all(
+                trait_slugs.map((slug) => dispatch("addTrait", slug))
+              );
+            } else {
+              // Otherwise, we generate we add traits dependent on the race.
+              const current_race = getters.race;
+              return Promise.all(
+                current_race.traits.map((t) => dispatch("addTrait", t.index))
+              );
+            }
+          })
+          .then(() => {
+            const name = rootGetters["input/name"];
+            if (name) {
+              this.$store.dispatch("current/setName", name);
+            } else {
+              // Generate random name.
+              const current_race = getters.race;
+              const current_gender = getters.gender;
+              const gen = Names.generate({
+                race: camelCase(current_race.index),
+                gender: current_gender,
+              });
+              dispatch("setName", gen.name);
+            }
+          })
+          // Set the ready flag.
+          .then(() => {
+            commit("SET_READY", true);
+          })
+      );
     },
 
     setName({ commit }, name) {

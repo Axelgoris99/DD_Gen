@@ -16,7 +16,7 @@
       :currentBackground="currentBackground"
       :currentLanguages="currentLanguages"
       :currentTraits="currentTraits"
-      :currentImage="currentImage"
+      :currentImage="imageUrl"
       :stats="currentStats"
       :dices="diceNums"
       @setName="setName"
@@ -44,6 +44,7 @@
 
 <script>
 import MyChangesView from "../view/changesView.vue";
+import { storage } from "../firebase";
 import { mapGetters } from "vuex";
 
 export default {
@@ -51,23 +52,32 @@ export default {
   components: {
     MyChangesView,
   },
-  mounted() {
-    if (!this.currentReady) {
-      if (!this.races[0]) {
-        this.$store
-          .dispatch("options/init")
-          .then(() => this.$store.dispatch("current/init"));
-      } else {
-        this.$store.dispatch("current/init");
-      }
-    }
-  },
   data() {
     return {
+      imageUrl: "",
       diceNums: [1, 1, 1, 1],
     };
   },
-
+  mounted() {
+    const self = this;
+    this.$store
+      .dispatch("current/init")
+      .then(() => {
+        const currentRace = this.$store.getters["current/race"].index;
+        const currentGender = this.$store.getters["current/gender"];
+        const currentClass = this.$store.getters["current/class"].index;
+        const currentImageNr = this.$store.getters["current/image"];
+        return storage
+          .ref()
+          .child(
+            `icon/${currentRace}/${currentGender}/${currentClass}/${currentImageNr}.png`
+          )
+          .getDownloadURL();
+      })
+      .then((value) => {
+        self.imageUrl = value;
+      });
+  },
   // map all the getters to computed properties.
   computed: {
     ...mapGetters({

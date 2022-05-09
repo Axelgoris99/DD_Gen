@@ -39,7 +39,7 @@
       <pdfVue
         v-if="ready"
         :download="false"
-        :myImageNumber="currentImage"
+        :myImage="currentImage"
         :myName="currentName"
         :myClass="currentClass"
         :myBackground="currentBackground"
@@ -170,7 +170,7 @@ export default {
     currentAlignment: Object,
     currentLanguages: Array,
     currentTraits: Array,
-    currentImage: Number,
+    currentImage: String,
     stats: Object,
     dices: Array,
   },

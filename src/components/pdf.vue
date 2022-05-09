@@ -85,7 +85,7 @@
         </div>
       </div>
     </article>
-    <img class="halfBg" :src="require(`@/assets/icon/${myPicture}`)" />
+    <img class="halfBg" :src="myImage" />
     <div v-if="download" class="html2pdf__page-break"></div>
     <article class="half">
       <div v-if="download">
@@ -150,7 +150,7 @@
           </div>
         </div>
       </div>
-      <img class="smallImg" :src="require(`@/assets/icon/${myPicture}`)" />
+      <img class="smallImg" :src="myImage" />
     </article>
   </section>
 </template>
@@ -171,11 +171,7 @@ export default {
     myGender: String,
     myImageNumber: Number,
     myStats: Object,
-  },
-  computed: {
-    myPicture() {
-      return `${this.myRace.index}/${this.myGender}/${this.myClass.index}/${this.myImageNumber}.png`;
-    },
+    myImage: String,
   },
 };
 </script>

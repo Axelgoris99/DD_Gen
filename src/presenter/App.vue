@@ -16,6 +16,7 @@ export default {
     ...mapState("loader", ["error"]),
   },
   created() {
+    // init options.
     httpClient.interceptors.request.use(
       (config) => {
         if (config.showLoader) {
