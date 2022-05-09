@@ -57,13 +57,7 @@
       label-for="imageNumber"
       description="The choice of your character image! Pick between 3 different ones."
     >
-      <b-form-input
-        @change="changeImage"
-        type="number"
-        :value="currentImage"
-        :min="0"
-        :max="2"
-      ></b-form-input>
+      <b-button @click="changeImage">Next Image</b-button>
     </b-form-group>
     <h2>Quantitative</h2>
     <div>
@@ -235,8 +229,8 @@ export default {
     removeTrait(t) {
       this.$emit("removeTrait", t);
     },
-    changeImage(i) {
-      this.$emit("changeImage", i);
+    changeImage() {
+      this.$emit("changeImage");
     },
     changeStr(s) {
       this.$emit("changeStr", s);

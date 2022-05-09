@@ -58,7 +58,9 @@ export default {
       diceNums: [1, 1, 1, 1],
     };
   },
-  mounted() {
+  created() {
+    // Add a watcher to race, gender, class and image to dynamically
+    // recalculate the image path.
     this.$watch(
       (vm) => [
         vm.currentRace,
@@ -144,8 +146,9 @@ export default {
     removeTrait(t) {
       this.$store.dispatch("current/removeTrait", t);
     },
-    changeImage(i) {
-      this.$store.dispatch("current/setImage", Number(i));
+    changeImage() {
+      const newImage = (this.currentImage + 1) % 3;
+      this.$store.dispatch("current/setImage", newImage);
     },
     changeStr(s) {
       this.$store.dispatch("current/setStr", Number(s));
