@@ -17,6 +17,8 @@
       :currentLanguages="currentLanguages"
       :currentTraits="currentTraits"
       :currentImage="currentImage"
+      :stats="currentStats"
+      :dices="diceNums"
       @setName="setName"
       @setGender="setGender"
       @setRace="setRace"
@@ -28,6 +30,14 @@
       @removeTrait="removeTrait"
       @addTrait="addTrait"
       @changeImage="changeImage"
+      @changeStr="changeStr"
+      @changeCha="changeCha"
+      @changeWis="changeWis"
+      @changeCon="changeCon"
+      @changeDex="changeDex"
+      @changeInt="changeInt"
+      @setDices="setDices"
+      @changeStats="changeStats"
     />
   </div>
 </template>
@@ -52,6 +62,12 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      diceNums: [1, 1, 1, 1],
+    };
+  },
+
   // map all the getters to computed properties.
   computed: {
     ...mapGetters({
@@ -72,6 +88,7 @@ export default {
       currentLanguages: "current/languages",
       currentTraits: "current/traits",
       currentBackground: "current/background",
+      currentStats: "current/stats",
     }),
   },
   methods: {
@@ -107,6 +124,45 @@ export default {
     },
     changeImage(i) {
       this.$store.dispatch("current/setImage", Number(i));
+    },
+    changeStr(s) {
+      this.$store.dispatch("current/setStr", Number(s));
+    },
+    changeInt(i) {
+      this.$store.dispatch("current/setInt", Number(i));
+    },
+    changeCon(c) {
+      this.$store.dispatch("current/setCon", Number(c));
+    },
+    changeCha(c) {
+      this.$store.dispatch("current/setCha", Number(c));
+    },
+    changeWis(w) {
+      this.$store.dispatch("current/setWis", Number(w));
+    },
+    changeDex(d) {
+      this.$store.dispatch("current/setDex", Number(d));
+    },
+    changeStats() {
+      this.changeStr(Math.floor(Math.random() * 18) + 1);
+      this.changeInt(Math.floor(Math.random() * 18) + 1);
+      this.changeDex(Math.floor(Math.random() * 18) + 1);
+      this.changeCon(Math.floor(Math.random() * 18) + 1);
+      this.changeCha(Math.floor(Math.random() * 18) + 1);
+      this.changeWis(Math.floor(Math.random() * 18) + 1);
+    },
+
+    setRandomDicesData() {
+      this.diceNums.forEach((element, index) => {
+        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
+        this.diceNums[index] = randomDiceNum;
+      });
+    },
+    setDices() {
+      this.diceNums.forEach((element, index) => {
+        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
+        this.diceNums[index] = randomDiceNum;
+      });
     },
   },
 };

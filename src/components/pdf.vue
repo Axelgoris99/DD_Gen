@@ -37,29 +37,41 @@
             <div class="stats abilities">
               <div>
                 <label for="str">STR</label>
-                <div id="str" class="stat">8 (+0)</div>
+                <div id="str" class="stat">
+                  {{ myStats.str }} ({{ Math.floor((myStats.str - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="dex">DEX</label>
-                <div id="dex" class="stat">16 (+3)</div>
+                <div id="dex" class="stat">
+                  {{ myStats.dex }} ({{ Math.floor((myStats.dex - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="con">CON</label>
-                <div id="con" class="stat">10 (+0)</div>
+                <div id="con" class="stat">
+                  {{ myStats.con }} ({{ Math.floor((myStats.con - 10) / 2) }})
+                </div>
               </div>
             </div>
             <div class="stats abilities">
               <div>
                 <label for="int">INT</label>
-                <div id="int" class="stat">13 (+1)</div>
+                <div id="int" class="stat">
+                  {{ myStats.int }} ({{ Math.floor((myStats.int - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="wis">WIS</label>
-                <div id="wis" class="stat">12 (+1)</div>
+                <div id="wis" class="stat">
+                  {{ myStats.wis }} ({{ Math.floor((myStats.wis - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="cha">CHA</label>
-                <div id="cha" class="stat">16 (+3)</div>
+                <div id="cha" class="stat">
+                  {{ myStats.cha }} ({{ Math.floor((myStats.cha - 10) / 2) }})
+                </div>
               </div>
             </div>
             <hr />
@@ -158,6 +170,7 @@ export default {
     myLanguages: Array,
     myGender: String,
     myImageNumber: Number,
+    myStats: Object,
   },
   computed: {
     myPicture() {
