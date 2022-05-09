@@ -11,9 +11,7 @@
 
 <script>
 import MyLoginView from "../view/loginView.vue";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { signIn } from "../firebaseModel";
 export default {
   name: "MyLogin",
   components: {
@@ -36,15 +34,8 @@ export default {
       this.form.email = event;
     },
     submit() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(() => {
-          this.$router.replace({ name: "home" });
-        })
-        .catch((err) => {
-          this.error = err.message;
-        });
+      signIn(this.form.email, this.form.password);
+      this.$router.replace({ name: "home" });
     },
   },
 };

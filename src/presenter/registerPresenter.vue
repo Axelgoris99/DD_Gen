@@ -12,9 +12,8 @@
 
 <script>
 import MyRegisterView from "../view/registerView.vue";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { signUp } from "../firebaseModel";
+
 export default {
   name: "MyRegister",
   components: {
@@ -41,21 +40,8 @@ export default {
       this.form.name = event;
     },
     submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
-          console.log(data);
-          data.user.updateProfile({
-            displayName: this.form.name,
-          });
-        })
-        .then(() => {
-          this.$router.push("home");
-        })
-        .catch((err) => {
-          this.error = err.message;
-        });
+      signUp(this.form.email, this.form.password, this.form.name);
+      this.$router.push("home");
     },
   },
 };

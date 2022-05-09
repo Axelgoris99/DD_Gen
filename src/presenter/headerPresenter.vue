@@ -13,9 +13,7 @@
 
 <script>
 import headerView from "../view/headerView.vue";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { signOut } from "../firebaseModel";
 import { mapGetters } from "vuex";
 
 export default {
@@ -42,7 +40,7 @@ export default {
     login() {},
     signup() {},
     signOut() {
-      firebase.auth().signOut();
+      signOut();
     },
   },
 };

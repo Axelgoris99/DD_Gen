@@ -1,4 +1,7 @@
 import { initializeApp } from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 import {
   getDatabase,
   set,
@@ -11,9 +14,34 @@ import firebaseConfig from "../firebase.config";
 initializeApp(firebaseConfig);
 var database = getDatabase();
 
-function signIn() {}
+function signUp(email, password, name) {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((data) => {
+      data.user.updateProfile({
+        displayName: name,
+      });
+    })
+    .then(() => {})
+    .catch((err) => {
+      this.error = err.message;
+    });
+}
 
-function signOut() {}
+function signIn(email, password) {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {})
+    .catch((err) => {
+      this.error = err.message;
+    });
+}
+
+function signOut() {
+  firebase.auth().signOut();
+}
 
 function updateFirebaseFromModel(payload) {
   let userId = getAuth().currentUser.uid;
@@ -47,4 +75,10 @@ function updateModelFromFirebase(store) {
     (snapshot) => store.commit("characters/REMOVE_CHARACTER", snapshot.val())
   );
 }
-export { signIn, signOut, updateFirebaseFromModel, updateModelFromFirebase };
+export {
+  signUp,
+  signIn,
+  signOut,
+  updateFirebaseFromModel,
+  updateModelFromFirebase,
+};
