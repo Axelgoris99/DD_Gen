@@ -32,10 +32,6 @@
                 <label for="armor">Hit Die</label>
                 <div class="inpt number">{{ myClass.hit_die }}</div>
               </div>
-              <div>
-                <label for="speed">Speed</label>
-                <div class="inpt number"></div>
-              </div>
             </div>
             <hr />
             <div class="stats abilities">
