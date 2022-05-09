@@ -8,6 +8,7 @@ import {
   ref,
   onChildAdded,
   onChildRemoved,
+  onValue,
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import firebaseConfig from "../firebase.config";
@@ -45,6 +46,7 @@ function signOut() {
 
 function updateFirebaseFromModel(payload) {
   let userId = getAuth().currentUser.uid;
+  // Profile characters
   if (payload.characterToAdd) {
     set(
       ref(
@@ -63,6 +65,86 @@ function updateFirebaseFromModel(payload) {
       null
     );
   }
+
+  // Input character
+  if (payload.input_name) {
+    set(
+      ref(database, "/users/" + userId + "/input_char/name"),
+      payload.input_name
+    );
+  }
+  if (payload.input_gender) {
+    set(
+      ref(database, "/users/" + userId + "/input_char/gender"),
+      payload.input_gender
+    );
+  }
+  if (payload.input_race) {
+    set(
+      ref(database, "/users/" + userId + "/input_char/race"),
+      payload.input_race
+    );
+  }
+  if (payload.input_class) {
+    set(
+      ref(database, "/users/" + userId + "/input_char/class"),
+      payload.input_class
+    );
+  }
+  if (payload.input_background) {
+    set(
+      ref(database, "/users/" + userId + "/input_char/background"),
+      payload.input_background
+    );
+  }
+  if (payload.input_alignment) {
+    set(
+      ref(database, "/users/" + userId + "/input_char/alignment"),
+      payload.input_alignment
+    );
+  }
+  if (payload.input_add_language) {
+    set(
+      ref(
+        database,
+        "/users/" +
+          userId +
+          "/input_char/languages/" +
+          payload.input_add_language
+      ),
+      payload.input_add_language
+    );
+  }
+  if (payload.input_remove_language) {
+    set(
+      ref(
+        database,
+        "/users/" +
+          userId +
+          "/input_char/languages/" +
+          payload.input_remove_language
+      ),
+      null
+    );
+  }
+  if (payload.input_add_trait) {
+    set(
+      ref(
+        database,
+        "/users/" + userId + "/input_char/traits/" + payload.input_add_trait
+      ),
+      payload.input_add_trait
+    );
+  }
+  if (payload.input_remove_language) {
+    set(
+      ref(
+        database,
+        "/users/" + userId + "/input_char/traits/" + payload.input_remove_trait
+      ),
+      null
+    );
+  }
 }
 
 function updateModelFromFirebase(store) {
@@ -73,6 +155,22 @@ function updateModelFromFirebase(store) {
   onChildRemoved(
     ref(database, "/users/" + userId + "/characters"),
     (snapshot) => store.commit("characters/REMOVE_CHARACTER", snapshot.val())
+  );
+
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/name"),
+    (snapshot) => {
+      console.log(snapshot.val());
+      store.dispatch("input/setName", snapshot.val());
+    }
+  );
+  onChildAdded(
+    ref(database, "/users/" + userId + "/input_char/languages"),
+    (snapshot) => store.commit("input/ADD_LANGUAGE", snapshot.val())
+  );
+  onChildRemoved(
+    ref(database, "/users/" + userId + "/input_char/languages"),
+    (snapshot) => store.commit("input/REMOVE_LANGUAGE", snapshot.val())
   );
 }
 export {

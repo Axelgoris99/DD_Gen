@@ -87,52 +87,52 @@ export default {
       commit("SET_GENERATED", generated);
     },
     setName({ commit }, name) {
-      commit("SET_NAME", name);
+      commit("SET_NAME", { input_name: name });
     },
     unsetName({ commit }) {
       commit("SET_NAME", null);
     },
     setGender({ commit }, gender) {
-      commit("SET_GENDER", gender);
+      commit("SET_GENDER", { input_gender: gender });
     },
     setRace({ commit }, race) {
-      commit("SET_RACE", race);
+      commit("SET_RACE", { input_race: race });
     },
     unsetRace({ commit }) {
       commit("SET_RACE", null);
     },
     setClass({ commit }, c) {
-      commit("SET_CLASS", c);
+      commit("SET_CLASS", { input_class: c });
     },
     unsetClass({ commit }) {
       commit("SET_CLASS", null);
     },
     setBackground({ commit }, background) {
-      commit("SET_BACKGROUND", background);
+      commit("SET_BACKGROUND", { input_background: background });
     },
     unsetBackground({ commit }) {
       commit("SET_BACKGROUND", null);
     },
     setAlignment({ commit }, alignment) {
-      commit("SET_ALIGNMENT", alignment);
+      commit("SET_ALIGNMENT", { input_alignment: alignment });
     },
     unsetAlignment({ commit }) {
       commit("SET_ALIGNMENT", null);
     },
     addLanguage({ commit }, lang) {
-      commit("ADD_LANGUAGE", lang);
+      commit("ADD_LANGUAGE", { input_add_language: lang });
     },
     removeLanguage({ commit }, lang) {
-      commit("REMOVE_LANGUAGE", lang);
+      commit("REMOVE_LANGUAGE", { input_remove_language: lang });
     },
     clearLanguages({ commit }) {
       commit("CLEAR_LANGUAGES");
     },
     addTrait({ commit }, trait) {
-      commit("ADD_TRAIT", trait);
+      commit("ADD_TRAIT", { input_add_trait: trait });
     },
     removeTrait({ commit }, trait) {
-      commit("REMOVE_TRAIT", trait);
+      commit("REMOVE_TRAIT", { input_remove_trait: trait });
     },
     clearTraits({ commit }) {
       commit("CLEAR_TRAITS");
