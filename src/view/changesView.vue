@@ -64,6 +64,14 @@
         :max="2"
       ></b-form-input>
     </b-form-group>
+    <h2>Quantitative</h2>
+    <div>
+      <p>
+        Here you can roll the dice and then set it to the attributes of your
+        choice. At the beginning, the "default" points repartition is suggested
+        (15-14-13-12-10-8)
+      </p>
+    </div>
     <b-button to="input" class="space">Another time!</b-button>
     <b-button to="output" class="space">Perfection!</b-button>
   </div>

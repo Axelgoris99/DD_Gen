@@ -18,7 +18,8 @@ export default {
     alignment: null,
     languages: [],
     traits: [],
-    stats: { str: 0, int: 0, dex: 0, con: 0, wis: 0, cha: 0 },
+    // These stats are the default value in DnD
+    stats: { str: 15, int: 12, dex: 13, con: 14, wis: 10, cha: 8 },
   },
   mutations: {
     SET_READY(state, ready) {
@@ -69,6 +70,24 @@ export default {
     CLEAR_TRAITS(state) {
       state.traits = [];
     },
+    SET_STR(state, value) {
+      state.stats.str = value;
+    },
+    SET_CON(state, value) {
+      state.stats.con = value;
+    },
+    SET_INT(state, value) {
+      state.stats.int = value;
+    },
+    SET_WIS(state, value) {
+      state.stats.wis = value;
+    },
+    SET_DEX(state, value) {
+      state.stats.dex = value;
+    },
+    SET_CHA(state, value) {
+      state.stats.cha = value;
+    },
   },
   getters: {
     ready(state) {
@@ -100,6 +119,9 @@ export default {
     },
     image(state) {
       return state.image;
+    },
+    stats(state) {
+      return state.stats;
     },
   },
 
@@ -306,6 +328,32 @@ export default {
     resetImage({ commit }) {
       commit("SET_IMAGE", null);
     },
+    setStr({ commit }, value) {
+      commit("SET_STR", value);
+    },
+    setCon({ commit }, value) {
+      commit("SET_CON", value);
+    },
+    setInt({ commit }, value) {
+      commit("SET_INT", value);
+    },
+    setCha({ commit }, value) {
+      commit("SET_CHA", value);
+    },
+    setDex({ commit }, value) {
+      commit("SET_DEX", value);
+    },
+    setWis({ commit }, value) {
+      commit("SET_WIS", value);
+    },
+    resetStats({ commit }) {
+      commit("SET_STR", 15);
+      commit("SET_CON", 14);
+      commit("SET_DEX", 13);
+      commit("SET_INT", 12);
+      commit("SET_WIS", 10);
+      commit("SET_CHA", 8);
+    },
     reset({ dispatch }) {
       dispatch("unsetName");
       dispatch("unsetBackground");
@@ -316,6 +364,7 @@ export default {
       dispatch("resetLanguages");
       dispatch("resetReady");
       dispatch("resetImage");
+      dispatch("resetStats");
     },
   },
 };
