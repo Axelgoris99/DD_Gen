@@ -16,7 +16,7 @@
       :myTraits="myTraits"
       :myLanguages="myLanguages"
       :myGender="myGender"
-      :myImageNumber="myImageNumber"
+      :myImage="myImage"
       :myStats="myStats"
     ></pdfVue>
 
@@ -41,7 +41,7 @@ export default {
     myTraits: Array,
     myLanguages: Array,
     myGender: String,
-    myImageNumber: Number,
+    myImage: String,
     myStats: Object,
   },
   components: {
