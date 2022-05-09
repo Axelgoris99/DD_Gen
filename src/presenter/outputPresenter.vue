@@ -14,6 +14,7 @@
         :myLanguages="languages"
         :myGender="gender"
         :myImageNumber="image"
+        :myStats="stats"
       />
     </div>
     <div>
@@ -39,9 +40,10 @@
             :myRace="race"
             :myAlignment="alignment"
             :myTraits="traits"
-            :myGender="gender"
             :myLanguages="languages"
+            :myGender="gender"
             :myImageNumber="image"
+            :myStats="stats"
           ></pdfVue>
         </section>
       </vue-html2pdf>
@@ -78,6 +80,7 @@ export default {
       traits: "current/traits",
       image: "current/image",
       ready: "current/ready",
+      stats: "current/stats",
     }),
   },
   methods: {

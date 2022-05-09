@@ -17,6 +17,7 @@
       :myLanguages="myLanguages"
       :myGender="myGender"
       :myImageNumber="myImageNumber"
+      :myStats="myStats"
     ></pdfVue>
 
     <b-button class="space" v-on:click="output">Export as PDF</b-button>
@@ -41,6 +42,7 @@ export default {
     myLanguages: Array,
     myGender: String,
     myImageNumber: Number,
+    myStats: Object,
   },
   components: {
     pdfVue,
