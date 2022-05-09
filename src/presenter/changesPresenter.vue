@@ -59,30 +59,36 @@ export default {
     };
   },
   mounted() {
-    this.$store
-      .dispatch("current/init")
-      .then(() => {
-        const currentRace = this.$store.getters["current/race"].index;
-        const currentGender = this.$store.getters["current/gender"];
-        const currentClass = this.$store.getters["current/class"].index;
-        const currentImageNr = this.$store.getters["current/image"];
+    this.$watch(
+      (vm) => [
+        vm.currentRace,
+        vm.currentGender,
+        vm.currentClass,
+        vm.currentImage,
+      ],
+      () => {
         this.$store.dispatch("loader/pending");
-        return getImage(
-          currentRace,
-          currentGender,
-          currentClass,
-          currentImageNr
-        );
-      })
-      .then((value) => {
-        this.imageUrl = value;
-        this.$store.dispatch("loader/done");
-      })
-      .catch((error) => {
-        this.$store.dispatch("loader/done");
-        this.$store.dispatch("loader/error");
-        return Promise.reject(error);
-      });
+        getImage(
+          this.currentRace.index,
+          this.currentGender,
+          this.currentClass.index,
+          this.currentImage
+        )
+          .then((value) => {
+            this.imageUrl = value;
+            this.$store.dispatch("loader/done");
+          })
+          .catch((error) => {
+            this.$store.dispatch("loader/done");
+            this.$store.dispatch("loader/error");
+            return Promise.reject(error);
+          });
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
   },
   // map all the getters to computed properties.
   computed: {
