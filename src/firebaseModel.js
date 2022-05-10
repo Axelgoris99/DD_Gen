@@ -8,6 +8,7 @@ import {
   ref,
   onChildAdded,
   onChildRemoved,
+  onValue,
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import firebaseConfig from "../firebase.config";
@@ -240,6 +241,8 @@ function updateFirebaseFromModel(payload) {
 
 function updateModelFromFirebase(store) {
   let userId = getAuth().currentUser.uid;
+
+  // charcaters
   onChildAdded(ref(database, "/users/" + userId + "/characters"), (snapshot) =>
     store.commit("characters/ADD_CHARACTER", snapshot.val())
   );
@@ -248,21 +251,119 @@ function updateModelFromFirebase(store) {
     (snapshot) => store.commit("characters/REMOVE_CHARACTER", snapshot.val())
   );
 
-  // onValue(
-  //   ref(database, "/users/" + userId + "/input_char/name"),
-  //   (snapshot) => {
-  //     console.log(snapshot.val());
-  //     store.dispatch("input/setName", snapshot.val());
-  //   }
-  // );
-  // onChildAdded(
-  //   ref(database, "/users/" + userId + "/input_char/languages"),
-  //   (snapshot) => store.commit("input/ADD_LANGUAGE", snapshot.val())
-  // );
-  // onChildRemoved(
-  //   ref(database, "/users/" + userId + "/input_char/languages"),
-  //   (snapshot) => store.commit("input/REMOVE_LANGUAGE", snapshot.val())
-  // );
+  //input
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/name"),
+    (snapshot) => {
+      store.dispatch("input/setName", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/gender"),
+    (snapshot) => {
+      store.dispatch("input/setGender", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/race"),
+    (snapshot) => {
+      store.dispatch("input/setRace", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/class"),
+    (snapshot) => {
+      store.dispatch("input/setClass", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/background"),
+    (snapshot) => {
+      store.dispatch("input/setBackground", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/input_char/alignment"),
+    (snapshot) => {
+      store.dispatch("input/setAlignment", snapshot.val());
+    }
+  );
+  onChildAdded(
+    ref(database, "/users/" + userId + "/input_char/languages"),
+    (snapshot) => store.dispatch("input/addLanguage", snapshot.val())
+  );
+  onChildRemoved(
+    ref(database, "/users/" + userId + "/input_char/languages"),
+    (snapshot) => store.dispatch("input/removeLanguage", snapshot.val())
+  );
+  onChildAdded(
+    ref(database, "/users/" + userId + "/input_char/traits"),
+    (snapshot) => store.dispatch("input/addTrait", snapshot.val())
+  );
+  onChildRemoved(
+    ref(database, "/users/" + userId + "/input_char/traits"),
+    (snapshot) => store.dispatch("input/removeTrait", snapshot.val())
+  );
+
+  // current
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/name"),
+    (snapshot) => {
+      store.dispatch("current/setName", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/gender"),
+    (snapshot) => {
+      store.dispatch("current/setGender", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/race"),
+    (snapshot) => {
+      store.dispatch("current/setRace", snapshot.val().index);
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/class"),
+    (snapshot) => {
+      store.dispatch("current/setClass", snapshot.val().index);
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/background"),
+    (snapshot) => {
+      store.dispatch("current/setBackground", snapshot.val().slug);
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/alignment"),
+    (snapshot) => {
+      store.dispatch("current/setAlignment", snapshot.val().index);
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/image"),
+    (snapshot) => {
+      store.dispatch("current/setImage", snapshot.val());
+    }
+  );
+  onChildAdded(
+    ref(database, "/users/" + userId + "/current_char/languages"),
+    (snapshot) => store.dispatch("current/addLanguage", snapshot.val().index)
+  );
+  onChildRemoved(
+    ref(database, "/users/" + userId + "/current_char/languages"),
+    (snapshot) => store.dispatch("current/removeLanguage", snapshot.val().index)
+  );
+  onChildAdded(
+    ref(database, "/users/" + userId + "/current_char/traits"),
+    (snapshot) => store.dispatch("current/addTrait", snapshot.val().index)
+  );
+  onChildRemoved(
+    ref(database, "/users/" + userId + "/current_char/traits"),
+    (snapshot) => store.dispatch("current/removeTrait", snapshot.val().index)
+  );
 }
 export {
   signUp,
