@@ -22,8 +22,8 @@ export default {
     stats: { str: 15, int: 12, dex: 13, con: 14, wis: 10, cha: 8 },
   },
   mutations: {
-    SET_READY(state, ready) {
-      Vue.set(state, "ready", ready);
+    SET_READY(state, payload) {
+      Vue.set(state, "ready", payload.current_char_ready);
     },
     SET_IMAGE(state, payload) {
       Vue.set(state, "image", payload.current_char_image);
@@ -142,7 +142,7 @@ export default {
   },
 
   actions: {
-    init({ dispatch, commit, getters, rootGetters }) {
+    init({ dispatch, getters, rootGetters }) {
       // Set synchronous properties first.
       dispatch(
         "setGender",
@@ -231,7 +231,7 @@ export default {
           })
           // Set the ready flag.
           .then(() => {
-            commit("SET_READY", true);
+            dispatch("setReady");
           })
       );
     },
@@ -337,8 +337,11 @@ export default {
     resetLanguages({ commit }) {
       commit("CLEAR_LANGUAGES");
     },
+    setReady({ commit }) {
+      commit("SET_READY", { current_char_ready: true });
+    },
     resetReady({ commit }) {
-      commit("SET_READY", false);
+      commit("SET_READY", { current_char_ready: false });
     },
     setImage({ commit }, num) {
       commit("SET_IMAGE", { current_char_image: num });

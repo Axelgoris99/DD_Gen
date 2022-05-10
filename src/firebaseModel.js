@@ -238,6 +238,12 @@ function updateFirebaseFromModel(payload) {
       payload.current_char_cha
     );
   }
+  if (payload.current_char_ready) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/ready"),
+      payload.current_char_ready
+    );
+  }
   if (payload.current_char_add_language) {
     set(
       ref(
@@ -431,6 +437,12 @@ function updateModelFromFirebase(store) {
     ref(database, "/users/" + userId + "/current_char/stats/charisma"),
     (snapshot) => {
       store.dispatch("current/setCha", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/ready"),
+    (snapshot) => {
+      store.dispatch("current/setReady", snapshot.val());
     }
   );
   onChildAdded(
