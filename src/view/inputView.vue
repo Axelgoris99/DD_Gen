@@ -28,7 +28,7 @@
       @addTrait="addTrait"
       @clearTraits="clearTraits"
     />
-    <b-button to="changes">Generate</b-button>
+    <router-link to="changes"> <b-button>Generate</b-button></router-link>
   </div>
 </template>
 

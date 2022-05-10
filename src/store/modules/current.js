@@ -18,6 +18,8 @@ export default {
     alignment: null,
     languages: [],
     traits: [],
+    // These stats are the default value in DnD
+    stats: { str: 15, int: 12, dex: 13, con: 14, wis: 10, cha: 8 },
   },
   mutations: {
     SET_READY(state, ready) {
@@ -84,6 +86,24 @@ export default {
     CLEAR_TRAITS(state) {
       state.traits = [];
     },
+    SET_STR(state, value) {
+      state.stats.str = value;
+    },
+    SET_CON(state, value) {
+      state.stats.con = value;
+    },
+    SET_INT(state, value) {
+      state.stats.int = value;
+    },
+    SET_WIS(state, value) {
+      state.stats.wis = value;
+    },
+    SET_DEX(state, value) {
+      state.stats.dex = value;
+    },
+    SET_CHA(state, value) {
+      state.stats.cha = value;
+    },
   },
   getters: {
     ready(state) {
@@ -115,6 +135,9 @@ export default {
     },
     image(state) {
       return state.image;
+    },
+    stats(state) {
+      return state.stats;
     },
   },
 
@@ -155,60 +178,62 @@ export default {
       );
 
       // Chain on dependent promises.
-      Promise.all(basePromises)
-        .then(() => {
-          const language_slugs = rootGetters["input/languages"];
-          if (language_slugs.length > 0) {
-            // map slugs to promises and reduce to a promise chain.
-            return Promise.all(
-              language_slugs.map((slug) => dispatch("addLanguage", slug))
-            );
+      return (
+        Promise.all(basePromises)
+          .then(() => {
+            const language_slugs = rootGetters["input/languages"];
+            if (language_slugs.length > 0) {
+              // map slugs to promises and reduce to a promise chain.
+              return Promise.all(
+                language_slugs.map((slug) => dispatch("addLanguage", slug))
+              );
 
-            // Otherwise, we add languages dependent on the race.
-          } else {
-            const current_race = getters.race;
-            // map slugs to promises and reduce to a promise chain.
-            return Promise.all(
-              current_race.languages.map((lang) =>
-                dispatch("addLanguage", lang.index)
-              )
-            );
-          }
-        })
-        .then(() => {
-          const trait_slugs = rootGetters["input/traits"];
-          if (trait_slugs.length > 0) {
-            // map slugs to promises and reduce to a promise chain.
-            return Promise.all(
-              trait_slugs.map((slug) => dispatch("addTrait", slug))
-            );
-          } else {
-            // Otherwise, we generate we add traits dependent on the race.
-            const current_race = getters.race;
-            return Promise.all(
-              current_race.traits.map((t) => dispatch("addTrait", t.index))
-            );
-          }
-        })
-        .then(() => {
-          const name = rootGetters["input/name"];
-          if (name) {
-            dispatch("setName", name);
-          } else {
-            // Generate random name.
-            const current_race = getters.race;
-            const current_gender = getters.gender;
-            const gen = Names.generate({
-              race: camelCase(current_race.index),
-              gender: current_gender,
-            });
-            dispatch("setName", gen.name);
-          }
-        })
-        // Set the ready flag.
-        .finally(() => {
-          commit("SET_READY", true);
-        });
+              // Otherwise, we add languages dependent on the race.
+            } else {
+              const current_race = getters.race;
+              // map slugs to promises and reduce to a promise chain.
+              return Promise.all(
+                current_race.languages.map((lang) =>
+                  dispatch("addLanguage", lang.index)
+                )
+              );
+            }
+          })
+          .then(() => {
+            const trait_slugs = rootGetters["input/traits"];
+            if (trait_slugs.length > 0) {
+              // map slugs to promises and reduce to a promise chain.
+              return Promise.all(
+                trait_slugs.map((slug) => dispatch("addTrait", slug))
+              );
+            } else {
+              // Otherwise, we generate we add traits dependent on the race.
+              const current_race = getters.race;
+              return Promise.all(
+                current_race.traits.map((t) => dispatch("addTrait", t.index))
+              );
+            }
+          })
+          .then(() => {
+            const name = rootGetters["input/name"];
+            if (name) {
+              dispatch("setName", name);
+            } else {
+              // Generate random name.
+              const current_race = getters.race;
+              const current_gender = getters.gender;
+              const gen = Names.generate({
+                race: camelCase(current_race.index),
+                gender: current_gender,
+              });
+              dispatch("setName", gen.name);
+            }
+          })
+          // Set the ready flag.
+          .then(() => {
+            commit("SET_READY", true);
+          })
+      );
     },
 
     setName({ commit }, name) {
@@ -321,6 +346,32 @@ export default {
     resetImage({ commit }) {
       commit("SET_IMAGE", { current_char_image: null });
     },
+    setStr({ commit }, value) {
+      commit("SET_STR", value);
+    },
+    setCon({ commit }, value) {
+      commit("SET_CON", value);
+    },
+    setInt({ commit }, value) {
+      commit("SET_INT", value);
+    },
+    setCha({ commit }, value) {
+      commit("SET_CHA", value);
+    },
+    setDex({ commit }, value) {
+      commit("SET_DEX", value);
+    },
+    setWis({ commit }, value) {
+      commit("SET_WIS", value);
+    },
+    resetStats({ commit }) {
+      commit("SET_STR", 15);
+      commit("SET_CON", 14);
+      commit("SET_DEX", 13);
+      commit("SET_INT", 12);
+      commit("SET_WIS", 10);
+      commit("SET_CHA", 8);
+    },
     reset({ dispatch }) {
       dispatch("unsetName");
       dispatch("unsetBackground");
@@ -331,6 +382,7 @@ export default {
       dispatch("resetLanguages");
       dispatch("resetReady");
       dispatch("resetImage");
+      dispatch("resetStats");
     },
   },
 };

@@ -16,7 +16,9 @@
       :currentBackground="currentBackground"
       :currentLanguages="currentLanguages"
       :currentTraits="currentTraits"
-      :currentImage="currentImage"
+      :currentImage="imageUrl"
+      :stats="currentStats"
+      :dices="diceNums"
       @setName="setName"
       @setGender="setGender"
       @setRace="setRace"
@@ -28,12 +30,21 @@
       @removeTrait="removeTrait"
       @addTrait="addTrait"
       @changeImage="changeImage"
+      @changeStr="changeStr"
+      @changeCha="changeCha"
+      @changeWis="changeWis"
+      @changeCon="changeCon"
+      @changeDex="changeDex"
+      @changeInt="changeInt"
+      @setDices="setDices"
+      @changeStats="changeStats"
     />
   </div>
 </template>
 
 <script>
 import MyChangesView from "../view/changesView.vue";
+import { getImage } from "../api/images";
 import { mapGetters } from "vuex";
 
 export default {
@@ -41,10 +52,45 @@ export default {
   components: {
     MyChangesView,
   },
-  mounted() {
-    if (!this.currentReady) {
-      this.$store.dispatch("current/init");
-    }
+  data() {
+    return {
+      imageUrl: "",
+      diceNums: [1, 1, 1, 1],
+    };
+  },
+  created() {
+    // Add a watcher to race, gender, class and image to dynamically
+    // recalculate the image path.
+    this.$watch(
+      (vm) => [
+        vm.currentRace,
+        vm.currentGender,
+        vm.currentClass,
+        vm.currentImage,
+      ],
+      () => {
+        this.$store.dispatch("loader/pending");
+        getImage(
+          this.currentRace.index,
+          this.currentGender,
+          this.currentClass.index,
+          this.currentImage
+        )
+          .then((value) => {
+            this.imageUrl = value;
+            this.$store.dispatch("loader/done");
+          })
+          .catch((error) => {
+            this.$store.dispatch("loader/done");
+            this.$store.dispatch("loader/error");
+            return Promise.reject(error);
+          });
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
   },
   // map all the getters to computed properties.
   computed: {
@@ -66,6 +112,7 @@ export default {
       currentLanguages: "current/languages",
       currentTraits: "current/traits",
       currentBackground: "current/background",
+      currentStats: "current/stats",
     }),
   },
   methods: {
@@ -99,8 +146,48 @@ export default {
     removeTrait(t) {
       this.$store.dispatch("current/removeTrait", t);
     },
-    changeImage(i) {
-      this.$store.dispatch("current/setImage", Number(i));
+    changeImage() {
+      const newImage = (this.currentImage + 1) % 3;
+      this.$store.dispatch("current/setImage", newImage);
+    },
+    changeStr(s) {
+      this.$store.dispatch("current/setStr", Number(s));
+    },
+    changeInt(i) {
+      this.$store.dispatch("current/setInt", Number(i));
+    },
+    changeCon(c) {
+      this.$store.dispatch("current/setCon", Number(c));
+    },
+    changeCha(c) {
+      this.$store.dispatch("current/setCha", Number(c));
+    },
+    changeWis(w) {
+      this.$store.dispatch("current/setWis", Number(w));
+    },
+    changeDex(d) {
+      this.$store.dispatch("current/setDex", Number(d));
+    },
+    changeStats() {
+      this.changeStr(Math.floor(Math.random() * 18) + 1);
+      this.changeInt(Math.floor(Math.random() * 18) + 1);
+      this.changeDex(Math.floor(Math.random() * 18) + 1);
+      this.changeCon(Math.floor(Math.random() * 18) + 1);
+      this.changeCha(Math.floor(Math.random() * 18) + 1);
+      this.changeWis(Math.floor(Math.random() * 18) + 1);
+    },
+
+    setRandomDicesData() {
+      this.diceNums.forEach((element, index) => {
+        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
+        this.diceNums[index] = randomDiceNum;
+      });
+    },
+    setDices() {
+      this.diceNums.forEach((element, index) => {
+        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
+        this.diceNums[index] = randomDiceNum;
+      });
     },
   },
 };

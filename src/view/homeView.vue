@@ -19,7 +19,7 @@
       </li>
     </ul>
 
-    <b-button to="input">Start</b-button>
+    <b-button @click="navInput">Start</b-button>
   </div>
 </template>
 
@@ -28,6 +28,11 @@ export default {
   name: "MyHomeView",
   props: {},
   components: {},
+  methods: {
+    navInput() {
+      this.$router.push("input");
+    },
+  },
 };
 </script>
 <style scoped>

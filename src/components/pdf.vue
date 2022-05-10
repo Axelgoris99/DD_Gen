@@ -32,38 +32,46 @@
                 <label for="armor">Hit Die</label>
                 <div class="inpt number">{{ myClass.hit_die }}</div>
               </div>
-              <div>
-                <label for="speed">Speed</label>
-                <div class="inpt number"></div>
-              </div>
             </div>
             <hr />
             <div class="stats abilities">
               <div>
                 <label for="str">STR</label>
-                <div id="str" class="stat">8 (+0)</div>
+                <div id="str" class="stat">
+                  {{ myStats.str }} ({{ Math.floor((myStats.str - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="dex">DEX</label>
-                <div id="dex" class="stat">16 (+3)</div>
+                <div id="dex" class="stat">
+                  {{ myStats.dex }} ({{ Math.floor((myStats.dex - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="con">CON</label>
-                <div id="con" class="stat">10 (+0)</div>
+                <div id="con" class="stat">
+                  {{ myStats.con }} ({{ Math.floor((myStats.con - 10) / 2) }})
+                </div>
               </div>
             </div>
             <div class="stats abilities">
               <div>
                 <label for="int">INT</label>
-                <div id="int" class="stat">13 (+1)</div>
+                <div id="int" class="stat">
+                  {{ myStats.int }} ({{ Math.floor((myStats.int - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="wis">WIS</label>
-                <div id="wis" class="stat">12 (+1)</div>
+                <div id="wis" class="stat">
+                  {{ myStats.wis }} ({{ Math.floor((myStats.wis - 10) / 2) }})
+                </div>
               </div>
               <div>
                 <label for="cha">CHA</label>
-                <div id="cha" class="stat">16 (+3)</div>
+                <div id="cha" class="stat">
+                  {{ myStats.cha }} ({{ Math.floor((myStats.cha - 10) / 2) }})
+                </div>
               </div>
             </div>
             <hr />
@@ -77,8 +85,8 @@
         </div>
       </div>
     </article>
-    <img class="halfBg" :src="require(`@/assets/icon/${myPicture}`)" />
-    <div v-if="download" class="html2pdf__page-break"></div>
+    <img class="halfBg" :src="myImage" />
+    <div v-if="download" class="html2pdf__page-break marginBot"></div>
     <article class="half">
       <div v-if="download">
         <h1>{{ myName }}</h1>
@@ -142,7 +150,7 @@
           </div>
         </div>
       </div>
-      <img class="smallImg" :src="require(`@/assets/icon/${myPicture}`)" />
+      <img class="smallImg" :src="myImage" />
     </article>
   </section>
 </template>
@@ -162,11 +170,8 @@ export default {
     myLanguages: Array,
     myGender: String,
     myImageNumber: Number,
-  },
-  computed: {
-    myPicture() {
-      return `${this.myRace.index}/${this.myGender}/${this.myClass.index}/${this.myImageNumber}.png`;
-    },
+    myStats: Object,
+    myImage: String,
   },
 };
 </script>
@@ -218,10 +223,10 @@ body .container .half.bg {
 .halfBg {
   object-fit: cover;
   position: absolute;
-  top: 50px;
-  right: 20px;
-  height: 300px;
-  width: 160px;
+  top: 2%;
+  right: 1%;
+  height: 40%;
+  width: 20%;
 }
 body .container h1 {
   font-size: 18px;
@@ -565,11 +570,15 @@ body .container .content .signup-cont {
 .flex {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-right: 10px;
   margin-left: 10px;
 }
 .marginLR {
   margin-right: 10px;
   margin-left: 10px;
+}
+.marginBot {
+  margin-bottom: 10%;
 }
 </style>

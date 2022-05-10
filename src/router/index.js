@@ -52,11 +52,26 @@ const router = new VueRouter({
   routes,
 });
 
-// eslint-disable-next-line
 router.beforeEach((to, from, next) => {
   if (to.name == "output" && !store.getters["current/ready"]) {
     next({ name: "home" });
-  } else next();
+  } else if (to.name == "changes" && !store.getters["current/ready"]) {
+    if (!store.getters["options/races"][0]) {
+      store
+        .dispatch("options/init")
+        .then(() => store.dispatch("current/init"))
+        .then(() => next({ name: "changes" }))
+        .catch(() => router.push({ name: "home" }));
+    } else {
+      store;
+      store
+        .dispatch("current/init")
+        .then(() => next({ name: "changes" }))
+        .catch(() => router.push({ name: "home" }));
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
