@@ -17,15 +17,13 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item><router-link to="home">Home</router-link></b-nav-item>
-            <b-nav-item><router-link to="input">Input</router-link></b-nav-item>
-            <b-nav-item
-              ><router-link to="changes">Changes</router-link></b-nav-item
-            >
-            <b-nav-item :disabled="ready"
-              ><router-link to="output" :class="{ disabled: ready }"
-                >Output</router-link
-              ></b-nav-item
+            <router-link to="home" class="middle">Home</router-link>
+            <router-link to="input" class="middle">Input</router-link>
+
+            <router-link to="changes" class="middle">Changes</router-link>
+
+            <router-link to="output" class="middle" :class="{ disabled: ready }"
+              >Output</router-link
             >
           </b-navbar-nav>
 
@@ -92,8 +90,14 @@ export default {
 .header {
   margin-bottom: 10px;
 }
+.middle {
+  justify-self: center;
+  align-self: center;
+  margin: 10px;
+}
 .disabled {
   color: #697684;
   cursor: default;
+  pointer-events: none;
 }
 </style>
