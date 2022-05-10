@@ -202,6 +202,42 @@ function updateFirebaseFromModel(payload) {
       payload.current_char_image
     );
   }
+  if (payload.current_char_str) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/stats/strength"),
+      payload.current_char_str
+    );
+  }
+  if (payload.current_char_con) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/stats/constitution"),
+      payload.current_char_con
+    );
+  }
+  if (payload.current_char_dex) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/stats/dexterity"),
+      payload.current_char_dex
+    );
+  }
+  if (payload.current_char_wis) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/stats/wisdom"),
+      payload.current_char_wis
+    );
+  }
+  if (payload.current_char_int) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/stats/intelligence"),
+      payload.current_char_int
+    );
+  }
+  if (payload.current_char_cha) {
+    set(
+      ref(database, "/users/" + userId + "/current_char/stats/charisma"),
+      payload.current_char_cha
+    );
+  }
   if (payload.current_char_add_language) {
     set(
       ref(
@@ -359,6 +395,42 @@ function updateModelFromFirebase(store) {
     ref(database, "/users/" + userId + "/current_char/image"),
     (snapshot) => {
       store.dispatch("current/setImage", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/stats/strength"),
+    (snapshot) => {
+      store.dispatch("current/setStr", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/stats/constitution"),
+    (snapshot) => {
+      store.dispatch("current/setCon", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/stats/dexterity"),
+    (snapshot) => {
+      store.dispatch("current/setDex", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/stats/wisdom"),
+    (snapshot) => {
+      store.dispatch("current/setWis", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/stats/intelligence"),
+    (snapshot) => {
+      store.dispatch("current/setInt", snapshot.val());
+    }
+  );
+  onValue(
+    ref(database, "/users/" + userId + "/current_char/stats/charisma"),
+    (snapshot) => {
+      store.dispatch("current/setCha", snapshot.val());
     }
   );
   onChildAdded(

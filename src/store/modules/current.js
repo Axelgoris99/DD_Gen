@@ -86,23 +86,23 @@ export default {
     CLEAR_TRAITS(state) {
       state.traits = [];
     },
-    SET_STR(state, value) {
-      state.stats.str = value;
+    SET_STR(state, payload) {
+      state.stats.str = payload.current_char_str;
     },
-    SET_CON(state, value) {
-      state.stats.con = value;
+    SET_CON(state, payload) {
+      state.stats.con = payload.current_char_con;
     },
-    SET_INT(state, value) {
-      state.stats.int = value;
+    SET_INT(state, payload) {
+      state.stats.int = payload.current_char_int;
     },
-    SET_WIS(state, value) {
-      state.stats.wis = value;
+    SET_WIS(state, payload) {
+      state.stats.wis = payload.current_char_wis;
     },
-    SET_DEX(state, value) {
-      state.stats.dex = value;
+    SET_DEX(state, payload) {
+      state.stats.dex = payload.current_char_dex;
     },
-    SET_CHA(state, value) {
-      state.stats.cha = value;
+    SET_CHA(state, payload) {
+      state.stats.cha = payload.current_char_cha;
     },
   },
   getters: {
@@ -347,22 +347,22 @@ export default {
       commit("SET_IMAGE", { current_char_image: null });
     },
     setStr({ commit }, value) {
-      commit("SET_STR", value);
+      commit("SET_STR", { current_char_str: value });
     },
     setCon({ commit }, value) {
-      commit("SET_CON", value);
+      commit("SET_CON", { current_char_con: value });
     },
     setInt({ commit }, value) {
-      commit("SET_INT", value);
+      commit("SET_INT", { current_char_int: value });
     },
     setCha({ commit }, value) {
-      commit("SET_CHA", value);
+      commit("SET_CHA", { current_char_cha: value });
     },
     setDex({ commit }, value) {
-      commit("SET_DEX", value);
+      commit("SET_DEX", { current_char_dex: value });
     },
     setWis({ commit }, value) {
-      commit("SET_WIS", value);
+      commit("SET_WIS", { current_char_wis: value });
     },
     resetStats({ commit }) {
       commit("SET_STR", 15);
