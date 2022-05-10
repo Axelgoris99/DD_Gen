@@ -1,7 +1,8 @@
-import { initializeApp } from "firebase/app";
+//import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import "firebase/compat/storage";
 import {
   getDatabase,
   set,
@@ -12,8 +13,20 @@ import {
 } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import firebaseConfig from "../firebase.config";
-initializeApp(firebaseConfig);
+
+firebase.initializeApp(firebaseConfig);
+
 var database = getDatabase();
+
+const auth = firebase.auth();
+const storage = firebase.storage();
+
+const fetchImageUrl = (race, gender, _class, number) => {
+  return storage
+    .ref()
+    .child(`icon/${race}/${gender}/${_class}/${number}.png`)
+    .getDownloadURL();
+};
 
 function signUp(email, password, name) {
   firebase
@@ -366,6 +379,9 @@ function updateModelFromFirebase(store) {
   );
 }
 export {
+  auth,
+  storage,
+  fetchImageUrl,
   signUp,
   signIn,
   signOut,

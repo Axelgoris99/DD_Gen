@@ -1,4 +1,4 @@
-import { storage } from "../firebase";
+import { storage } from "../firebaseModel";
 
 export const getImage = (race, gender, _class, nr) => {
   return storage
