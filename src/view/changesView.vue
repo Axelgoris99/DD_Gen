@@ -131,8 +131,12 @@
         </b-form-group>
       </div>
     </div>
-    <b-button @click="navInput" class="space">Another time!</b-button>
-    <b-button @click="navOutput" class="space">Perfection!</b-button>
+    <router-link to="input" class="space">
+      <b-button>Another Time !</b-button></router-link
+    >
+    <router-link to="output" class="space">
+      <b-button>Perfection !</b-button></router-link
+    >
   </div>
 </template>
 
@@ -253,12 +257,6 @@ export default {
     setDices() {
       this.$emit("setDices");
       this.$emit("changeStats");
-    },
-    navInput() {
-      this.$router.push("input");
-    },
-    navOutput() {
-      this.$router.push("output");
     },
   },
 };

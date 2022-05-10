@@ -55,11 +55,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.name == "output" && !store.getters["current/ready"]) {
     next({ name: "home" });
-  } else if (to.name == "changes" && from.name == "input") {
+  } else if (to.name == "changes" && !store.getters["current/ready"]) {
     store
-      .dispatch("current/init")
+      .dispatch("options/init")
+      .then(() => store.dispatch("current/init"))
       .then(() => next({ name: "changes" }))
-      .catch(next({ name: "home" }));
+      .catch(() => router.push({ name: "home" }));
   } else {
     next();
   }

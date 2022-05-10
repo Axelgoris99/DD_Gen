@@ -22,7 +22,9 @@
 
     <b-button class="space" v-on:click="output">Export as PDF</b-button>
     <b-button class="space">Add to my Characters</b-button>
-    <b-button class="space" @click="navInput">New character</b-button>
+    <router-link to="input" class="space">
+      <b-button>New Character</b-button></router-link
+    >
   </div>
 </template>
 
@@ -51,9 +53,6 @@ export default {
   methods: {
     output() {
       this.$emit("output");
-    },
-    navInput() {
-      this.$router.push("input");
     },
   },
 };

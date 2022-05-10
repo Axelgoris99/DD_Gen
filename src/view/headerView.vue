@@ -2,42 +2,59 @@
   <div class="header">
     <div>
       <b-navbar toggleable="lg" type="light" variant="info">
-        <b-navbar-brand href="#" @click="navHome">
-          <b-img
-            right
-            src="../assets/dd_logo.png"
-            alt="Right image"
-            width="50px"
-            height="50px"
-          ></b-img
+        <b-navbar-brand href="#">
+          <router-link to="home">
+            <b-img
+              right
+              src="../assets/dd_logo.png"
+              alt="Right image"
+              width="50px"
+              height="50px"
+            ></b-img> </router-link
         ></b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item @click="navHome">Home</b-nav-item>
-            <b-nav-item @click="navInput">Input</b-nav-item>
-            <b-nav-item @click="navChanges">Changes</b-nav-item>
-            <b-nav-item @click="navOutput" :disabled="ready">Output</b-nav-item>
+            <b-nav-item><router-link to="home">Home</router-link></b-nav-item>
+            <b-nav-item><router-link to="input">Input</router-link></b-nav-item>
+            <b-nav-item
+              ><router-link to="changes">Changes</router-link></b-nav-item
+            >
+            <b-nav-item :disabled="ready"
+              ><router-link to="output" :class="{ disabled: ready }"
+                >Output</router-link
+              ></b-nav-item
+            >
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
             <b-button-group>
               <template v-if="connect">
-                <b-button variant="success" @click="navProfile">{{
-                  username
-                }}</b-button>
-                <b-button variant="danger" v-on:click="signOut"
-                  >Sign Out</b-button
+                <router-link to="profile"
+                  ><b-button variant="success">{{
+                    username
+                  }}</b-button></router-link
+                >
+                <router-link to="home"
+                  ><b-button variant="danger" v-on:click="signOut"
+                    >Sign Out</b-button
+                  ></router-link
                 >
               </template>
               <template v-else>
-                <b-button variant="primary" v-on:click="login">Login</b-button>
-                <b-button variant="success" v-on:click="signup"
-                  >Signup</b-button
+                <router-link to="login"
+                  ><b-button variant="primary" v-on:click="login"
+                    >Login</b-button
+                  ></router-link
                 >
+                <router-link to="register"
+                  ><b-button variant="success" v-on:click="signup"
+                    >Signup</b-button
+                  >
+                </router-link>
               </template>
             </b-button-group></b-navbar-nav
           >
@@ -60,30 +77,12 @@ export default {
   methods: {
     login() {
       this.$emit("login");
-      this.$router.push("login");
     },
     signup() {
       this.$emit("signup");
-      this.$router.push("register");
     },
     signOut() {
       this.$emit("signOut");
-      this.$router.push("home");
-    },
-    navProfile() {
-      this.$router.push("profile");
-    },
-    navHome() {
-      this.$router.push("home");
-    },
-    navInput() {
-      this.$router.push("input");
-    },
-    navChanges() {
-      this.$router.push("changes");
-    },
-    navOutput() {
-      this.$router.push("output");
     },
   },
 };
@@ -92,5 +91,9 @@ export default {
 <style scoped>
 .header {
   margin-bottom: 10px;
+}
+.disabled {
+  color: #697684;
+  cursor: default;
 }
 </style>

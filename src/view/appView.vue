@@ -45,16 +45,25 @@ export default {
     margin: 1% 1%;
   }
 }
+.router-link {
+  color: #2c3e50;
+}
 nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
 
+    &:hover {
+      color: #434b52;
+      font-size: large;
+      text-decoration: none;
+    }
     &.router-link-exact-active {
       font-weight: bold;
       font-size: x-large;
+      color: #2c3e50;
+      cursor: default;
     }
   }
 }

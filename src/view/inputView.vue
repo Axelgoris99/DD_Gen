@@ -28,7 +28,7 @@
       @addTrait="addTrait"
       @clearTraits="clearTraits"
     />
-    <b-button @click="navChanges">Generate</b-button>
+    <router-link to="changes"> <b-button>Generate</b-button></router-link>
   </div>
 </template>
 
@@ -101,9 +101,6 @@ export default {
     },
     clearTraits() {
       this.$emit("clearTraits");
-    },
-    navChanges() {
-      this.$router.push("changes");
     },
   },
 };
