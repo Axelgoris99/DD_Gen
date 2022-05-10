@@ -1,6 +1,9 @@
 <template>
   <div>
-    <MyProfileView :characters="characters" />
+    <MyProfileView
+      :characters="characters"
+      @deleteCharacter="deleteCharacter"
+    />
   </div>
 </template>
 
@@ -16,6 +19,11 @@ export default {
   },
   computed: {
     ...mapGetters(["characters"]),
+  },
+  methods: {
+    deleteCharacter(char) {
+      this.$store.dispatch("characters/removeChar", char);
+    },
   },
 };
 </script>
