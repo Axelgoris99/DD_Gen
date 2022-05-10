@@ -570,6 +570,7 @@ body .container .content .signup-cont {
 .flex {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-right: 10px;
   margin-left: 10px;
 }
