@@ -63,7 +63,6 @@ router.beforeEach((to, from, next) => {
         .then(() => next({ name: "changes" }))
         .catch(() => router.push({ name: "home" }));
     } else {
-      store;
       store
         .dispatch("current/init")
         .then(() => next({ name: "changes" }))
