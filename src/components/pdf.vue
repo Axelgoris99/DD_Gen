@@ -223,10 +223,10 @@ body .container .half.bg {
 .halfBg {
   object-fit: cover;
   position: absolute;
-  top: 50px;
-  right: 20px;
-  height: 300px;
-  width: 160px;
+  top: 2%;
+  right: 1%;
+  height: 40%;
+  width: 20%;
 }
 body .container h1 {
   font-size: 18px;
