@@ -176,13 +176,6 @@ export default {
       this.changeCha(Math.floor(Math.random() * 18) + 1);
       this.changeWis(Math.floor(Math.random() * 18) + 1);
     },
-
-    setRandomDicesData() {
-      this.diceNums.forEach((element, index) => {
-        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
-        this.diceNums[index] = randomDiceNum;
-      });
-    },
     setDices() {
       this.diceNums.forEach((element, index) => {
         var randomDiceNum = Math.floor(Math.random() * 6) + 1;

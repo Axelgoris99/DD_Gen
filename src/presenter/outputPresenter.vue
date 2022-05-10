@@ -44,6 +44,7 @@
       >
         <section slot="pdf-content">
           <pdfVue
+            id="pdf2Print"
             v-if="ready"
             :download="true"
             :myName="name"
@@ -69,6 +70,7 @@ import VueHtml2pdf from "vue-html2pdf";
 import pdfVue from "../components/pdf.vue";
 import { getImage } from "../api/images";
 import { mapGetters } from "vuex";
+import html2pdf from "html2pdf.js/dist/require/html2pdf.cjs";
 export default {
   name: "MyOutput",
   components: {
@@ -98,7 +100,23 @@ export default {
   },
   methods: {
     generateReport() {
-      this.$refs.html2Pdf.generatePdf();
+      // this.$refs.html2Pdf.generatePdf();
+      var element = document.getElementById("pdf2Print");
+      // html2pdf(element);
+      var opt = {
+        margin: 0,
+        filename: this.name,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          letterRendering: true,
+          useCORS: true,
+        },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      };
+
+      // New Promise-based usage:
+      html2pdf().set(opt).from(element).save();
     },
   },
   mounted() {

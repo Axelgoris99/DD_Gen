@@ -17,6 +17,7 @@
     "es6-promise": "^4.2.8",
     "fantasy-content-generator": "^4.9.1",
     "firebase": "^9.6.10",
+    "html2pdf.js": "^0.9.3",
     "lodash.camelcase": "^4.3.0",
     "lodash.sample": "^4.2.1",
     "mutationobserver-shim": "^0.3.7",
