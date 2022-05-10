@@ -13,10 +13,9 @@ import {
 import VueCompositionAPI from "@vue/composition-api";
 Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false;
-
+var unsubscribe;
 auth.onAuthStateChanged((user) => {
   store.dispatch("auth/fetchUser", user);
-  var unsubscribe;
   if (user) {
     updateModelFromFirebase(store);
     unsubscribe = store.subscribe((mutation) => {
@@ -24,8 +23,9 @@ auth.onAuthStateChanged((user) => {
         updateFirebaseFromModel(mutation.payload);
       }
     });
-  } else {
+  } else if (unsubscribe) {
     unsubscribe();
+    unsubscribe = null;
   }
 });
 
