@@ -86,7 +86,7 @@
       </div>
     </article>
     <img class="halfBg" :src="myImage" />
-    <div v-if="download" class="html2pdf__page-break"></div>
+    <div v-if="download" class="html2pdf__page-break marginBot"></div>
     <article class="half">
       <div v-if="download">
         <h1>{{ myName }}</h1>
@@ -576,5 +576,8 @@ body .container .content .signup-cont {
 .marginLR {
   margin-right: 10px;
   margin-left: 10px;
+}
+.marginBot {
+  margin-bottom: 10%;
 }
 </style>
