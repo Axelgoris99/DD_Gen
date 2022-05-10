@@ -104,8 +104,8 @@ export default {
     saveCharacter() {
       this.$store.dispatch("characters/addChar", {
         characterToAdd: {
-          name: this.name1,
-          class: this.class1,
+          name: this.name,
+          class: this._class,
           gender: this.gender,
           race: this.race,
           alignment: this.alignment,
