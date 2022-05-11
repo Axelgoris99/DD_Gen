@@ -18,7 +18,6 @@
       :currentTraits="currentTraits"
       :currentImage="imageUrl"
       :stats="currentStats"
-      :dices="diceNums"
       @setName="setName"
       @setGender="setGender"
       @setRace="setRace"
@@ -36,7 +35,6 @@
       @changeCon="changeCon"
       @changeDex="changeDex"
       @changeInt="changeInt"
-      @setDices="setDices"
       @changeStats="changeStats"
     />
   </div>
@@ -55,7 +53,6 @@ export default {
   data() {
     return {
       imageUrl: "",
-      diceNums: [1, 1, 1, 1],
     };
   },
   created() {
@@ -175,19 +172,6 @@ export default {
       this.changeCon(Math.floor(Math.random() * 18) + 1);
       this.changeCha(Math.floor(Math.random() * 18) + 1);
       this.changeWis(Math.floor(Math.random() * 18) + 1);
-    },
-
-    setRandomDicesData() {
-      this.diceNums.forEach((element, index) => {
-        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
-        this.diceNums[index] = randomDiceNum;
-      });
-    },
-    setDices() {
-      this.diceNums.forEach((element, index) => {
-        var randomDiceNum = Math.floor(Math.random() * 6) + 1;
-        this.diceNums[index] = randomDiceNum;
-      });
     },
   },
 };

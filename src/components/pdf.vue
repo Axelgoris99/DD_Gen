@@ -2,7 +2,9 @@
   <section
     class="container"
     :style="[
-      download ? { 'overflow-y': 'visible' } : { 'overflow-y': 'scroll' },
+      download
+        ? { 'overflow-y': 'visible' }
+        : { 'overflow-y': 'scroll', height: '900px' },
     ]"
   >
     <article class="half">
@@ -90,10 +92,6 @@
     <article class="half">
       <div v-if="download">
         <h1>{{ myName }}</h1>
-        <h2>{{ myClass.name }}</h2>
-        <p class="detail" style="text-align: center">
-          {{ myRace.name }} - {{ myAlignment.name }}
-        </p>
       </div>
       <div class="profs">
         <h3>Traits</h3>
@@ -195,7 +193,6 @@ body .container {
   position: relative;
   width: 95%;
   max-width: 740px;
-  height: 900px;
   margin: 30px auto;
   background-color: #ffffff;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
