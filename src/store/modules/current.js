@@ -174,7 +174,8 @@ export default {
           "setRace",
           rootGetters["input/race"] ||
             sample(rootGetters["options/races"]).value
-        )
+        ),
+        dispatch("resetStats")
       );
 
       // Chain on dependent promises.
@@ -368,12 +369,12 @@ export default {
       commit("SET_WIS", { current_char_wis: value });
     },
     resetStats({ commit }) {
-      commit("SET_STR", 15);
-      commit("SET_CON", 14);
-      commit("SET_DEX", 13);
-      commit("SET_INT", 12);
-      commit("SET_WIS", 10);
-      commit("SET_CHA", 8);
+      commit("SET_STR", { current_char_str: 15 });
+      commit("SET_CON", { current_char_con: 14 });
+      commit("SET_DEX", { current_char_dex: 13 });
+      commit("SET_INT", { current_char_int: 12 });
+      commit("SET_WIS", { current_char_wis: 10 });
+      commit("SET_CHA", { current_char_cha: 8 });
     },
     reset({ dispatch }) {
       dispatch("unsetName");
