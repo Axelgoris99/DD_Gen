@@ -44,7 +44,7 @@
 import MyChangesView from "../view/changesView.vue";
 import { getImage } from "../api/images";
 import { mapGetters } from "vuex";
-
+import store from "../store/index.js";
 export default {
   name: "MyChanges",
   components: {
@@ -54,6 +54,24 @@ export default {
     return {
       imageUrl: "",
     };
+  },
+  mounted() {
+    if (!store.getters["options/races"][0] && !store.getters["current/ready"]) {
+      store
+        .dispatch("options/init")
+        .then(() => store.dispatch("current/init"))
+        .catch(() => console.log("err"));
+    } else if (
+      !store.getters["options/races"][0] &&
+      store.getters["current/ready"]
+    ) {
+      store.dispatch("options/init").catch(() => console.log("err"));
+    } else if (
+      store.getters["options/races"][0] &&
+      !store.getters["current/ready"]
+    ) {
+      store.dispatch("current/init").catch(() => console.log("err"));
+    }
   },
   created() {
     // Add a watcher to race, gender, class and image to dynamically
