@@ -19,6 +19,7 @@
                   placeholder="Enter email"
                   required
                   v-on:input="onMailInput"
+                  autocomplete="email"
                 ></b-form-input>
               </b-form-group>
 
@@ -33,6 +34,7 @@
                   placeholder="Enter password"
                   required
                   v-on:input="onPasswordInput"
+                  autocomplete="current-password"
                 ></b-form-input>
               </b-form-group>
 

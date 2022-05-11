@@ -13,10 +13,7 @@
       <li>
         Generate your cool character and tweak it a bit on the Changes page
       </li>
-      <li>
-        Add it to your character or export it as a pdf at the end! Be careful,
-        the pdf generation is still a bit wonky.
-      </li>
+      <li>Add it to your character or export it as a pdf at the end!</li>
     </ul>
 
     <b-button @click="navInput">Start</b-button>

@@ -19,6 +19,7 @@
                   placeholder="Reminder : azerty is not a valid name."
                   required
                   v-on:input="onNameInput"
+                  autocomplete="username"
                 ></b-form-input>
               </b-form-group>
 
@@ -34,6 +35,7 @@
                   placeholder="Enter email"
                   required
                   v-on:input="onMailInput"
+                  autocomplete="username"
                 ></b-form-input>
               </b-form-group>
 
@@ -48,6 +50,7 @@
                   placeholder="Enter password"
                   required
                   v-on:input="onPasswordInput"
+                  autocomplete="new-password"
                 ></b-form-input>
               </b-form-group>
 

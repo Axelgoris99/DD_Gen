@@ -32,9 +32,9 @@
             <b-button-group>
               <template v-if="connect">
                 <router-link to="profile"
-                  ><b-button variant="success">{{
-                    username
-                  }}</b-button></router-link
+                  ><b-button variant="success"
+                    >My Profile</b-button
+                  ></router-link
                 >
                 <router-link to="home"
                   ><b-button variant="danger" v-on:click="signOut"
