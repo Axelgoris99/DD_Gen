@@ -103,18 +103,16 @@ export default {
     },
     saveCharacter() {
       this.$store.dispatch("characters/addChar", {
-        characterToAdd: {
-          name: this.name,
-          class: this._class,
-          gender: this.gender,
-          race: this.race,
-          alignment: this.alignment,
-          background: this.background,
-          languages: this.languages,
-          traits: this.traits,
-          image: this.image,
-          ready: this.ready,
-        },
+        name: this.name,
+        class: this._class,
+        gender: this.gender,
+        race: this.race,
+        alignment: this.alignment,
+        background: this.background,
+        languages: this.languages,
+        traits: this.traits,
+        image: this.image,
+        ready: this.ready,
       });
       this.$router.replace({ name: "profile" });
     },

@@ -299,11 +299,11 @@ function updateModelFromFirebase(store) {
 
   // charcaters
   onChildAdded(ref(database, "/users/" + userId + "/characters"), (snapshot) =>
-    store.commit("characters/ADD_CHARACTER", snapshot.val())
+    store.dispatch("characters/addChar", snapshot.val())
   );
   onChildRemoved(
     ref(database, "/users/" + userId + "/characters"),
-    (snapshot) => store.commit("characters/REMOVE_CHARACTER", snapshot.val())
+    (snapshot) => store.dispatch("characters/removeChar", snapshot.val())
   );
 
   //input
