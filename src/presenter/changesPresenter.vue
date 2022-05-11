@@ -55,39 +55,50 @@ export default {
       imageUrl: "",
     };
   },
-  created() {
-    // Add a watcher to race, gender, class and image to dynamically
-    // recalculate the image path.
-    this.$watch(
-      (vm) => [
-        vm.currentRace,
-        vm.currentGender,
-        vm.currentClass,
-        vm.currentImage,
-      ],
-      () => {
-        this.$store.dispatch("loader/pending");
-        getImage(
-          this.currentRace.index,
-          this.currentGender,
-          this.currentClass.index,
-          this.currentImage
-        )
-          .then((value) => {
-            this.imageUrl = value;
-            this.$store.dispatch("loader/done");
-          })
-          .catch((error) => {
-            this.$store.dispatch("loader/done");
-            this.$store.dispatch("loader/error");
-            return Promise.reject(error);
-          });
-      },
-      {
-        immediate: true,
-        deep: true,
-      }
-    );
+  mounted() {
+    Promise.resolve()
+      .then(() => {
+        // init options if we do not have them.
+        if (!this.optionsReady) return this.$store.dispatch("options/init");
+      })
+      .then(() => {
+        // generate character if we do not already have one.
+        if (!this.currentReady) return this.$store.dispatch("current/init");
+      })
+      // Create watcher to dynamically calculate the image url.
+      .then(() => {
+        this.$watch(
+          (vm) => [
+            vm.currentRace,
+            vm.currentGender,
+            vm.currentClass,
+            vm.currentImage,
+          ],
+          () => {
+            this.$store.dispatch("loader/pending");
+            getImage(
+              this.currentRace.index,
+              this.currentGender,
+              this.currentClass.index,
+              this.currentImage
+            )
+              .then((value) => {
+                this.imageUrl = value;
+                this.$store.dispatch("loader/done");
+              })
+              .catch((error) => {
+                this.$store.dispatch("loader/done");
+                this.$store.dispatch("loader/error");
+                return Promise.reject(error);
+              });
+          },
+          // Run at once.
+          {
+            immediate: true,
+            deep: true,
+          }
+        );
+      });
   },
   // map all the getters to computed properties.
   computed: {
@@ -98,6 +109,7 @@ export default {
       languages: "options/languages",
       traits: "options/traits",
       abilities: "options/abilities",
+      optionsReady: "options/ready",
       backgrounds: "options/backgrounds",
       currentReady: "current/ready",
       currentImage: "current/image",
