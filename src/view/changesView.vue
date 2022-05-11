@@ -62,17 +62,38 @@
     <h2>Quantitative</h2>
     <div>
       <p>
-        Here you can roll the dice and then set it to the attributes of your
-        choice. At the beginning, the "default" points repartition is suggested
+        Here you can roll the dice and set the attributes randomly or tweak
+        them. At the beginning, the "default" points repartition is suggested
         (15-14-13-12-10-8)
       </p>
-      <div class="row-fluid center">
-        <div v-for="dice in dices" :key="dice.key">
-          <div class="dice" :class="'dice-' + dice"></div>
-        </div>
-      </div>
       <div class="center">
-        <b-button @click="setDices">Roll the dices!</b-button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-dice-2-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M0 3a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3zm5.5 1a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm6.5 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </svg>
+        <b-button @click="changeStats">
+          <div class="space">Roll the dices!</div>
+        </b-button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-dice-6-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3zm1 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm1.5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM12 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM4 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+          />
+        </svg>
       </div>
       <div class="row-fluid center">
         <b-form-group id="str" label="STR" label-for="str">
@@ -170,7 +191,6 @@ export default {
     currentTraits: Array,
     currentImage: String,
     stats: Object,
-    dices: Array,
   },
   emits: [
     "setName",
@@ -190,7 +210,6 @@ export default {
     "changeDex",
     "changeWis",
     "changeCha",
-    "setDices",
     "changeStats",
   ],
 
@@ -254,8 +273,7 @@ export default {
     changeCha(c) {
       this.$emit("changeCha", c);
     },
-    setDices() {
-      this.$emit("setDices");
+    changeStats() {
       this.$emit("changeStats");
     },
   },
