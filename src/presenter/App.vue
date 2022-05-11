@@ -53,7 +53,6 @@ export default {
       }
     );
     httpClient.defaults.showLoader = true;
-    this.$store.dispatch("options/init");
   },
 };
 </script>
