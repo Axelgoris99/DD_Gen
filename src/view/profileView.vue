@@ -1,14 +1,20 @@
 <template>
-  <div class="back">
+  <div>
     <h1>My Profile</h1>
     <h2>My Characters</h2>
-    <span v-for="character in characters" :key="character.name">
-      <img :src="character.imagePath" width="100" height="150" />
-      <div>{{ character.name }}</div>
-      <button class="space" v-on:click="deleteCharacter(character)">
-        Delete character
-      </button>
-    </span>
+    <div class="flex">
+      <span
+        v-for="character in characters"
+        :key="character.name"
+        class="center space"
+      >
+        <img :src="character.imagePath" width="100" height="150" />
+        <div>{{ character.name }}</div>
+        <b-button class="space" v-on:click="deleteCharacter(character)">
+          Delete character
+        </b-button>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -27,7 +33,21 @@ export default {
 };
 </script>
 <style scoped>
-.back {
-  background-color: beige;
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.center {
+  align-content: center;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  text-align: center;
+}
+.space {
+  margin: 5px;
 }
 </style>
