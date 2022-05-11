@@ -39,7 +39,7 @@ function signUp(email, password, name) {
     })
     .then(() => {})
     .catch((err) => {
-      this.error = err.message;
+      return err.message;
     });
 }
 
@@ -49,7 +49,7 @@ function signIn(email, password) {
     .signInWithEmailAndPassword(email, password)
     .then(() => {})
     .catch((err) => {
-      this.error = err.message;
+      return err.message;
     });
 }
 
@@ -296,7 +296,6 @@ function updateFirebaseFromModel(payload) {
 
 function updateModelFromFirebase(store) {
   let userId = getAuth().currentUser.uid;
-
   // charcaters
   onChildAdded(ref(database, "/users/" + userId + "/characters"), (snapshot) =>
     store.dispatch("characters/addChar", snapshot.val())
@@ -310,37 +309,49 @@ function updateModelFromFirebase(store) {
   onValue(
     ref(database, "/users/" + userId + "/input_char/name"),
     (snapshot) => {
-      store.dispatch("input/setName", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("input/setName", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/input_char/gender"),
     (snapshot) => {
-      store.dispatch("input/setGender", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("input/setGender", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/input_char/race"),
     (snapshot) => {
-      store.dispatch("input/setRace", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("input/setRace", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/input_char/class"),
     (snapshot) => {
-      store.dispatch("input/setClass", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("input/setClass", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/input_char/background"),
     (snapshot) => {
-      store.dispatch("input/setBackground", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("input/setBackground", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/input_char/alignment"),
     (snapshot) => {
-      store.dispatch("input/setAlignment", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("input/setAlignment", snapshot.val());
+      }
     }
   );
   onChildAdded(
@@ -364,85 +375,113 @@ function updateModelFromFirebase(store) {
   onValue(
     ref(database, "/users/" + userId + "/current_char/name"),
     (snapshot) => {
-      store.dispatch("current/setName", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setName", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/gender"),
     (snapshot) => {
-      store.dispatch("current/setGender", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setGender", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/race"),
     (snapshot) => {
-      store.dispatch("current/setRace", snapshot.val().index);
+      if (snapshot.val()) {
+        store.dispatch("current/setRace", snapshot.val().index);
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/class"),
     (snapshot) => {
-      store.dispatch("current/setClass", snapshot.val().index);
+      if (snapshot.val()) {
+        store.dispatch("current/setClass", snapshot.val().index);
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/background"),
     (snapshot) => {
-      store.dispatch("current/setBackground", snapshot.val().slug);
+      if (snapshot.val()) {
+        store.dispatch("current/setBackground", snapshot.val().slug);
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/alignment"),
     (snapshot) => {
-      store.dispatch("current/setAlignment", snapshot.val().index);
+      if (snapshot.val()) {
+        store.dispatch("current/setAlignment", snapshot.val().index);
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/image"),
     (snapshot) => {
-      store.dispatch("current/setImage", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setImage", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/stats/strength"),
     (snapshot) => {
-      store.dispatch("current/setStr", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setStr", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/stats/constitution"),
     (snapshot) => {
-      store.dispatch("current/setCon", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setCon", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/stats/dexterity"),
     (snapshot) => {
-      store.dispatch("current/setDex", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setDex", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/stats/wisdom"),
     (snapshot) => {
-      store.dispatch("current/setWis", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setWis", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/stats/intelligence"),
     (snapshot) => {
-      store.dispatch("current/setInt", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setInt", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/stats/charisma"),
     (snapshot) => {
-      store.dispatch("current/setCha", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setCha", snapshot.val());
+      }
     }
   );
   onValue(
     ref(database, "/users/" + userId + "/current_char/ready"),
     (snapshot) => {
-      store.dispatch("current/setReady", snapshot.val());
+      if (snapshot.val()) {
+        store.dispatch("current/setReady", snapshot.val());
+      }
     }
   );
   onChildAdded(

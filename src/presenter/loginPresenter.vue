@@ -34,8 +34,8 @@ export default {
       this.form.email = event;
     },
     submit() {
-      signIn(this.form.email, this.form.password);
-      this.$router.replace({ name: "home" });
+      this.error = signIn(this.form.email, this.form.password);
+      this.$router.push({ name: "home" });
     },
   },
 };
