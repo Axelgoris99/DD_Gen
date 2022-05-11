@@ -29,28 +29,18 @@ const fetchImageUrl = (race, gender, _class, number) => {
 };
 
 function signUp(email, password, name) {
-  firebase
+  return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((data) => {
       data.user.updateProfile({
         displayName: name,
       });
-    })
-    .then(() => {})
-    .catch((err) => {
-      return err.message;
     });
 }
 
 function signIn(email, password) {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {})
-    .catch((err) => {
-      return err.message;
-    });
+  return firebase.auth().signInWithEmailAndPassword(email, password);
 }
 
 function signOut() {

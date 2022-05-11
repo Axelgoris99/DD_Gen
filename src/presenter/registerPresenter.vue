@@ -40,8 +40,13 @@ export default {
       this.form.name = event;
     },
     submit() {
-      signUp(this.form.email, this.form.password, this.form.name, this.error);
-      this.$router.push("home");
+      signUp(this.form.email, this.form.password, this.form.name)
+        .then(() => {
+          this.$router.push("home");
+        })
+        .catch((err) => {
+          this.error = err.message;
+        });
     },
   },
 };
