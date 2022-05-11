@@ -3,7 +3,6 @@
     <MyProfileView
       :characters="characters"
       @deleteCharacter="deleteCharacter"
-      @image="image"
     />
   </div>
 </template>
@@ -11,7 +10,6 @@
 <script>
 import MyProfileView from "../view/profileView.vue";
 import { createNamespacedHelpers } from "vuex";
-import { getImage } from "../api/images";
 const { mapGetters } = createNamespacedHelpers("characters");
 
 export default {
@@ -25,14 +23,6 @@ export default {
   methods: {
     deleteCharacter(char) {
       this.$store.dispatch("characters/removeChar", char);
-    },
-    image(char) {
-      return getImage(
-        char.race.index,
-        char.gender,
-        char.class.index,
-        char.image
-      );
     },
   },
 };

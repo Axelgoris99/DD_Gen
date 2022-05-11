@@ -112,6 +112,7 @@ export default {
         languages: this.languages,
         traits: this.traits,
         image: this.image,
+        imagePath: this.imageUrl,
         ready: this.ready,
       });
       this.$router.replace({ name: "profile" });
