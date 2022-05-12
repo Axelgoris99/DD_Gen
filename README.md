@@ -2,25 +2,6 @@
 ## Description
 Welcome on this Dungeon & Dragon Character Generator. The goal of this is to allow you to quickly create different characters, making you able to adapt to whatever your crazy players might do. Or if you're a lazy player who does not want to bother with creating a complicated character, this one is for you. 
 
-## What has been done 
-We have :
-- Created the basic layout of the website
-- Implemented the router
-- Created a VueX Store for the state management (model)
-- Implemented the PDF output
-- Implemented basic login and register features
-- Got infos from the APIs, populated the dropdown with them on the input page
-- Website is partly reactive
-
-## What we need to do
-We still need to :
-- Store the selected datas inside the model
-- Retrieve infos from the API when someone is done with its selection and autofill all of the remaining fields
-- Retrieve images for the character (using bing search image API)(this has been started and it works fine but it needs to be reformated into clean code)
-- Store a complete character inside firebase for each user to be able to retrieve its characters
-- Finish the PDF template so that it uses the infos from the model
-- Fix the reactiveness of some pages
-
 ## Project file structure 
 So far:
 - The App and main files are here for the initialization, the modules and for the global layout
