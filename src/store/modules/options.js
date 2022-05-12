@@ -5,6 +5,7 @@ import open5 from "../../api/open5e";
 export default {
   namespaced: true,
   state: {
+    ready: false,
     races: [],
     classes: [],
     languages: [],
@@ -15,6 +16,9 @@ export default {
   },
 
   mutations: {
+    SET_READY(state) {
+      state.ready = true;
+    },
     SET_RACES(state, races) {
       state.races = races;
     },
@@ -38,6 +42,9 @@ export default {
     },
   },
   getters: {
+    ready(state) {
+      return state.ready;
+    },
     races(state) {
       return state.races;
     },
@@ -134,6 +141,9 @@ export default {
             );
           }
         )
+        .finally(() => {
+          commit("SET_READY");
+        })
         .catch(() => console.log("error resolving promises"));
     },
   },

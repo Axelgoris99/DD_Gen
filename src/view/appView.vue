@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <HttpLoader :isVisible="loading" />
     <Header />
-    <Error v-if="error" />
+    <HttpLoader v-if="loading" :isVisible="loading" />
+    <Error v-else-if="error" />
     <router-view v-else />
     <Footer />
   </div>

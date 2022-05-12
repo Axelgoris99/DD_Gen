@@ -142,6 +142,36 @@ export default {
   },
 
   actions: {
+    setModel({ commit }, model) {
+      commit("SET_NAME", { current_char_name: model.name });
+      commit("SET_GENDER", { current_char_name: model.gender });
+      commit("SET_IMAGE", { current_char_image: model.image });
+      commit("SET_RACE", { current_char_race: model.race });
+      commit("SET_CLASS", { current_char_class: model.class });
+      commit("SET_ALIGNMENT", { current_char_alignment: model.alignment });
+
+      if (model.languages) {
+        Object.values(model.languages).forEach((lang) => {
+          commit("ADD_LANGUAGE", { current_char_add_language: lang });
+        });
+      }
+
+      if (model.traits) {
+        Object.values(model.traits).forEach((trait) => {
+          commit("ADD_TRAIT", { current_char_add_trait: trait });
+        });
+      }
+
+      if (model.stats) {
+        commit("SET_CHA", { current_char_cha: model.charisma });
+        commit("SET_CON", { current_char_con: model.constitution });
+        commit("SET_DEX", { current_char_dex: model.dexterity });
+        commit("SET_INT", { current_char_int: model.intelligence });
+        commit("SET_STR", { current_char_str: model.strength });
+        commit("SET_WIS", { current_char_wis: model.wisdom });
+      }
+      commit("SET_READY", { current_char_ready: model.ready });
+    },
     init({ dispatch, getters, rootGetters }) {
       // Set synchronous properties first.
       dispatch(

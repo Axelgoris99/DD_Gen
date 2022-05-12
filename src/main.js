@@ -9,14 +9,17 @@ import {
   auth,
   updateFirebaseFromModel,
   updateModelFromFirebase,
+  intialModelFromFirebase,
 } from "./firebaseModel";
 import VueCompositionAPI from "@vue/composition-api";
 Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false;
+
 var unsubscribe;
 auth.onAuthStateChanged((user) => {
   store.dispatch("auth/fetchUser", user);
   if (user) {
+    intialModelFromFirebase(store);
     updateModelFromFirebase(store);
     unsubscribe = store.subscribe((mutation) => {
       if (mutation.payload) {

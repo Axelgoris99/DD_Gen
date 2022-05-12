@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
+import "firebase/compat/database";
 import {
   getDatabase,
   set,
@@ -49,6 +50,7 @@ function signOut() {
 
 function updateFirebaseFromModel(payload) {
   let userId = getAuth().currentUser.uid;
+
   // Profile characters
   if (payload.characterToAdd) {
     set(
@@ -284,8 +286,26 @@ function updateFirebaseFromModel(payload) {
   }
 }
 
+async function intialModelFromFirebase(store) {
+  const userId = getAuth().currentUser.uid;
+  store.dispatch("loader/pending");
+  try {
+    const snapshot = await firebase
+      .database()
+      .ref(`users/${userId}/current_char`)
+      .once("value");
+    const model = snapshot.val();
+    if (model) store.dispatch("current/setModel", model);
+    store.dispatch("loader/done");
+  } catch {
+    store.dispatch("loader/done");
+    store.dispatch("loader/error");
+  }
+}
+
 function updateModelFromFirebase(store) {
   let userId = getAuth().currentUser.uid;
+
   // charcaters
   onChildAdded(ref(database, "/users/" + userId + "/characters"), (snapshot) =>
     store.dispatch("characters/addChar", snapshot.val())
@@ -378,11 +398,12 @@ function updateModelFromFirebase(store) {
       }
     }
   );
+  //NOTE: we commit mutations for the following as the actions are async calls to the APIs
   onValue(
     ref(database, "/users/" + userId + "/current_char/race"),
     (snapshot) => {
       if (snapshot.val()) {
-        store.dispatch("current/setRace", snapshot.val().index);
+        store.commit("current/SET_RACE", { current_char_race: snapshot.val() });
       }
     }
   );
@@ -390,7 +411,9 @@ function updateModelFromFirebase(store) {
     ref(database, "/users/" + userId + "/current_char/class"),
     (snapshot) => {
       if (snapshot.val()) {
-        store.dispatch("current/setClass", snapshot.val().index);
+        store.commit("current/SET_CLASS", {
+          current_char_class: snapshot.val(),
+        });
       }
     }
   );
@@ -398,7 +421,9 @@ function updateModelFromFirebase(store) {
     ref(database, "/users/" + userId + "/current_char/background"),
     (snapshot) => {
       if (snapshot.val()) {
-        store.dispatch("current/setBackground", snapshot.val().slug);
+        store.commit("current/SET_BACKGROUND", {
+          current_char_background: snapshot.val(),
+        });
       }
     }
   );
@@ -406,10 +431,13 @@ function updateModelFromFirebase(store) {
     ref(database, "/users/" + userId + "/current_char/alignment"),
     (snapshot) => {
       if (snapshot.val()) {
-        store.dispatch("current/setAlignment", snapshot.val().index);
+        store.commit("current/SET_ALIGNMENT", {
+          current_char_alignment: snapshot.val(),
+        });
       }
     }
   );
+  //NOTE: synchronous actions -> no direct mutations.
   onValue(
     ref(database, "/users/" + userId + "/current_char/image"),
     (snapshot) => {
@@ -474,21 +502,34 @@ function updateModelFromFirebase(store) {
       }
     }
   );
+  //NOTE: async actions once again, we have to do direct mutations.
   onChildAdded(
     ref(database, "/users/" + userId + "/current_char/languages"),
-    (snapshot) => store.dispatch("current/addLanguage", snapshot.val().index)
+    (snapshot) =>
+      store.commit("current/ADD_LANGUAGE", {
+        current_char_add_language: snapshot.val(),
+      })
   );
   onChildRemoved(
     ref(database, "/users/" + userId + "/current_char/languages"),
-    (snapshot) => store.dispatch("current/removeLanguage", snapshot.val().index)
+    (snapshot) =>
+      store.commit("current/REMOVE_LANGUAGE", {
+        current_char_remove_language: snapshot.val(),
+      })
   );
   onChildAdded(
     ref(database, "/users/" + userId + "/current_char/traits"),
-    (snapshot) => store.dispatch("current/addTrait", snapshot.val().index)
+    (snapshot) =>
+      store.commit("current/ADD_TRAIT", {
+        current_char_add_trait: snapshot.val(),
+      })
   );
   onChildRemoved(
     ref(database, "/users/" + userId + "/current_char/traits"),
-    (snapshot) => store.dispatch("current/removeTrait", snapshot.val().index)
+    (snapshot) =>
+      store.commit("current/REMOVE_TRAIT", {
+        current_char_remove_trait: snapshot.val(),
+      })
   );
 }
 export {
@@ -500,4 +541,5 @@ export {
   signOut,
   updateFirebaseFromModel,
   updateModelFromFirebase,
+  intialModelFromFirebase,
 };
