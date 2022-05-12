@@ -3,7 +3,7 @@
     <HttpLoader :isVisible="loading" />
     <Header />
     <Error v-if="error" />
-    <router-view v-else />
+    <router-view v-else-if="done" />
     <Footer />
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
   props: {
     loading: Boolean,
     error: Boolean,
+    done: Boolean,
   },
 };
 </script>

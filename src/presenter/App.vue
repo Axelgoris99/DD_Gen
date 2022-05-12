@@ -1,19 +1,37 @@
 <template>
-  <appView :loading="loading" :error="error"></appView>
+  <div>
+    <appView :done="done.ready" :loading="loading" :error="error"></appView>
+  </div>
 </template>
 
 <script>
 import httpClient from "../api/httpClient";
 import { mapState } from "vuex";
 import appView from "../view/appView.vue";
+import { auth, initialModelFromFirebase } from "../firebaseModel.js";
+import { modelFetched } from "../firebaseModel.js";
+import store from "../store/index.js";
 export default {
   name: "App",
   components: {
     appView,
   },
+  data() {
+    return {
+      done: modelFetched,
+    };
+  },
   computed: {
     ...mapState("loader", ["loading"]),
     ...mapState("loader", ["error"]),
+  },
+  beforeCreate() {
+    auth.onAuthStateChanged((user) => {
+      store.dispatch("auth/fetchUser", user);
+      if (user) {
+        initialModelFromFirebase(store);
+      }
+    });
   },
   created() {
     // init options.

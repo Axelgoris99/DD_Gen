@@ -104,6 +104,52 @@ export default {
     SET_CHA(state, payload) {
       state.stats.cha = payload.current_char_cha;
     },
+    // SET_MOD(model) {
+    //   this.commit("current/SET_NAME", { current_char_name: model.name });
+    //   this.commit("current/SET_GENDER", { current_char_gender: model.gender });
+    //   this.commit("current/SET_IMAGE", { current_char_image: model.image });
+    //   this.commit("current/SET_RACE", { current_char_race: model.race });
+    //   this.commit("current/SET_CLASS", { current_char_class: model.class });
+    //   this.commit("current/SET_ALIGNMENT", {
+    //     current_char_alignment: model.alignment,
+    //   });
+
+    //   if (model.languages) {
+    //     Object.values(model.languages).forEach((lang) => {
+    //       this.commit("current/ADD_LANGUAGE", {
+    //         current_char_add_language: lang,
+    //       });
+    //     });
+    //   }
+
+    //   if (model.traits) {
+    //     Object.values(model.traits).forEach((trait) => {
+    //       this.commit("current/ADD_TRAIT", { current_char_add_trait: trait });
+    //     });
+    //   }
+
+    //   if (model.stats) {
+    //     this.commit("current/SET_CHA", {
+    //       current_char_cha: model.stats.charisma,
+    //     });
+    //     this.commit("current/SET_CON", {
+    //       current_char_con: model.stats.constitution,
+    //     });
+    //     this.commit("current/SET_DEX", {
+    //       current_char_dex: model.stats.dexterity,
+    //     });
+    //     this.commit("current/SET_INT", {
+    //       current_char_int: model.stats.intelligence,
+    //     });
+    //     this.commit("current/SET_STR", {
+    //       current_char_str: model.stats.strength,
+    //     });
+    //     this.commit("current/SET_WIS", {
+    //       current_char_wis: model.stats.wisdom,
+    //     });
+    //   }
+    //   this.commit("current/SET_READY", { current_char_ready: model.ready });
+    // },
   },
   getters: {
     ready(state) {
@@ -142,6 +188,65 @@ export default {
   },
 
   actions: {
+    setModel({ commit }, model) {
+      return Promise.resolve()
+        .then(() => commit("SET_NAME", { current_char_name: model.name }))
+        .then(() => commit("SET_GENDER", { current_char_gender: model.gender }))
+        .then(() => commit("SET_IMAGE", { current_char_image: model.image }))
+        .then(() => commit("SET_RACE", { current_char_race: model.race }))
+        .then(() => commit("SET_CLASS", { current_char_class: model.class }))
+        .then(() =>
+          commit("SET_BACKGROUND", {
+            current_char_background: model.background,
+          })
+        )
+        .then(() =>
+          commit("SET_ALIGNMENT", {
+            current_char_alignment: model.alignment,
+          })
+        )
+        .then(() => {
+          if (model.languages) {
+            Object.values(model.languages).forEach((lang) => {
+              commit("ADD_LANGUAGE", {
+                current_char_add_language: lang,
+              });
+            });
+          }
+        })
+        .then(() => {
+          if (model.traits) {
+            Object.values(model.traits).forEach((trait) => {
+              commit("ADD_TRAIT", { current_char_add_trait: trait });
+            });
+          }
+        })
+        .then(() => {
+          if (model.stats) {
+            commit("SET_CHA", {
+              current_char_cha: model.stats.charisma,
+            });
+            commit("SET_CON", {
+              current_char_con: model.stats.constitution,
+            });
+            commit("SET_DEX", {
+              current_char_dex: model.stats.dexterity,
+            });
+            commit("SET_INT", {
+              current_char_int: model.stats.intelligence,
+            });
+            commit("SET_STR", {
+              current_char_str: model.stats.strength,
+            });
+            commit("SET_WIS", {
+              current_char_wis: model.stats.wisdom,
+            });
+          }
+        })
+        .then(() => {
+          commit("SET_READY", { current_char_ready: model.ready });
+        });
+    },
     init({ dispatch, getters, rootGetters }) {
       // Set synchronous properties first.
       dispatch(
