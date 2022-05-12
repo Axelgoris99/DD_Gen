@@ -243,7 +243,7 @@ function updateFirebaseFromModel(payload) {
         "/users/" +
           userId +
           "/current_char/languages/" +
-          payload.current_char_add_language.name
+          payload.current_char_add_language.index
       ),
       payload.current_char_add_language
     );
@@ -255,7 +255,7 @@ function updateFirebaseFromModel(payload) {
         "/users/" +
           userId +
           "/current_char/languages/" +
-          payload.current_char_remove_language.name
+          payload.current_char_remove_language
       ),
       null
     );
@@ -267,7 +267,7 @@ function updateFirebaseFromModel(payload) {
         "/users/" +
           userId +
           "/current_char/traits/" +
-          payload.current_char_add_trait.name
+          payload.current_char_add_trait.index
       ),
       payload.current_char_add_trait
     );
@@ -279,7 +279,7 @@ function updateFirebaseFromModel(payload) {
         "/users/" +
           userId +
           "/current_char/traits/" +
-          payload.current_char_remove_trait.name
+          payload.current_char_remove_trait
       ),
       null
     );
