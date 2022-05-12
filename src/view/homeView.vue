@@ -15,7 +15,13 @@
       </li>
       <li>Add it to your character or export it as a pdf at the end!</li>
     </ul>
-
+    <p>
+      Please, be aware that if you go to the input page, your current character
+      WILL be erased. If you ever close the window while logged in, you just
+      need to click on the "changes" directly at the top, without going by the
+      input page.
+    </p>
+    <p>You won't be able to save your characters if you're not connected.</p>
     <b-button @click="navInput">Start</b-button>
   </div>
 </template>

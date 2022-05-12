@@ -209,7 +209,6 @@ body .container .half {
 }
 
 body .container .half.bg {
-  background-image: url("../assets/icon/barbarian.png");
   background-size: 300px;
   width: 25%;
   background-repeat: no-repeat;

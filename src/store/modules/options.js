@@ -134,7 +134,7 @@ export default {
             );
           }
         )
-        .catch(() => console.log("error resolving promises"));
+        .catch(() => {});
     },
   },
 };
