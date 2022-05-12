@@ -188,6 +188,38 @@ export default {
     currentLanguages: Array,
     currentTraits: Array,
   },
+  watch: {
+    currentGender: function () {
+      this.$refs.gender.select(this.currentGender);
+    },
+    currentRace: function () {
+      this.$refs.race.select(this.currentRace);
+    },
+    currentClass: function () {
+      this.$refs.class.select(this.currentClass);
+    },
+    currentBackground: function () {
+      this.$refs.background.select(this.currentBackground);
+    },
+    currentAlignment: function () {
+      console.log("test");
+      this.$refs.alignment.select(this.currentAlignment);
+    },
+    // currentLanguages: {
+    //   handler(oldValue, newValue) {
+    //     console.log(oldValue);
+    //     console.log(newValue);
+    //     var difference = oldValue.filter((x) => newValue.indexOf(x) === -1);
+    //     if (difference.length == 0) {
+    //       difference = newValue.filter((x) => oldValue.indexOf(x) === -1);
+    //       this.$refs.languages.remove(difference[0]);
+    //     } else {
+    //       this.$refs.languages.select(difference[0]);
+    //     }
+    //   },
+    //   deep: true,
+    // },
+  },
   emits: [
     "setName",
     "setGender",
