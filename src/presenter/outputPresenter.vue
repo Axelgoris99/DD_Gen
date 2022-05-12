@@ -111,11 +111,12 @@ export default {
         background: this.background,
         languages: this.languages,
         traits: this.traits,
+        stats: this.stats,
         image: this.image,
         imagePath: this.imageUrl,
         ready: this.ready,
       });
-      this.$router.replace({ name: "profile" });
+      this.$router.push({ name: "profile" });
     },
   },
   mounted() {

@@ -9,9 +9,12 @@
         class="center space"
       >
         <img :src="character.imagePath" width="100" height="150" />
-        <div>{{ character.name }}</div>
+        <div>{{ character.name }} - {{ character.class.index }}</div>
         <b-button class="space" v-on:click="deleteCharacter(character)">
           Delete character
+        </b-button>
+        <b-button class="space" v-on:click="downloadCharacter(character)">
+          Download PDF
         </b-button>
       </span>
     </div>
@@ -24,10 +27,13 @@ export default {
   props: {
     characters: Array,
   },
-  emits: ["deleteCharacter"],
+  emits: ["deleteCharacter", "downloadCharacter"],
   methods: {
     deleteCharacter(char) {
       this.$emit("deleteCharacter", char);
+    },
+    downloadCharacter(char) {
+      this.$emit("downloadCharacter", char);
     },
   },
 };
@@ -46,6 +52,7 @@ export default {
   justify-items: center;
   justify-self: center;
   text-align: center;
+  max-width: 200px;
 }
 .space {
   margin: 5px;
