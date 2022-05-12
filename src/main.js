@@ -13,6 +13,7 @@ import {
 import VueCompositionAPI from "@vue/composition-api";
 Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false;
+
 var unsubscribe;
 auth.onAuthStateChanged((user) => {
   store.dispatch("auth/fetchUser", user);

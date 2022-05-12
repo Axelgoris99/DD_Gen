@@ -7,6 +7,8 @@ import {
   getDatabase,
   set,
   ref,
+  get,
+  child,
   onChildAdded,
   onChildRemoved,
   onValue,
@@ -186,7 +188,7 @@ function updateFirebaseFromModel(payload) {
       payload.current_char_alignment
     );
   }
-  if (payload.current_char_image) {
+  if (!isNaN(payload.current_char_image)) {
     set(
       ref(database, "/users/" + userId + "/current_char/image"),
       payload.current_char_image
@@ -283,6 +285,11 @@ function updateFirebaseFromModel(payload) {
     );
   }
 }
+
+var modelFetched = { ready: false };
+// function getModelFetched() {
+//   return modelFetched;
+// }
 
 function updateModelFromFirebase(store) {
   let userId = getAuth().currentUser.uid;
@@ -470,6 +477,7 @@ function updateModelFromFirebase(store) {
     ref(database, "/users/" + userId + "/current_char/ready"),
     (snapshot) => {
       if (snapshot.val()) {
+        // modelFetched.ready = true;
         store.dispatch("current/setReady", snapshot.val());
       }
     }
@@ -491,13 +499,40 @@ function updateModelFromFirebase(store) {
     (snapshot) => store.dispatch("current/removeTrait", snapshot.val().index)
   );
 }
+
+function initialModelFromFirebase(store) {
+  const userId = getAuth().currentUser.uid;
+  // store.dispatch("loader/pending");
+  // try {
+  get(child(ref(database), `users/${userId}/current_char`))
+    .then((snapshot) => {
+      const model = snapshot.val();
+      if (model) {
+        store
+          .dispatch("current/setModel", model)
+          .then(() => store.dispatch("options/init"))
+          .then(() => (modelFetched.ready = true));
+      } else {
+        modelFetched.ready = true;
+      }
+    })
+    .finally(() => {});
+  //   store.dispatch("loader/done");
+  // } catch {
+  //   store.dispatch("loader/done");
+  //   store.dispatch("loader/error");
+}
+// }
+
 export {
   auth,
   storage,
+  modelFetched,
   fetchImageUrl,
   signUp,
   signIn,
   signOut,
   updateFirebaseFromModel,
   updateModelFromFirebase,
+  initialModelFromFirebase,
 };

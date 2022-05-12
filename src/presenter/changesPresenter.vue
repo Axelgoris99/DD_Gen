@@ -59,7 +59,7 @@ export default {
     Promise.resolve()
       .then(() => {
         // init options if we do not have them.
-        if (!this.optionsReady) return this.$store.dispatch("options/init");
+        if (!this.races[0]) return this.$store.dispatch("options/init");
       })
       .then(() => {
         // generate character if we do not already have one.

@@ -12,14 +12,7 @@ export default {
   components: {
     footerView,
   },
-  methods: {
-    login() {
-      console.log("Welcome user !");
-    },
-    signup() {
-      console.log("New User Incoming ?");
-    },
-  },
+  methods: {},
 };
 </script>
 
