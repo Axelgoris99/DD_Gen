@@ -33,6 +33,7 @@ export default {
   },
   created() {
     this.$store.dispatch("options/init");
+    this.$store.dispatch("input/reset");
     this.$store.dispatch("current/reset");
   },
   computed: {

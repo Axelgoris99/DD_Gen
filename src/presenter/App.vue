@@ -9,7 +9,7 @@ import httpClient from "../api/httpClient";
 import { mapState } from "vuex";
 import appView from "../view/appView.vue";
 import { auth, initialModelFromFirebase } from "../firebaseModel.js";
-import { modelFetched } from "../firebaseModel.js";
+import { modelFetched, setModelFetched } from "../firebaseModel.js";
 import store from "../store/index.js";
 export default {
   name: "App",
@@ -30,6 +30,8 @@ export default {
       store.dispatch("auth/fetchUser", user);
       if (user) {
         initialModelFromFirebase(store);
+      } else {
+        setModelFetched();
       }
     });
   },

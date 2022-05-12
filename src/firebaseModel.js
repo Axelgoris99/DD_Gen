@@ -287,9 +287,9 @@ function updateFirebaseFromModel(payload) {
 }
 
 var modelFetched = { ready: false };
-// function getModelFetched() {
-//   return modelFetched;
-// }
+function setModelFetched() {
+  modelFetched.ready = true;
+}
 
 function updateModelFromFirebase(store) {
   let userId = getAuth().currentUser.uid;
@@ -528,6 +528,7 @@ export {
   auth,
   storage,
   modelFetched,
+  setModelFetched,
   fetchImageUrl,
   signUp,
   signIn,

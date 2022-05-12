@@ -107,6 +107,9 @@ export default {
     setGender({ commit }, gender) {
       commit("SET_GENDER", { input_gender: gender });
     },
+    unsetGender({ commit }) {
+      commit("SET_GENDER", { input_gender: null });
+    },
     setRace({ commit }, race) {
       commit("SET_RACE", { input_race: race });
     },
@@ -148,6 +151,16 @@ export default {
     },
     clearTraits({ commit }) {
       commit("CLEAR_TRAITS");
+    },
+    reset({ dispatch }) {
+      dispatch("clearTraits");
+      dispatch("clearLanguages");
+      dispatch("unsetAlignment");
+      dispatch("unsetBackground");
+      dispatch("unsetRace");
+      dispatch("unsetClass");
+      dispatch("unsetName");
+      dispatch("unsetGender");
     },
   },
 };
